@@ -39,6 +39,30 @@ export default function Hero() {
 					/>
 				</div>
 			</div>
+
+			{/* Filter Bar  */}
+			{showFilters && (
+				<div className=" mt-2 flex gap-x-2 gap-y-[6px] justify-center items-end flex-wrap relative">
+					<Selector
+						url={"https://restcountries.com/v2/all?fields=name"}
+						label="Type"
+					/>
+					<Selector
+						url={"https://restcountries.com/v2/all?fields=name"}
+						label="Wilaya"
+					/>
+					<Selector
+						url={"https://restcountries.com/v2/all?fields=name"}
+						label="Commune"
+					/>
+
+					<DatePicker />
+
+					<button className=" px-4 py-2 h-fit text-white bg-purple rounded-[10px] font-semibold border-2 border-purple border-white2 hover:bg-white2 hover:text-purple  transition">
+						Filtrer
+					</button>
+				</div>
+			)}
 		</div>
 	);
 }
