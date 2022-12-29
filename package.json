@@ -9,6 +9,13 @@
 		"lint": "next lint"
 	},
 	"dependencies": {
+		"@emotion/react": "^11.10.5",
+		"@emotion/server": "^11.10.0",
+		"@mantine/carousel": "^5.9.5",
+		"@mantine/core": "^5.9.5",
+		"@mantine/hooks": "^5.9.5",
+		"@mantine/next": "^5.9.5",
+		"embla-carousel-react": "^7.0.5",
 		"eslint": "8.29.0",
 		"eslint-config-next": "13.0.6",
 		"flowbite-datepicker": "^1.2.2",

@@ -17,8 +17,8 @@ export default function Navbar() {
 			title: "Acheter",
 		},
 		{
-			id: "vendre",
-			title: "Vendre",
+			id: "mes_annoces",
+			title: "Mes annoces",
 		},
 		{
 			id: "messages",

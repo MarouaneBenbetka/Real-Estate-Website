@@ -1,14 +1,17 @@
 import { useState } from "react";
 import { FiSearch } from "react-icons/fi";
 import { VscSettings } from "react-icons/vsc";
-import DatePicker from "../components/shared/DatePicker";
-import Selector from "../components/shared/Selector";
+import CardsGrid from "../components/Home/CardsGrid";
+import DatePicker from "../components/Home/DatePicker";
+import Selector from "../components/Home/Selector";
+import TypeSelector from "../components/Home/TypeSelector";
+import { annouces } from "./data";
 
 export default function Hero() {
 	const [showFilters, setShowFilters] = useState(false);
 
 	return (
-		<div className="mt-4">
+		<div className="mt-4 ">
 			<h1 className="font-bold text-[32px]">Des immobiliers à louer</h1>
 			{/* Search Bar  */}
 			<div className="flex items-center">
@@ -42,11 +45,8 @@ export default function Hero() {
 
 			{/* Filter Bar  */}
 			{showFilters && (
-				<div className=" mt-2 flex gap-x-2 gap-y-[6px] justify-center items-end flex-wrap relative">
-					<Selector
-						url={"https://restcountries.com/v2/all?fields=name"}
-						label="Type"
-					/>
+				<div className=" mt-2 mb-4 flex gap-x-2 gap-y-[6px] justify-center items-end flex-wrap relative">
+					<TypeSelector label="Type" />
 					<Selector
 						url={"https://restcountries.com/v2/all?fields=name"}
 						label="Wilaya"
@@ -63,6 +63,9 @@ export default function Hero() {
 					</button>
 				</div>
 			)}
+
+			{/*Cards*/}
+			<CardsGrid annouces={annouces} />
 		</div>
 	);
 }

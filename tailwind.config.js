@@ -5,6 +5,11 @@ module.exports = {
 		"./components/**/*.{js,ts,jsx,tsx}",
 	],
 	theme: {
+		screens: {
+			sm: "600px",
+			md: "864px",
+			lg: "1350px",
+		},
 		extend: {
 			colors: {
 				white2: "#f5f5f5",
@@ -13,14 +18,6 @@ module.exports = {
 			},
 			fontFamily: {
 				"libre-franklin": ["Libre Franklin", "sans-serif"],
-			},
-		},
-		container: {
-			center: true,
-			padding: {
-				DEFAULT: "1rem",
-				sm: "2rem",
-				lg: "9%",
 			},
 		},
 	},

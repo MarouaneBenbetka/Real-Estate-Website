@@ -3,7 +3,7 @@ import { BiChevronDown } from "react-icons/bi";
 import { AiOutlineSearch } from "react-icons/ai";
 
 const Selector = ({ label, url }) => {
-	const [countries, setCountries] = useState(null);
+	const [items, setItems] = useState(null);
 	const [inputValue, setInputValue] = useState("");
 	const [selected, setSelected] = useState("");
 	const [open, setOpen] = useState(false);
@@ -12,7 +12,7 @@ const Selector = ({ label, url }) => {
 		fetch(url)
 			.then((res) => res.json())
 			.then((data) => {
-				setCountries(data);
+				setItems(data);
 			});
 	}, []);
 	return (
@@ -20,18 +20,16 @@ const Selector = ({ label, url }) => {
 			<h2 className="mb-1 pl-2 text-[14px] font-normal text-purple relative">
 				{label}
 			</h2>
-			<div
-				className="w-28 md:w-52 font-semibold max-h-[320px]  cursor-pointer relative"
-				onClick={() => setOpen(!open)}
-			>
+			<div className="w-32 sm:w-40 md:w-52 font-semibold max-h-[320px]  cursor-pointer relative">
 				<div
-					className={`bg-white w-full p-2 flex items-center justify-between   placeholder-gray-500 rounded-md border-white ring-1 ring-gray-300 focus:outline-none ${
+					className={`text-[14px] sm:text-[16px] bg-white w-full p-2 flex items-center justify-between   placeholder-gray-500 rounded-md border-white ring-1 ring-gray-300 focus:outline-none 	 text-ellipsis ${
 						!selected && "text-gray-500 "
 					}`}
+					onClick={() => setOpen(!open)}
 				>
 					{selected
-						? selected?.length > 25
-							? selected?.substring(0, 25) + "..."
+						? selected?.length > 16
+							? selected?.substring(0, 16) + "..."
 							: selected
 						: label}
 					<BiChevronDown
@@ -62,31 +60,31 @@ const Selector = ({ label, url }) => {
 							className="placeholder:text-gray-500 p-2 outline-none w-full "
 						/>
 					</div>
-					{countries?.map((country) => (
+					{items?.map((item) => (
 						<li
-							key={country?.name}
+							key={item?.name}
 							className={`p-2 text-sm hover:bg-purple hover:text-white transition-all duration-200 cursor-pointer
             ${
-				country?.name?.toLowerCase() === selected?.toLowerCase() &&
+				item?.name?.toLowerCase() === selected?.toLowerCase() &&
 				"bg-purple text-white"
 			}
             ${
-				country?.name?.toLowerCase().startsWith(inputValue)
+				item?.name?.toLowerCase().startsWith(inputValue)
 					? "block"
 					: "hidden"
 			}`}
 							onClick={() => {
 								if (
-									country?.name?.toLowerCase() !==
+									item?.name?.toLowerCase() !==
 									selected.toLowerCase()
 								) {
-									setSelected(country?.name);
+									setSelected(item?.name);
 									setOpen(false);
 									setInputValue("");
 								}
 							}}
 						>
-							{country?.name}
+							{item?.name}
 						</li>
 					))}
 				</ul>
