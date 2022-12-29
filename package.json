@@ -24,6 +24,7 @@
 		"react-dom": "18.2.0",
 		"react-dropdown": "^1.11.0",
 		"react-icons": "^4.7.1",
+		"react-paginate": "^8.1.4",
 		"react-spring": "^9.6.1"
 	},
 	"devDependencies": {

@@ -9,12 +9,8 @@ export default function Navbar() {
 
 	const navlinks = [
 		{
-			id: "louer",
-			title: "Louer",
-		},
-		{
-			id: "acheter",
-			title: "Acheter",
+			id: "exploer",
+			title: "Exploer",
 		},
 		{
 			id: "mes_annoces",
