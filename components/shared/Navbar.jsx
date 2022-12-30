@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "../../styles/NavBar.module.css";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { useSpring, animated } from "react-spring";
+import Link from "next/link";
 
 export default function Navbar() {
 	const [active, setActive] = useState(0);
@@ -11,14 +12,17 @@ export default function Navbar() {
 		{
 			id: "exploer",
 			title: "Exploer",
+			link: "/",
 		},
 		{
-			id: "mes_annoces",
-			title: "Mes annoces",
+			id: "mes_annonces",
+			title: "Mes annonces",
+			link: "/MesAnnonces",
 		},
 		{
 			id: "messages",
 			title: "Messages",
+			link: "/Messages",
 		},
 	];
 
@@ -42,13 +46,12 @@ export default function Navbar() {
 							styles.navLink
 						}
 						onClick={(e) => {
+							e.preventDefault();
 							setActive(index);
-							// e.preventDefault();
-							console.log(index, active);
 						}}
 					>
-						<a
-							href={index === 0 ? "#" : `#${navLink.id}`}
+						<Link
+							href={navLink.link}
 							className={
 								index === active
 									? "text-[18px] text-purple font-semibold"
@@ -56,7 +59,7 @@ export default function Navbar() {
 							}
 						>
 							{navLink.title}
-						</a>
+						</Link>
 					</li>
 				))}
 			</ul>

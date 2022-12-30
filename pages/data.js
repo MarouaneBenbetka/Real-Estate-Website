@@ -17,7 +17,7 @@ export const annouces = [
 		commune: "Baba Hassen",
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
 		prix: 10000,
-		duree: "jour",
+		typePayment: "jour",
 		images: images,
 	},
 	{
@@ -28,7 +28,7 @@ export const annouces = [
 		commune: "Baba Hassen",
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
 		prix: 10000,
-		duree: "jour",
+		typePayment: "jour",
 		images: images,
 	},
 	{
@@ -39,7 +39,7 @@ export const annouces = [
 		commune: "Baba Hassen",
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
 		prix: 10000,
-		duree: "jour",
+		typePayment: "jour",
 		images: images,
 	},
 	{
@@ -50,7 +50,7 @@ export const annouces = [
 		commune: "Baba Hassen",
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
 		prix: 10000,
-		duree: "jour",
+		typePayment: "jour",
 		images: images,
 	},
 	{
@@ -61,7 +61,7 @@ export const annouces = [
 		commune: "Baba Hassen",
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
 		prix: 10000,
-		duree: "jour",
+		typePayment: "jour",
 		images: images,
 	},
 	{
@@ -72,7 +72,7 @@ export const annouces = [
 		commune: "Baba Hassen",
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
 		prix: 10000,
-		duree: "jour",
+		typePayment: "jour",
 		images: images,
 	},
 	{
@@ -83,7 +83,7 @@ export const annouces = [
 		commune: "Baba Hassen",
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
 		prix: 10000,
-		duree: "jour",
+		typePayment: "jour",
 		images: images,
 	},
 	{
@@ -94,7 +94,7 @@ export const annouces = [
 		commune: "Baba Hassen",
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
 		prix: 10000,
-		duree: "jour",
+		typePayment: "jour",
 		images: images,
 	},
 	{
@@ -105,7 +105,7 @@ export const annouces = [
 		commune: "Baba Hassen",
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
 		prix: 10000,
-		duree: "jour",
+		typePayment: "jour",
 		images: images,
 	},
 	{
@@ -116,7 +116,7 @@ export const annouces = [
 		commune: "Baba Hassen",
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
 		prix: 10000,
-		duree: "jour",
+		typePayment: "jour",
 		images: images,
 	},
 	{
@@ -127,7 +127,7 @@ export const annouces = [
 		commune: "Baba Hassen",
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
 		prix: 10000,
-		duree: "jour",
+		typePayment: "jour",
 		images: images,
 	},
 	{
@@ -138,7 +138,7 @@ export const annouces = [
 		commune: "Baba Hassen",
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
 		prix: 10000,
-		duree: "jour",
+		typePayment: "jour",
 		images: images,
 	},
 ];
