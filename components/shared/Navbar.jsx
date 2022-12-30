@@ -10,8 +10,8 @@ export default function Navbar() {
 
 	const navlinks = [
 		{
-			id: "exploer",
-			title: "Exploer",
+			id: "explorer",
+			title: "Explorer",
 			link: "/",
 		},
 		{
@@ -42,7 +42,7 @@ export default function Navbar() {
 					<li
 						key={index}
 						className={
-							"relative md:px-3 lg:px-5 cursor-pointer hover:text-purple transition duration-300 " +
+							"relative  cursor-pointer hover:text-purple transition duration-300 " +
 							styles.navLink
 						}
 						onClick={(e) => {
@@ -53,9 +53,10 @@ export default function Navbar() {
 						<Link
 							href={navLink.link}
 							className={
-								index === active
+								"md:px-3 lg:px-5 " +
+								(index === active
 									? "text-[18px] text-purple font-semibold"
-									: "text-[18px]"
+									: "text-[18px]")
 							}
 						>
 							{navLink.title}

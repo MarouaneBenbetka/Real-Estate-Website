@@ -45,3 +45,15 @@ button,
 [type="submit"] {
 	background-color: #f5f5f5;
 }
+
+textarea {
+	resize: none;
+}
+textarea:focus {
+	outline: none;
+}
+textarea::placeholder {
+	font-weight: 500;
+	opacity: 1;
+	color: "#000929";
+}

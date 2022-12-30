@@ -5,7 +5,7 @@ import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
 export default function ImagesGalery() {
 	return (
-		<div className=" border-2 border-purple w-fit rounded-[6px] mt-2">
+		<div className=" border-2 border-purple w-fit rounded-[6px] mt-2 mx-auto md:mx-0">
 			<Carousel
 				sx={{ maxWidth: 700 }}
 				mx="auto"
@@ -17,6 +17,12 @@ export default function ImagesGalery() {
 						transition: "width 250ms ease",
 						"&[data-active]": {
 							width: 32,
+						},
+					},
+					control: {
+						"&[data-inactive]": {
+							opacity: 0,
+							cursor: "default",
 						},
 					},
 				}}
@@ -36,7 +42,7 @@ export default function ImagesGalery() {
 				}
 			>
 				{images.map((img) => (
-					<Carousel.Slide>
+					<Carousel.Slide key={img}>
 						<TransformWrapper>
 							<TransformComponent>
 								<img
