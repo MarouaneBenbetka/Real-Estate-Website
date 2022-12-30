@@ -1,4 +1,4 @@
-import { images } from "../../pages/data";
+import { images } from "../../data/data";
 import AnnouceCard from "./AnnouceCard";
 
 export default function CardsGrid({ annouces }) {

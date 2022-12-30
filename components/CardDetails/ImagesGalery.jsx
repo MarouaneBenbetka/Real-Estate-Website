@@ -1,5 +1,5 @@
 import { Carousel } from "@mantine/carousel";
-import { images } from "../../pages/data";
+import { images } from "../../data/data";
 import { MdOutlineNavigateNext, MdOutlineNavigateBefore } from "react-icons/md";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 

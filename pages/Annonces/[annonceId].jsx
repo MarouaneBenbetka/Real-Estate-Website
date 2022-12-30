@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { MdOutlineNavigateBefore } from "react-icons/md";
 import ImagesGalery from "../../components/CardDetails/ImagesGalery";
-import { images } from "../data";
+import { images } from "../../data/data";
 
 export default function CardDeatails() {
 	const router = useRouter();
