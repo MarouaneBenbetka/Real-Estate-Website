@@ -2,10 +2,9 @@ import React, { useEffect, useState } from "react";
 import { BiChevronDown } from "react-icons/bi";
 import { AiOutlineSearch } from "react-icons/ai";
 
-const TypeSelector = ({ label }) => {
+const TypeSelector = ({ label, onChangeValue, open, onOpened }) => {
 	const [inputValue, setInputValue] = useState("");
 	const [selected, setSelected] = useState("");
-	const [open, setOpen] = useState(false);
 	const items = ["Vente", "Echange", "Location", "Location vacances"];
 
 	return (
@@ -18,7 +17,9 @@ const TypeSelector = ({ label }) => {
 					className={`text-[14px] sm:text-[16px] bg-white w-full p-2 flex items-center justify-between   placeholder-gray-500 rounded-md border-white ring-1 ring-gray-300 focus:outline-none 	 text-ellipsis ${
 						!selected && "text-gray-500 "
 					}`}
-					onClick={() => setOpen(!open)}
+					onClick={() => {
+						onOpened(!open);
+					}}
 				>
 					{selected
 						? selected?.length > 16
@@ -53,8 +54,9 @@ const TypeSelector = ({ label }) => {
 									selected.toLowerCase()
 								) {
 									setSelected(item);
-									setOpen(false);
+									onOpened(false);
 									setInputValue("");
+									onChangeValue(item);
 								}
 							}}
 						>
