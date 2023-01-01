@@ -15,7 +15,7 @@ export const annouces = [
 		typeAnnoce: "Vente",
 		wilaya: "Alger",
 		commune: "Baba Hassen",
-		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
+		description: "une belle",
 		prix: 10000,
 		typePayment: "jour",
 		images: images,
@@ -140,5 +140,71 @@ export const annouces = [
 		prix: 10000,
 		typePayment: "jour",
 		images: images,
+	},
+];
+
+export const messages = [
+	{
+		id: 0,
+		name: "Cristiano Ronaldo dos Santos Aveiro",
+		photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz-LJaTp0HFRT2GHznf3n7iSAzu-z7och7Vc0GsJkTHWEk67OjQ0t0o6piSTpTv9sr7UI&usqp=CAU",
+		message:
+			"Salam rani 7ab nchri 3likom hd l'appartement est ce c'est toujours disponible Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae quasi in corrupti aut explicabo cumque ex excepturi doloribus mollitia magni. Impedit nemo aspernatur harum non dolores rem numquam officiis quo!",
+		date: "01/01/2023",
+		vue: false,
+	},
+	{
+		id: 1,
+		name: "Benbetka Marouane",
+		photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz-LJaTp0HFRT2GHznf3n7iSAzu-z7och7Vc0GsJkTHWEk67OjQ0t0o6piSTpTv9sr7UI&usqp=CAU",
+		message:
+			"Salam rani 7ab nchri 3likom hd l'appartement est ce c'est toujours disponible Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae quasi in corrupti aut explicabo cumque ex excepturi doloribus mollitia magni. Impedit nemo aspernatur harum non dolores rem numquam officiis quo!",
+		date: "01/01/2023",
+		vue: true,
+	},
+	{
+		id: 2,
+		name: "Benbetka Marouane",
+		photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz-LJaTp0HFRT2GHznf3n7iSAzu-z7och7Vc0GsJkTHWEk67OjQ0t0o6piSTpTv9sr7UI&usqp=CAU",
+		message:
+			"Salam rani 7ab nchri 3likom hd l'appartement est ce c'est toujours disponible Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae quasi in corrupti aut explicabo cumque ex excepturi doloribus mollitia magni. Impedit nemo aspernatur harum non dolores rem numquam officiis quo!",
+		date: "01/01/2023",
+		vue: true,
+	},
+	{
+		id: 3,
+		name: "Benbetka Marouane",
+		photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz-LJaTp0HFRT2GHznf3n7iSAzu-z7och7Vc0GsJkTHWEk67OjQ0t0o6piSTpTv9sr7UI&usqp=CAU",
+		message:
+			"Salam rani 7ab nchri 3likom hd l'appartement est ce c'est toujours disponible Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae quasi in corrupti aut explicabo cumque ex excepturi doloribus mollitia magni. Impedit nemo aspernatur harum non dolores rem numquam officiis quo!",
+		date: "01/01/2023",
+		vue: false,
+	},
+	{
+		id: 4,
+		name: "Benbetka Marouane",
+		photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz-LJaTp0HFRT2GHznf3n7iSAzu-z7och7Vc0GsJkTHWEk67OjQ0t0o6piSTpTv9sr7UI&usqp=CAU",
+		message:
+			"Salam rani 7ab nchri 3likom hd l'appartement est ce c'est toujours disponible Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae quasi in corrupti aut explicabo cumque ex excepturi doloribus mollitia magni. Impedit nemo aspernatur harum non dolores rem numquam officiis quo!",
+		date: "01/01/2023",
+		vue: false,
+	},
+	{
+		id: 5,
+		name: "Benbetka Marouane",
+		photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz-LJaTp0HFRT2GHznf3n7iSAzu-z7och7Vc0GsJkTHWEk67OjQ0t0o6piSTpTv9sr7UI&usqp=CAU",
+		message:
+			"Salam rani 7ab nchri 3likom hd l'appartement est ce c'est toujours disponible Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae quasi in corrupti aut explicabo cumque ex excepturi doloribus mollitia magni. Impedit nemo aspernatur harum non dolores rem numquam officiis quo!",
+		date: "01/01/2023",
+		vue: true,
+	},
+	{
+		id: 6,
+		name: "Benbetka Marouane",
+		photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz-LJaTp0HFRT2GHznf3n7iSAzu-z7och7Vc0GsJkTHWEk67OjQ0t0o6piSTpTv9sr7UI&usqp=CAU",
+		message:
+			"Salam rani 7ab nchri 3likom hd l'appartement est ce c'est toujours disponible Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae quasi in corrupti aut explicabo cumque ex excepturi doloribus mollitia magni. Impedit nemo aspernatur harum non dolores rem numquam officiis quo!",
+		date: "01/01/2023",
+		vue: true,
 	},
 ];
