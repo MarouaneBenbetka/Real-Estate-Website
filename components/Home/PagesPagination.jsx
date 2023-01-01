@@ -29,7 +29,9 @@ export default function PagesPagination({
 						</div>
 					);
 			})}
-			{currentPage < maxPages - 1 && <p className="text-purple">...</p>}
+			{currentPage < maxPages - 1 && maxPages > 3 && (
+				<p className="text-purple">...</p>
+			)}
 			<div
 				className={
 					maxPages === currentPage
