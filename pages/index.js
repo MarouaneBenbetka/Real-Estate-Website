@@ -2,11 +2,18 @@ import { useState } from "react";
 import CardsGrid from "../components/Home/CardsGrid";
 import { annouces } from "../data/data";
 import SearchBar from "../components/Home/SearchBar";
+import { toast } from "react-toastify";
 import PagesPagination from "../components/Home/PagesPagination";
+import cookie from 'js-cookie'
 
-export default function Explore() {
+
+export default function Explore({toasting}) {
 	const [pageCount, setPageCount] = useState(1);
 	const maxPages = 10;
+
+	if(toasting === "true"){
+toast.error("vous devez entre authentifiee")
+	}
 
 	//search bar handler :
 
@@ -56,3 +63,14 @@ export default function Explore() {
 		</div>
 	);
 }
+
+export async function getServerSideProps(ctx) {
+	
+	// const toasting = req.headers['toasting'] || false
+	const toasting = ctx.query.login || false
+	console.log(toasting)
+  
+	return {
+	  props: { toasting },
+	};
+  }

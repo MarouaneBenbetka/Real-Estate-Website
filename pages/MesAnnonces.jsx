@@ -3,6 +3,8 @@ import AddAnnonce from "../components/formComponents/AddAnnonce";
 import MesAnnoncesList from "../components/MesAnnoncesComponents/MesAnnoncesList";
 import {isLogin} from "../utils/services/auth"
 import { getSession } from "next-auth/react"
+import { toast } from "react-toastify";
+
 
 
 const MesAnnonces = () => {
@@ -55,11 +57,21 @@ const MesAnnonces = () => {
 
 export default MesAnnonces;
 
-export async function getServerSideProps({ req }) {
-	const session = await getSession({ req })
+export async function getServerSideProps({req}) {
+	const session = await getSession({req});
+  
+	if (!session) {
+		return {
+			redirect: {
+			  
+        destination: "/?login=true",
+			  permanent: false,
+			},
+		  };
+	}
 
-  isLogin(req);
-  return {
-    props: { session }
+  
+	return {
+	  props: { session },
+	};
   }
-}

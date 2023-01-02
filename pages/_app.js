@@ -5,6 +5,7 @@ import { MantineProvider } from '@mantine/core'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
+
 function MyApp ({ session, Component, pageProps }) {
   return (
     <SessionProvider session={session}>

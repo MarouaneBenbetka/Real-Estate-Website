@@ -21,6 +21,7 @@
 		"eslint-config-next": "13.0.6",
 		"flowbite-datepicker": "^1.2.2",
 		"formik": "^2.2.9",
+		"js-cookie": "^3.0.1",
 		"next": "13.0.6",
 		"next-auth": "^4.18.7",
 		"react": "18.2.0",

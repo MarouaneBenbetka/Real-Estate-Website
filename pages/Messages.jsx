@@ -4,6 +4,7 @@ import Message from "../components/Messages/Message";
 import { messages } from "../data/data";
 import {isLogin} from "../utils/services/auth"
 import { getSession } from "next-auth/react"
+import cookie from 'js-cookie'
 
 const Messages = () => {
 	const [pageCount, setPageCount] = useState(1);
@@ -49,11 +50,19 @@ const Messages = () => {
 
 export default Messages;
 
-export async function getServerSideProps({ req }) {
-	const session = await getSession({ req })
-
-  isLogin(req);
-  return {
-    props: { session }
+export async function getServerSideProps({req}) {
+	const session = await getSession({req});
+	if (!session) {
+	  return {
+		redirect: {
+		  
+		  destination: "/?login=true",
+		  permanent: true,
+		},
+	  };
+	}
+  
+	return {
+	  props: { session },
+	};
   }
-}

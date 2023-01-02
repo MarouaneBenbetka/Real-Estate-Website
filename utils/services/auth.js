@@ -17,8 +17,7 @@ import { getSession } from "next-auth/react"
 //   }
 // }
 
-export async function isLogin (req){
-  const session = await getSession({ req })
+export async function isLogin (session){
 
   if (!session) {
     return {

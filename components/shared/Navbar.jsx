@@ -5,8 +5,8 @@ import { useSpring, animated } from "react-spring";
 import Link from "next/link";
 import { useSession, signIn, signOut } from "next-auth/react";
 
-
 export default function Navbar() {
+  const { status, data: session } = useSession();
   const [active, setActive] = useState(0);
   const [navMobile, setNavMobile] = useState(false);
   const [nbNotifications, setNbNotifications] = useState(9);
@@ -41,7 +41,6 @@ export default function Navbar() {
     if (indexPage === active) e.preventDefault;
     setActive(indexPage);
   };
-
 
   return (
     <div className="flex justify-between items-center    py-4 md:px-6 lg:px-8 border-b">
@@ -80,6 +79,18 @@ export default function Navbar() {
           </li>
         ))}
       </ul>
+	  {console.log("session", status)}
+
+	  {status !== "unauthenticated" && status !== "loading" ? (
+            <button
+              onClick={() => {
+                signOut();
+              }}
+              className="px-4 py-2 text-white2 bg-purple rounded-[10px] font-semibold border-2 border-purple hover:bg-white hover:text-purple transition "
+            >
+              Logout
+            </button>
+          ):(
       <div className="hidden mr-3 md:flex items-center gap-4">
         <button
           className="px-4 py-2  text-purple rounded-[10px] font-semibold border-2 border-white2 hover:bg-dark hover:text-red transition hover:bg-purple hover:text-white "
@@ -99,7 +110,7 @@ export default function Navbar() {
           Sign up
         </button>
       </div>
-
+)}
       {/* The mobile verion of the navbar  */}
       <div className="block md:hidden relative cursor-pointer ">
         {navMobile ? (
