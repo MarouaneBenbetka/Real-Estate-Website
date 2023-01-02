@@ -119,7 +119,7 @@ export default function CardDeatails() {
 							<span className=" text-purple font-bold text-[32px]">
 								{announceInfo.prix.toLocaleString("en-US")}
 							</span>
-							<span className="text-purple text-[18px] font-normal pr-1">
+							<span className="text-purple text-[18px] font-normal pr-1 pl-2">
 								DA
 							</span>
 
@@ -131,7 +131,7 @@ export default function CardDeatails() {
 						</div>
 						<textarea
 							placeholder="Envoyer un message vers l'annonceur"
-							className="bg-gray-300 p-2 w-full md:w-2/3 h-[200px] border  rounded border-purple text-dark-blue focus:border-2"
+							className="bg-white2 p-2 w-full md:w-2/3  border  rounded border-purple text-dark-blue focus:border-2 placeholder-purple"
 							onChange={(e) => setMessage(e.target.value)}
 						></textarea>
 						<button

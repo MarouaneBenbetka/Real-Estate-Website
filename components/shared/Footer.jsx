@@ -2,7 +2,7 @@ import { footerLinks, socialMedia } from "../../data/data";
 
 const Footer = () => {
 	return (
-		<section className={` flex-col bg-white px-6 py-6`}>
+		<section className={` flex-col bg-white px-6 py-6 border-t mt-4`}>
 			<div
 				className={`flex justify-center items-start md:flex-row flex-col mb-8 `}
 			>

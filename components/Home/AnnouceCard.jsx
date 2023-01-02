@@ -67,7 +67,7 @@ export default function AnnouceCard({
 		<Card
 			radius="md"
 			withBorder
-			className="max-w-xs px-4 pb-2 shadow-[0px_20px_20px_10px_#00000024] hover:scale-[1.04] transition-all duration-75 "
+			className="max-w-xs px-4 pb-2  shadow-xl hover:scale-[1.04] transition-all duration-75 "
 		>
 			<Card.Section>
 				<Carousel

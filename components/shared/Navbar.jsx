@@ -41,6 +41,15 @@ export default function Navbar() {
     if (indexPage === active) e.preventDefault;
     setActive(indexPage);
   };
+  const googleSSO = (e) => {
+    e.preventDefault();
+    signIn("google", {
+      callbackUrl:
+        env === "development"
+          ? "http://localhost:3000"
+          : "https://glassdon.vercel.app",
+    });
+  };
 
   return (
     <div className="flex justify-between items-center    py-4 md:px-6 lg:px-8 border-b">
@@ -84,7 +93,7 @@ export default function Navbar() {
       {status !== "unauthenticated" && status !== "loading" ? (
         <button
           onClick={() => {
-            signOut();
+            signOutgoogleSSO();
           }}
           className="px-4 py-2 text-white2 bg-purple rounded-[10px] font-semibold border-2 border-purple hover:bg-white hover:text-purple transition "
         >
@@ -95,13 +104,7 @@ export default function Navbar() {
           <button
             className="px-4 py-2  text-purple rounded-[10px] font-semibold border-2 border-white2 hover:bg-dark hover:text-red transition hover:bg-purple hover:text-white "
             onClick={(e) => {
-              e.preventDefault();
-              signIn("google", {
-                callbackUrl:
-                  env === "development"
-                    ? "http://localhost:3000"
-                    : "https://glassdon.vercel.app",
-              });
+              googleSSO(e);
             }}
           >
             Login
@@ -109,13 +112,7 @@ export default function Navbar() {
           <button
             className="px-4 py-2 text-white2 bg-purple rounded-[10px] font-semibold border-2 border-purple hover:bg-white hover:text-purple transition"
             onClick={(e) => {
-              e.preventDefault();
-              signIn("google", {
-                callbackUrl:
-                  env === "development"
-                    ? "http://localhost:3000"
-                    : "https://glassdon.vercel.app",
-              });
+              googleSSO(e);
             }}
           >
             Sign up

@@ -21,7 +21,7 @@ export default function Message({ infos }) {
 	return (
 		<div
 			className={
-				"border border-purple rounded-xl p-2 shadow-[0px_4px_30px_8px_#00000024]  relative cursor-pointer mb-5 " +
+				"border border-purple rounded-xl p-2 shadow-xl  relative cursor-pointer mb-5 " +
 				(seen
 					? " bg-gray-300 "
 					: "  bg-purple bg-opacity-30 border-2 border-purple ")
