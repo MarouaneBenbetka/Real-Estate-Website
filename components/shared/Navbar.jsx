@@ -3,35 +3,30 @@ import styles from "../../styles/NavBar.module.css";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { useSpring, animated } from "react-spring";
 import Link from "next/link";
-
-const navlinks = [
-	{
-		id: "explorer",
-		title: "Explorer",
-		link: "/",
-	},
-	{
-		id: "mes_annonces",
-		title: "Mes annonces",
-		link: "/MesAnnonces",
-	},
-	{
-		id: "messages",
-		title: "Messages",
-		link: "/Messages",
-	},
-];
+import { useSession, signIn, signOut } from "next-auth/react";
 
 export default function Navbar() {
 	const [active, setActive] = useState(0);
 	const [navMobile, setNavMobile] = useState(false);
-	const [nbNotifications, setNbNotifications] = useState(9);
+	const env = process.env.NODE_ENV;
 
-	const pageNavigationHadler = (e, indexPage) => {
-		setNavMobile(false);
-		if (indexPage === active) e.preventDefault;
-		setActive(indexPage);
-	};
+	const navlinks = [
+		{
+			id: "explorer",
+			title: "Explorer",
+			link: "/",
+		},
+		{
+			id: "mes_annonces",
+			title: "Mes annonces",
+			link: "/MesAnnonces",
+		},
+		{
+			id: "messages",
+			title: "Messages",
+			link: "/Messages",
+		},
+	];
 
 	const openAnimation = useSpring({
 		from: { maxHeight: "0px" },
@@ -77,7 +72,18 @@ export default function Navbar() {
 				))}
 			</ul>
 			<div className="hidden mr-3 md:flex items-center gap-4">
-				<button className="px-4 py-2  text-purple rounded-[10px] font-semibold border-2 border-white2 hover:bg-dark hover:text-red transition">
+				<button
+					className="px-4 py-2  text-purple rounded-[10px] font-semibold border-2 border-white2 hover:bg-dark hover:text-red transition"
+					onClick={(e) => {
+						e.preventDefault();
+						signIn("google", {
+							callbackUrl:
+								env === "development"
+									? "http://localhost:3000"
+									: "https://glassdon.vercel.app",
+						});
+					}}
+				>
 					Login
 				</button>
 				<button className="px-4 py-2 text-white2 bg-purple rounded-[10px] font-semibold border-2 border-purple hover:bg-white hover:text-purple transition">
