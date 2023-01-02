@@ -5,7 +5,7 @@ import MesAnnoncesList from "../components/MesAnnoncesComponents/MesAnnoncesList
 const MesAnnonces = () => {
 	return (
 		<div className="flex flex-col justify-center ">
-			<div className="border-b-2 min-h-[120px] bg-center flex flex-col justify-end">
+			<div className=" min-h-[120px] bg-center flex flex-col justify-end">
 				<div className="  min-h-[120px]">
 					{" "}
 					<div className="max-w-[1920px] mx-auto flex justify-center pt-8">

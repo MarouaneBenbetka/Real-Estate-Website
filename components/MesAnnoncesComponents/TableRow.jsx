@@ -46,8 +46,8 @@ export default function TableRow({
           </div>
         </td>
       </tr> */}
-      <tr>
-        <td>
+      <tr className="bg-white">
+        <td className="bg-white">
           <div className="flex items-center space-x-3">
             <div className="avatar">
               <div className="mask mask-squircle w-12 h-12">
@@ -66,25 +66,25 @@ export default function TableRow({
             </div>
           </div>
         </td>
-        <td>
+        <td className="bg-white">
           {typeAnnonce},{typeImmoblier},{wilaya}
           <br />
-          <span className="badge badge-ghost badge-sm">{prix}</span>
+          <span className="badge badge-ghost badge-sm bg-white2">{prix} DA</span>
         </td>
-        <td>{typePayment}</td>
-        <th>
+        <td className="bg-white">{typePayment}</td>
+        <th className="bg-white">
           <button
             onClick={(e) => {
               document.querySelector('[id="my-modal2"]').click();
-              console.log(props.data);
-              document
-                .querySelector(".confirm")
-                .setAttribute("data", props.data);
+              // console.log(props.data);
+              // document
+              //   .querySelector(".confirm")
+              //   .setAttribute("data", props.data);
               //add the modal of suppression to confirm eiher I will supress or not and fix the toast
               // add in igl the content of the about us page
             }}
           >
-            <BiTrash size={24} color="#d92525"></BiTrash>
+            <BiTrash size={24} color="#d92525" className="bg-white"></BiTrash>
           </button>
         </th>
       </tr>
