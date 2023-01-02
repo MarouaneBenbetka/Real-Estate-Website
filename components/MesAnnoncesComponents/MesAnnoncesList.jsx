@@ -50,7 +50,7 @@ const MesAnnoncesList = () => {
               onClick={(e) => {
                 document.querySelector('[id="my-modal2"]').click();
                 dispatch(deleteDonation(e.target.getAttribute("data")));
-                toast.success("Annonce supprimee avec succees");
+                toast.success("Annonce supprimee avec usc");
 
                 // dispatch(donationAdapter(removeOne(e.target.getAttribute('data'))))
               }}
@@ -94,33 +94,6 @@ const MesAnnoncesList = () => {
           </Accordion.Item>
         ))}
       </Accordion>
-      <div className="overflow-x-auto w-full mx-auto">
-      <table className=" table mx-auto w-full border-1 border-darkPrimary bg-white ">
-        <thead className="bg-white">
-          <tr className="text-center bg-white">
-            <th className="text-left sm:pl-28">Requester</th>
-            <th>Phone Number</th>
-            <th>action</th>
-          </tr>
-        </thead>
-        <tbody className="bg-white">
-          {requests?.map((request) => (
-            <FormRow
-              key={request.id}
-              fullname={request.user_fullname}
-              email={request.user_email}
-              phoneNum={request.user_phoneNum}
-              id={request.id}
-              // key={request}
-              // fullname={request}
-              // email={request}
-              // phoneNum={request}
-              // id= {request}
-            />
-          ))}
-        </tbody>
-      </table>
-    </div>
     </div>
   );
 };
