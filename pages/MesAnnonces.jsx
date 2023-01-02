@@ -9,7 +9,7 @@ const MesAnnonces = () => {
 				<div className="  min-h-[120px]">
 					{" "}
 					<div className="max-w-[1920px] mx-auto flex justify-center pt-8">
-						<h1 className="font-bold text-[48px] text-black ml-4 text-left border-purple pl ">
+						<h1 className="font-bold text-[48px] text-black ml-4 text-center md:text-left border-purple pl ">
 							Toutes les annonces
 						</h1>{" "}
 					</div>

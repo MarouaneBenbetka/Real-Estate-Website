@@ -54,7 +54,7 @@ const MesAnnoncesList = () => {
       <div className="overflow-x-auto w-full mx-auto mt-8">
       <table className=" table mx-auto w-full border-1 border-darkPrimary bg-white ">
         <thead className="bg-white">
-          <tr className="text-center bg-white2">
+          <tr className=" bg-white2">
             <th className="text-left sm:pl-28 bg-white2">Annonce</th>
             <th className="bg-white2">Localisation</th>
             <th className="bg-white2">Payment</th>
