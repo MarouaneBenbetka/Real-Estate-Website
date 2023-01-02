@@ -20,9 +20,10 @@ export const annouces = [
 		typeAnnoce: "Vente",
 		wilaya: "Alger",
 		commune: "Baba Hassen",
-		description: "une belle",
+		description: "une belle k askldf alkdjf",
 		prix: 10000,
 		typePayment: "jour",
+		datePublication: "11 decembre",
 		images: images,
 	},
 	{
@@ -34,6 +35,7 @@ export const annouces = [
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
 		prix: 10000,
 		typePayment: "jour",
+		datePublication: "11 decembre",
 		images: images,
 	},
 	{
@@ -45,6 +47,7 @@ export const annouces = [
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
 		prix: 10000,
 		typePayment: "jour",
+		datePublication: "11 decembre",
 		images: images,
 	},
 	{
@@ -56,6 +59,7 @@ export const annouces = [
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
 		prix: 10000,
 		typePayment: "jour",
+		datePublication: "11 decembre",
 		images: images,
 	},
 	{
@@ -67,6 +71,7 @@ export const annouces = [
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
 		prix: 10000,
 		typePayment: "jour",
+		datePublication: "11 decembre",
 		images: images,
 	},
 	{
@@ -78,6 +83,7 @@ export const annouces = [
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
 		prix: 10000,
 		typePayment: "jour",
+		datePublication: "11 decembre",
 		images: images,
 	},
 	{
@@ -89,6 +95,7 @@ export const annouces = [
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
 		prix: 10000,
 		typePayment: "jour",
+		datePublication: "11 decembre",
 		images: images,
 	},
 	{
@@ -100,6 +107,7 @@ export const annouces = [
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
 		prix: 10000,
 		typePayment: "jour",
+		datePublication: "11 decembre",
 		images: images,
 	},
 	{
@@ -111,6 +119,7 @@ export const annouces = [
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
 		prix: 10000,
 		typePayment: "jour",
+		datePublication: "11 decembre",
 		images: images,
 	},
 	{
@@ -122,6 +131,7 @@ export const annouces = [
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
 		prix: 10000,
 		typePayment: "jour",
+		datePublication: "11 decembre",
 		images: images,
 	},
 	{
@@ -133,6 +143,7 @@ export const annouces = [
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
 		prix: 10000,
 		typePayment: "jour",
+		datePublication: "11 decembre",
 		images: images,
 	},
 	{
@@ -144,6 +155,7 @@ export const annouces = [
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
 		prix: 10000,
 		typePayment: "jour",
+		datePublication: "11 decembre",
 		images: images,
 	},
 ];

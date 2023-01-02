@@ -1,12 +1,26 @@
-import "../styles/globals.css";
-import Layout from "../components/shared/Layout.jsx";
+import '../styles/globals.css'
+import Layout from '../components/shared/Layout.jsx'
+import { SessionProvider } from 'next-auth/react'
+import { MantineProvider } from '@mantine/core'
 
-function MyApp({ Component, pageProps }) {
-	return (
-		<Layout>
-			<Component {...pageProps} />
-		</Layout>
-	);
+function MyApp ({ session, Component, pageProps }) {
+  return (
+    <SessionProvider session={session}>
+      <MantineProvider
+        theme={{
+          fontFamily: {
+            poppins: ['Poppins', 'sans-serif'],
+            serif: ['Garamond']
+          }
+        }}
+        withGlobalStyles
+      >
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </MantineProvider>
+    </SessionProvider>
+  )
 }
 
-export default MyApp;
+export default MyApp

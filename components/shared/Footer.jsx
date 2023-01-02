@@ -2,7 +2,7 @@ import { footerLinks, socialMedia } from "../../data/data";
 
 const Footer = () => {
 	return (
-		<section className={` flex-col bg-white px-6 py-6 mt-4`}>
+		<section className={` flex-col bg-white px-6 py-6`}>
 			<div
 				className={`flex justify-center items-start md:flex-row flex-col mb-8 `}
 			>
@@ -52,7 +52,7 @@ const Footer = () => {
 			</div>
 			<div className="w-full flex justify-between items-center md:flex-row flex-col pt-6 border-t-[1px] border-t-[#3F3E45]">
 				<p className="font-poppins font-normal text-center text-[18px] leading-[27px] text-purple">
-					Copyright Ⓒ 2022 GlassDon. All Rights Reserved.
+					Copyright Ⓒ 2022 . All Rights Reserved.
 				</p>
 				<div className="flex flex-row md:mt-0 mt-6">
 					{socialMedia?.map((social, index) => (
