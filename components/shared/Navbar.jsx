@@ -35,6 +35,12 @@ export default function Navbar() {
 		config: { duration: "200" },
 	});
 
+	const pageNavigationHadler = (e, indexPage) => {
+		setNavMobile(false);
+		if (indexPage === active) e.preventDefault;
+		setActive(indexPage);
+	};
+
 	return (
 		<div className="flex justify-between items-center    py-4 md:px-6 lg:px-8">
 			<div className="ml-4 font-bold text-[24px]">
@@ -65,7 +71,7 @@ export default function Navbar() {
 							{navLink.title}
 						</Link>
 						{navLink.id === "messages" && nbNotifications > 0 && (
-							<div className="absolute text-[12px] font-bold w-6 h-6 rounded-full bg-purple text-white top-[-8px] right-[-.8vw] flex items-center justify-center ">
+							<div className="absolute text-[12px] w-6 h-6 font-bold rounded-full bg-purple text-white top-[-8px] right-[-.8vw] flex items-center justify-center ">
 								{nbNotifications}
 							</div>
 						)}
