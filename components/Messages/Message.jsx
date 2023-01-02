@@ -22,7 +22,9 @@ export default function Message({ infos }) {
 		<div
 			className={
 				"bg-gray-300 border border-purple rounded-xl p-2 shadow-[0px_4px_30px_8px_#00000024]  relative cursor-pointer mb-5" +
-				(seen ? "" : " bg-purple bg-opacity-20 border-2")
+				(seen
+					? ""
+					: " bg-purple bg-opacity-20 border-2 border-gray-400    ")
 			}
 			onMouseEnter={() => setShowExpand(true)}
 			onMouseLeave={() => setShowExpand(false)}

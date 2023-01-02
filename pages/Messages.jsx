@@ -32,7 +32,6 @@ const Messages = () => {
 				{messages.map((message) => (
 					<Message infos={message} key={message.id} />
 				))}
-				<PagesPagination maxPages={3} pag />
 				<PagesPagination
 					maxPages={maxPages}
 					currentPage={pageCount}
