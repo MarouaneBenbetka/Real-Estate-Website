@@ -3,27 +3,10 @@ import { Accordion, ActionIcon, Box } from "@mantine/core";
 import { BiTrash } from "react-icons/bi";
 import Image from "next/image";
 import { annouces } from "../../data/data";
+import TableRow from "./TableRow";
 
 const MesAnnoncesList = () => {
-  function AccordionControl(props) {
-    return (
-      <Box sx={{ display: "flex", alignItems: "center" }}>
-        <Accordion.Control {...props} />
-        <ActionIcon
-          size="lg"
-          onClick={(e) => {
-            document.querySelector('[id="my-modal2"]').click();
-            console.log(props.data);
-            document.querySelector(".confirm").setAttribute("data", props.data);
-            //add the modal of suppression to confirm eiher I will supress or not and fix the toast
-            // add in igl the content of the about us page
-          }}
-        >
-          <BiTrash size={24} color="#d92525"></BiTrash>
-        </ActionIcon>
-      </Box>
-    );
-  }
+
 
   const annonces = annouces;
 
@@ -52,7 +35,6 @@ const MesAnnoncesList = () => {
                 dispatch(deleteDonation(e.target.getAttribute("data")));
                 toast.success("Annonce supprimee avec usc");
 
-                // dispatch(donationAdapter(removeOne(e.target.getAttribute('data'))))
               }}
             >
               Confirmer
@@ -69,7 +51,37 @@ const MesAnnoncesList = () => {
           </div>
         </div>
       </div>
-      <Accordion>
+      <div className="overflow-x-auto w-full mx-auto mt-8">
+      <table className=" table mx-auto w-full border-1 border-darkPrimary bg-white ">
+        <thead className="bg-white">
+          <tr className="text-center bg-white">
+            <th className="text-left sm:pl-28">Annonce</th>
+            <th>Localisation</th>
+            <th>Payment</th>
+          </tr>
+        </thead>
+        <tbody className="bg-white">
+          {annonces?.map((annonce) => (
+            
+            <TableRow 
+            key={annonce.id}
+            description={annonce.description}
+            typeAnnonce={annonce.typeAnnoce}
+            typeImmoblier={annonce.typeImmoblier}
+            typePayment={annonce.typePayment}
+            prix={annonce.prix}
+            wilaya={annonce.wilaya}
+            datePublication={annonce.datePublication}
+            image={annonce.images[0]}
+            id={annonce.id}
+            
+            />
+        
+          ))}
+        </tbody>
+      </table>
+    </div>
+      {/* <Accordion>
         {annonces?.map((annonce) => (
           <Accordion.Item value={annonce.description} key={annonce.id}>
             <AccordionControl
@@ -90,10 +102,23 @@ const MesAnnoncesList = () => {
             >
               {annonce.description}
             </AccordionControl>
-            <Accordion.Panel>here is an element </Accordion.Panel>
+            <Accordion.Panel> 
+            <TableRow 
+            description={annonce.description}
+            typeAnnoce={annonce.typeAnnoce}
+            typeImmoblier={annonce.typeImmoblier}
+            typePayment={annonce.typePayment}
+            prix={annonce.prix}
+            wilaya={annonce.wilaya}
+            datePublication={annonce.datePublication}
+            image={annonce.images[0]}
+            id={annonce.id}
+            
+            />
+              </Accordion.Panel>
           </Accordion.Item>
         ))}
-      </Accordion>
+      </Accordion> */}
     </div>
   );
 };
