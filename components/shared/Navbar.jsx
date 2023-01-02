@@ -8,6 +8,7 @@ import { useSession, signIn, signOut } from "next-auth/react";
 export default function Navbar() {
 	const [active, setActive] = useState(0);
 	const [navMobile, setNavMobile] = useState(false);
+	const [nbNotifications, setNbNotifications] = useState(9);
 	const env = process.env.NODE_ENV;
 
 	const navlinks = [
