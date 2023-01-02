@@ -69,7 +69,7 @@ export default function Navbar() {
 							{navLink.title}
 						</Link>
 						{navLink.id === "messages" && nbNotifications > 0 && (
-							<div className="absolute text-[12px] w-6 h-6 rounded-full bg-purple text-white top-[-8px] right-[-.8vw] flex items-center justify-center ">
+							<div className="absolute text-[12px] font-bold w-6 h-6 rounded-full bg-purple text-white top-[-8px] right-[-.8vw] flex items-center justify-center ">
 								{nbNotifications}
 							</div>
 						)}
@@ -99,7 +99,7 @@ export default function Navbar() {
 							onClick={() => setNavMobile((prev) => !prev)}
 						/>
 						{nbNotifications > 0 && (
-							<div className="absolute text-[12px] w-3 h-3 rounded-full bg-purple text-white top-0 right-3  "></div>
+							<div className="absolute text-[12px]  w-3 h-3 rounded-full bg-purple text-white top-0 right-3  "></div>
 						)}
 					</>
 				)}
