@@ -79,38 +79,49 @@ export default function Navbar() {
           </li>
         ))}
       </ul>
-	  {console.log("session", status)}
+      {console.log("session", status)}
 
-	  {status !== "unauthenticated" && status !== "loading" ? (
-            <button
-              onClick={() => {
-                signOut();
-              }}
-              className="px-4 py-2 text-white2 bg-purple rounded-[10px] font-semibold border-2 border-purple hover:bg-white hover:text-purple transition "
-            >
-              Logout
-            </button>
-          ):(
-      <div className="hidden mr-3 md:flex items-center gap-4">
+      {status !== "unauthenticated" && status !== "loading" ? (
         <button
-          className="px-4 py-2  text-purple rounded-[10px] font-semibold border-2 border-white2 hover:bg-dark hover:text-red transition hover:bg-purple hover:text-white "
-          onClick={(e) => {
-            e.preventDefault();
-            signIn("google", {
-              callbackUrl:
-                env === "development"
-                  ? "http://localhost:3000"
-                  : "https://glassdon.vercel.app",
-            });
+          onClick={() => {
+            signOut();
           }}
+          className="px-4 py-2 text-white2 bg-purple rounded-[10px] font-semibold border-2 border-purple hover:bg-white hover:text-purple transition "
         >
-          Login
+          Logout
         </button>
-        <button className="px-4 py-2 text-white2 bg-purple rounded-[10px] font-semibold border-2 border-purple hover:bg-white hover:text-purple transition">
-          Sign up
-        </button>
-      </div>
-)}
+      ) : (
+        <div className="hidden mr-3 md:flex items-center gap-4">
+          <button
+            className="px-4 py-2  text-purple rounded-[10px] font-semibold border-2 border-white2 hover:bg-dark hover:text-red transition hover:bg-purple hover:text-white "
+            onClick={(e) => {
+              e.preventDefault();
+              signIn("google", {
+                callbackUrl:
+                  env === "development"
+                    ? "http://localhost:3000"
+                    : "https://glassdon.vercel.app",
+              });
+            }}
+          >
+            Login
+          </button>
+          <button
+            className="px-4 py-2 text-white2 bg-purple rounded-[10px] font-semibold border-2 border-purple hover:bg-white hover:text-purple transition"
+            onClick={(e) => {
+              e.preventDefault();
+              signIn("google", {
+                callbackUrl:
+                  env === "development"
+                    ? "http://localhost:3000"
+                    : "https://glassdon.vercel.app",
+              });
+            }}
+          >
+            Sign up
+          </button>
+        </div>
+      )}
       {/* The mobile verion of the navbar  */}
       <div className="block md:hidden relative cursor-pointer ">
         {navMobile ? (
