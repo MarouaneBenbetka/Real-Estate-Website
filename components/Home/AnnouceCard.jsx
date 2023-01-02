@@ -104,7 +104,7 @@ export default function AnnouceCard({
 					{commune} / {wilaya}
 				</Text>
 
-				<Text size="sm" color="dimmed" mt="sm">
+				<Text size="sm" color="dimmed" mt="sm" className="h-[44px]">
 					{description.length > 64
 						? description.substring(0, 64) + "..."
 						: description}
