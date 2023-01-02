@@ -2,6 +2,9 @@ import { useState } from "react";
 import PagesPagination from "../components/Home/PagesPagination";
 import Message from "../components/Messages/Message";
 import { messages } from "../data/data";
+import {isLogin} from "../utils/services/auth"
+import { getSession } from "next-auth/react"
+
 const Messages = () => {
 	const [pageCount, setPageCount] = useState(1);
 	const maxPages = 3;
@@ -45,3 +48,12 @@ const Messages = () => {
 };
 
 export default Messages;
+
+export async function getServerSideProps({ req }) {
+	const session = await getSession({ req })
+
+  isLogin(req);
+  return {
+    props: { session }
+  }
+}

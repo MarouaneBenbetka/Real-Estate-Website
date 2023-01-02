@@ -5,6 +5,7 @@ import { useSpring, animated } from "react-spring";
 import Link from "next/link";
 import { useSession, signIn, signOut } from "next-auth/react";
 
+
 export default function Navbar() {
   const [active, setActive] = useState(0);
   const [navMobile, setNavMobile] = useState(false);
@@ -41,8 +42,9 @@ export default function Navbar() {
     setActive(indexPage);
   };
 
+
   return (
-    <div className="flex justify-between items-center    py-4 md:px-6 lg:px-8 border-b-2">
+    <div className="flex justify-between items-center    py-4 md:px-6 lg:px-8 border-b">
       <div className="ml-4 font-bold text-[24px]">
         <h1>Real State</h1>
       </div>
@@ -80,7 +82,7 @@ export default function Navbar() {
       </ul>
       <div className="hidden mr-3 md:flex items-center gap-4">
         <button
-          className="px-4 py-2  text-purple rounded-[10px] font-semibold border-2 border-white2 hover:bg-dark hover:text-red transition"
+          className="px-4 py-2  text-purple rounded-[10px] font-semibold border-2 border-white2 hover:bg-dark hover:text-red transition hover:bg-purple hover:text-white "
           onClick={(e) => {
             e.preventDefault();
             signIn("google", {
