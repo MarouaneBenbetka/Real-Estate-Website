@@ -50,6 +50,11 @@ export default function CardDeatails() {
 		typePayment: "jour",
 		images: images,
 		datePublication: "01-01-2023",
+		ownerName: "Houari Boumedian",
+		ownerImg:
+			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz-LJaTp0HFRT2GHznf3n7iSAzu-z7och7Vc0GsJkTHWEk67OjQ0t0o6piSTpTv9sr7UI&usqp=CAU",
+		ownerEmail: "km_benbetka@gmail.com",
+		ownerPhone: "07 38 48 29 38",
 	});
 
 	const sendMessageHandler = () => {
@@ -75,6 +80,7 @@ export default function CardDeatails() {
 				{announceInfo.adresse}
 			</h2>
 
+			{/*Grid 2x2  [images-infos][description - message]  */}
 			<div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
 				{/* images galery */}
 				<ImagesGalery />
@@ -107,12 +113,39 @@ export default function CardDeatails() {
 						<p className="text-gray-600	text-[18px] max-w-[650px]">
 							{announceInfo.description}
 						</p>
+						<h2 className="mt-6 text-[18px] text-gray-500 mb-1">
+							Propriétaire de l'annonce{" "}
+						</h2>
+						<div className="flex items-center gap-4">
+							<img
+								className="w-[72px] h-[72px] rounded-full  border-purple object-cover object-center"
+								src={announceInfo.ownerImg}
+							/>
+							<div>
+								<h2 className="text-[20px] font-semibold leading-3 pb-1 mt-3 ">
+									{announceInfo.ownerName}
+								</h2>
+								<a
+									href={"mailto:" + announceInfo.ownerEmail}
+									target="_blank"
+									rel="noreferrer"
+								>
+									<h3 className="text-gray-600 ">
+										{announceInfo.ownerEmail}
+									</h3>
+								</a>
+
+								<h3 className="text-gray-600 text-[14px] leading-3 pt-1">
+									{announceInfo.ownerPhone}
+								</h3>
+							</div>
+						</div>
 					</div>
 				</div>
 				{/* Prix et message */}
 				<div className="w-full">
 					<div className="flex  flex-col justify-center items-center ">
-						<div className="ml-4 md:ml-10 mt-2 ">
+						<div className="ml-4 md:ml-10 mt-4 ">
 							<span className="text-gray-500 font-semibold text-[18px]  leading-[8px] pr-4">
 								Prix
 							</span>
@@ -131,11 +164,11 @@ export default function CardDeatails() {
 						</div>
 						<textarea
 							placeholder="Envoyer un message vers l'annonceur"
-							className="bg-white2 p-2 w-full md:w-2/3  border  rounded border-purple text-dark-blue focus:border-2 placeholder-purple"
+							className="h-[100px] bg-gray-300 p-2 w-full md:w-2/3  border  rounded border-purple text-dark-blue focus:border-2 placeholder-gray-500"
 							onChange={(e) => setMessage(e.target.value)}
 						></textarea>
 						<button
-							className="px-4 py-2 mt-2	 w-2/3 text-white2 bg-purple rounded-[4px] font-semibold border-2 border-purple hover:bg-white hover:text-purple transition"
+							className=" px-4 py-2 mt-2	 w-2/3 text-white2 bg-purple rounded-[4px] font-semibold border-2 border-purple hover:bg-white hover:text-purple transition"
 							onClick={sendMessageHandler}
 						>
 							Envoyer Message
@@ -143,6 +176,10 @@ export default function CardDeatails() {
 					</div>
 				</div>
 			</div>
+			{/* map location */}
+			<h1 className="text-dark-blue font-semibold text-[28px] mt-10 mb-2">
+				Position sur la carte
+			</h1>
 		</div>
 	);
 }
