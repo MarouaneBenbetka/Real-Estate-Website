@@ -11,14 +11,14 @@ const MesAnnoncesList = () => {
   const annonces = annouces;
 
   return (
-    <div className="bg-white">
+    <div className="">
       <input
         type="checkbox"
         id="my-modal2"
         defaultChecked={false}
         className="modal-toggle"
       />
-      <div className="modal hero lg:min-w-xl bg-white" id="my-modal-2">
+      <div className="modal hero lg:min-w-xl " id="my-modal-2">
         <div className="modal-box bg-white">
           <h3 className="font-bold text-lg">
             Voulez vous supprimer cette annonce !
@@ -54,7 +54,7 @@ const MesAnnoncesList = () => {
       <div className="overflow-x-auto w-full mx-auto mt-8">
       <table className=" table mx-auto w-full border-1 border-darkPrimary bg-white ">
         <thead className="bg-white">
-          <tr className=" bg-white2">
+          <tr className="  bg-white2">
             <th className="text-left sm:pl-28 bg-white2">Annonce</th>
             <th className="bg-white2">Localisation</th>
             <th className="bg-white2">Payment</th>

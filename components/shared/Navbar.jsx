@@ -107,7 +107,7 @@ export default function Navbar() {
       ) : (
         <div className="hidden mr-3 md:flex items-center gap-4">
           <button
-            className="px-4 py-2  text-purple rounded-[10px] font-semibold border-2 border-white2 hover:bg-dark hover:text-red transition hover:bg-purple hover:text-white "
+            className="px-4 py-2  text-purple rounded-[10px] font-semibold border-2 border-white2 transition hover:bg-purple hover:text-white hover:border-purple"
             onClick={(e) => {
               googleSSO(e);
             }}

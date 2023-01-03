@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState, useLayoutEffect } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import FormikControl from "./ControlComponents/FormikControl";
@@ -80,14 +80,16 @@ const AddAnnonce = () => {
     { key: "In Guezzam", value: "In Guezzam" },
   ];
 
+  const [commuoptions, Setcommuoptions] = useState(options1);
+  const [val, SetVal] = useState()
   const initialValues = {
     description: "",
     commune: "",
     typeImmoblier: "",
     typeAnnonce: "",
-    typePayment: "",
     prix: "",
     wilaya: "",
+    address: "",
     images: "",
   };
 
@@ -97,8 +99,8 @@ const AddAnnonce = () => {
     description: Yup.string().required("Required"),
     typeImmoblier: Yup.string().required("Required"),
     typeAnnonce: Yup.string().required("Required"),
-    typePayment: Yup.string().required("Required"),
     prix: Yup.number().required("Required"),
+    address: Yup.string().required("Required"),
     images: Yup.mixed()
       .required("Required")
       .test(
@@ -171,6 +173,11 @@ const AddAnnonce = () => {
     //   console.log(data);
   };
 
+  // useEffect(() => {
+  //   console.log(document?.querySelector('[ name="wilaya"]').value)
+  //   Setcommuoptions(options1);
+  // }, [document.querySelector('[ name="wilaya"]').value]);
+
   return (
     <div className="card flex-shrink-0  w-full shadow-2xl bg-white">
       <label
@@ -186,6 +193,9 @@ const AddAnnonce = () => {
           onSubmit={onSubmit}
         >
           {(formik) => {
+
+
+
             return (
               <Form>
                 <div className="md:grid md:grid-cols-2 md:gap-4">
@@ -235,12 +245,6 @@ const AddAnnonce = () => {
                   />
                   <FormikControl
                     control="select"
-                    label="Payment"
-                    name="typePayment"
-                    options={options2}
-                  />
-                  <FormikControl
-                    control="select"
                     label="Wilaya"
                     name="wilaya"
                     options={options3}
@@ -249,7 +253,15 @@ const AddAnnonce = () => {
                     control="select"
                     label="Commune"
                     name="commune"
-                    options={options3}
+                    options={commuoptions}
+                  />
+                  <FormikControl
+                    control="input"
+                    type="text"
+                    label="Address"
+                    name="address"
+                    formik={formik}
+                    placeholder="full address"
                   />
                   <FormikControl
                     control="number"
@@ -277,6 +289,7 @@ const AddAnnonce = () => {
                       <span>|</span>
                     </div> */}
                   </div>
+
                   <div className="form-control">
                     <label className="label" htmlFor="image">
                       <span className="label-text  text-lg">Image</span>

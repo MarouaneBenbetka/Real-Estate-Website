@@ -1,6 +1,7 @@
 import NextAuth from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
 import Error from 'next/error'
+import jsonwebtoken from 'jsonwebtoken'
 
 export default NextAuth({
   secret: process.env.JWT_SECRET,
@@ -17,9 +18,14 @@ export default NextAuth({
         console.log(account)
         console.log(account.id_token, account.token_type)
         console.log('token ~~~~~~~~~~~~~~~~~~~~~', token)
+        
+const jwt = jsonwebtoken.sign(token,process.env.JWT_SECRET)
+console.log("jwttttttttttttttttt", jwt)
+
         token = {
           email: user.email,
-          name: user.name
+          name: user.name,
+          jwt: jwt
           //     isDonator: user.isDonator,
           //     id: user.id,
           //     fullname: user.fullname,
@@ -34,6 +40,9 @@ export default NextAuth({
       // token?.id ? (session.user.id = token.id) : ''
       token?.email ? (session.user.email = token.email) : ''
       token?.name ? (session.user.name = token.name) : ''
+      token?.jwt ? (session.user.jwt = token.jwt) : ''
+
+      console.log("token ",token)
 
       // token?.isDonator ? (session.user.isDonator = token.isDonator) : ''
       // token?.fullname ? (session.user.fullname = token.fullname) : ''
