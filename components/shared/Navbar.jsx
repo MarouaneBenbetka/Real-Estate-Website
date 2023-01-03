@@ -93,7 +93,12 @@ export default function Navbar() {
       {status !== "unauthenticated" && status !== "loading" ? (
         <button
           onClick={() => {
-            signOutgoogleSSO();
+            signOut({
+              callbackUrl:
+                env === "development"
+                  ? "http://localhost:3000"
+                  : "https://glassdon.vercel.app",
+            });
           }}
           className="px-4 py-2 text-white2 bg-purple rounded-[10px] font-semibold border-2 border-purple hover:bg-white hover:text-purple transition "
         >
