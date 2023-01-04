@@ -16,7 +16,6 @@ export default function TableRow({
 }) {
   const { status, data: session } = useSession();
   console.log(session);
-  console.log(datePublication,"date pub")
 
   return (
     <>

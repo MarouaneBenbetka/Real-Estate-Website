@@ -4,6 +4,7 @@ import { FaBars, FaTimes } from "react-icons/fa";
 import { useSpring, animated } from "react-spring";
 import Link from "next/link";
 import { useSession, signIn, signOut } from "next-auth/react";
+import { toast } from "react-toastify";
 
 export default function Navbar() {
   const { status, data: session } = useSession();
@@ -110,6 +111,7 @@ export default function Navbar() {
             className="px-4 py-2  text-purple rounded-[10px] font-semibold border-2 border-white2 transition hover:bg-purple hover:text-white hover:border-purple"
             onClick={(e) => {
               googleSSO(e);
+              // toast.success("authentifie avec succes")
             }}
           >
             Login
@@ -177,12 +179,42 @@ export default function Navbar() {
               ))}
             </ul>
             <div className="flex gap-1">
-              <button className="px-4 py-2  text-purple rounded-[10px] font-semibold border-2 border-white2 hover:bg-dark hover:text-red transition">
-                Login
-              </button>
-              <button className="px-4 py-2 text-white2 bg-purple rounded-[10px] font-semibold border-2 border-purple hover:bg-white hover:text-purple transition">
-                Sign up
-              </button>
+              {status !== "unauthenticated" && status !== "loading" ? (
+                <>
+                  <button
+                    className="px-4 py-2  text-purple rounded-[10px] font-semibold border-2 border-white2 hover:bg-dark hover:text-red transition"
+                    onClick={(e) => {
+                      googleSSO(e);
+                    }}
+                  >
+                    Login
+                  </button>
+                  <button
+                    className="px-4 py-2 text-white2 bg-purple rounded-[10px] font-semibold border-2 border-purple hover:bg-white hover:text-purple transition"
+                    onClick={(e) => {
+                      googleSSO(e);
+                    }}
+                  >
+                    Sign up
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button
+                    className="px-4 py-2 text-white2 bg-purple rounded-[10px] font-semibold border-2 border-purple hover:bg-white hover:text-purple transition"
+                    onClick={() => {
+                      signOut({
+                        callbackUrl:
+                          env === "development"
+                            ? "http://localhost:3000"
+                            : "https://glassdon.vercel.app",
+                      });
+                    }}
+                  >
+                    logout
+                  </button>
+                </>
+              )}
             </div>
           </animated.div>
         )}

@@ -40,12 +40,12 @@ body {
 .underlineAnimation:hover::after {
 	width: 40%;
 }
-button,
+/* button,
 [type="button"],
 [type="reset"],
 [type="submit"] {
 	background-color: #f5f5f5;
-}
+} */
 
 textarea {
 	resize: none;
