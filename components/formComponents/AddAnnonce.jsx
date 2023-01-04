@@ -2,93 +2,18 @@ import React, { useEffect, useState, useLayoutEffect } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import FormikControl from "./ControlComponents/FormikControl";
+import {comm, options1,options2,options3} from "./AddAnnonceData"
 
 const AddAnnonce = () => {
   const status = "loading";
-  const options1 = [
-    { key: "Vente", value: "Vente" },
-    { key: "Echange", value: "Echange" },
-    { key: "Location", value: "Location" },
-    { key: "Loc pour vacances", value: "Loc pour vacances" },
-  ];
-  const options2 = [
-    { key: " Terrain", value: " Terrain" },
-    { key: "Terrain Agricole", value: "Terrain Agricole" },
-    { key: "Appartement", value: "Appartement" },
-    { key: "Maison", value: "Maison" },
-    { key: "Bungalow", value: "Bungalow" },
-  ];
-
-  const options3 = [
-    { key: "Adrar", value: "Adrar" },
-    { key: "Chlef", value: "Chlef" },
-    { key: "Laghouat", value: "Laghouat" },
-    { key: "Oum El Bouaghi", value: "Oum El Bouaghi" },
-    { key: "Batna", value: "Batna" },
-    { key: "Béjaïa", value: "Béjaïa" },
-    { key: "Biskra", value: "Biskra" },
-    { key: "Bechar", value: "Bechar" },
-    { key: "Blida", value: "Blida" },
-    { key: "Bouira", value: "Bouira" },
-    { key: "Tamanrasset", value: "Tamanrasset" },
-    { key: "Tbessa", value: "Tbessa" },
-    { key: "Tlemcen", value: "Tlemcen" },
-    { key: "Tiaret", value: "Tiaret" },
-    { key: "Tizi Ouzou", value: "Tizi Ouzou" },
-    { key: "Alger", value: "Alger" },
-    { key: "Djelfa", value: "Djelfa" },
-    { key: "Jijel", value: "Jijel" },
-    { key: "Se9tif", value: "Se9tif" },
-    { key: "Saefda", value: "Saefda" },
-    { key: "Skikda", value: "Skikda" },
-    { key: "Sidi Bel Abbes", value: "Sidi Bel Abbes" },
-    { key: "Annaba", value: "Annaba" },
-    { key: "Guelma", value: "Guelma" },
-    { key: "Constantine", value: "Constantine" },
-    { key: "Medea", value: "Medea" },
-    { key: "Mostaganem", value: "Mostaganem" },
-    { key: "M'Sila", value: "M'Sila" },
-    { key: "Mascara", value: "Mascara" },
-    { key: "Ouargla", value: "Ouargla" },
-    { key: "Oran", value: "Oran" },
-    { key: "El Bayadh", value: "El Bayadh" },
-    { key: "Illizi", value: "Illizi" },
-    { key: "Bordj Bou Arreridj", value: "Bordj Bou Arreridj" },
-    { key: "Boumerdes", value: "Boumerdes" },
-    { key: "El Tarf", value: "El Tarf" },
-    { key: "Tindouf", value: "Tindouf" },
-    { key: "Tissemsilt", value: "Tissemsilt" },
-    { key: "El Oued", value: "El Oued" },
-    { key: "Khenchela", value: "Khenchela" },
-    { key: "Souk Ahras", value: "Souk Ahras" },
-    { key: "Tipaza", value: "Tipaza" },
-    { key: "Mila", value: "Mila" },
-    { key: "Ain Defla", value: "Ain Defla" },
-    { key: "Naama", value: "Naama" },
-    { key: "Ain Temouchent", value: "Ain Temouchent" },
-    { key: "Ghardaefa", value: "Ghardaefa" },
-    { key: "Relizane", value: "Relizane" },
-    { key: "El M'ghair", value: "El M'ghair" },
-    { key: "El Menia", value: "El Menia" },
-    { key: "Ouled Djellal", value: "Ouled Djellal" },
-    { key: "Bordj Baji Mokhtar", value: "Bordj Baji Mokhtar" },
-    { key: "Béni Abbès", value: "Béni Abbès" },
-    { key: "Timimoun", value: "Timimoun" },
-    { key: "Touggourt", value: "Touggourt" },
-    { key: "Djanet", value: "Djanet" },
-    { key: "In Salah", value: "In Salah" },
-    { key: "In Guezzam", value: "In Guezzam" },
-  ];
-
-  const [commuoptions, Setcommuoptions] = useState(options1);
-  const [val, SetVal] = useState()
+  
   const initialValues = {
     description: "",
     commune: "",
     typeImmoblier: "",
     typeAnnonce: "",
     prix: "",
-    wilaya: "",
+    wilaya: "Adrar",
     address: "",
     images: "",
   };
@@ -173,11 +98,6 @@ const AddAnnonce = () => {
     //   console.log(data);
   };
 
-  // useEffect(() => {
-  //   console.log(document?.querySelector('[ name="wilaya"]').value)
-  //   Setcommuoptions(options1);
-  // }, [document.querySelector('[ name="wilaya"]').value]);
-
   return (
     <div className="card flex-shrink-0  w-full shadow-2xl bg-white">
       <label
@@ -253,7 +173,7 @@ const AddAnnonce = () => {
                     control="select"
                     label="Commune"
                     name="commune"
-                    options={commuoptions}
+                    options={comm[formik.values.wilaya]}
                   />
                   <FormikControl
                     control="input"
@@ -261,7 +181,7 @@ const AddAnnonce = () => {
                     label="Address"
                     name="address"
                     formik={formik}
-                    placeholder="full address"
+                    placeholder="cite 1000 LOGTS"
                   />
                   <FormikControl
                     control="number"
