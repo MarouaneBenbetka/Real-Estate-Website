@@ -5,11 +5,12 @@ import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
 export default function ImagesGalery() {
 	return (
-		<div className=" border-2 border-purple w-fit rounded-[6px] mt-2 mx-auto md:mx-0">
+		<div className="border-2 border-purple w-fit rounded-[6px] mt-2 mx-auto md:mx-0">
 			<Carousel
 				sx={{ maxWidth: 700 }}
 				mx="auto"
 				withIndicators
+				className="carousel"
 				styles={{
 					indicator: {
 						width: 12,

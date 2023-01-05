@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { MdOutlineNavigateBefore } from "react-icons/md";
 import ImagesGalery from "../../components/CardDetails/ImagesGalery";
+import dynamic from "next/dynamic";
 import { images } from "../../data/data";
 
 const sideInfo = [

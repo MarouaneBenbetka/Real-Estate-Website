@@ -20,10 +20,10 @@ export const annouces = [
 		typeAnnoce: "Vente",
 		wilaya: "Alger",
 		commune: "Baba Hassen",
-		description: "une belle k askldf alkdjf",
+		description: "une belle maison qui se bala bala ",
 		prix: 10000,
 		typePayment: "jour",
-		datePublication: "11 decembre",
+		datePublication: "01-01-2023",
 		images: images,
 	},
 	{
@@ -35,7 +35,7 @@ export const annouces = [
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
 		prix: 10000,
 		typePayment: "jour",
-		datePublication: "11 decembre",
+		datePublication: "01-01-2023",
 		images: images,
 	},
 	{
@@ -47,7 +47,7 @@ export const annouces = [
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
 		prix: 10000,
 		typePayment: "jour",
-		datePublication: "11 decembre",
+		datePublication: "01-01-2023",
 		images: images,
 	},
 	{
@@ -59,7 +59,7 @@ export const annouces = [
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
 		prix: 10000,
 		typePayment: "jour",
-		datePublication: "11 decembre",
+		datePublication: "01-01-2023",
 		images: images,
 	},
 	{
@@ -71,7 +71,7 @@ export const annouces = [
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
 		prix: 10000,
 		typePayment: "jour",
-		datePublication: "11 decembre",
+		datePublication: "01-01-2023",
 		images: images,
 	},
 	{
@@ -83,7 +83,7 @@ export const annouces = [
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
 		prix: 10000,
 		typePayment: "jour",
-		datePublication: "11 decembre",
+		datePublication: "01-01-2023",
 		images: images,
 	},
 	{
@@ -95,7 +95,7 @@ export const annouces = [
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
 		prix: 10000,
 		typePayment: "jour",
-		datePublication: "11 decembre",
+		datePublication: "01-01-2023",
 		images: images,
 	},
 	{
@@ -107,7 +107,7 @@ export const annouces = [
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
 		prix: 10000,
 		typePayment: "jour",
-		datePublication: "11 decembre",
+		datePublication: "01-01-2023",
 		images: images,
 	},
 	{
@@ -119,7 +119,7 @@ export const annouces = [
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
 		prix: 10000,
 		typePayment: "jour",
-		datePublication: "11 decembre",
+		datePublication: "01-01-2023",
 		images: images,
 	},
 	{
@@ -131,7 +131,7 @@ export const annouces = [
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
 		prix: 10000,
 		typePayment: "jour",
-		datePublication: "11 decembre",
+		datePublication: "01-01-2023",
 		images: images,
 	},
 	{
@@ -143,7 +143,7 @@ export const annouces = [
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
 		prix: 10000,
 		typePayment: "jour",
-		datePublication: "11 decembre",
+		datePublication: "01-01-2023",
 		images: images,
 	},
 	{
@@ -155,7 +155,7 @@ export const annouces = [
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
 		prix: 10000,
 		typePayment: "jour",
-		datePublication: "11 decembre",
+		datePublication: "01-01-2023",
 		images: images,
 	},
 ];
