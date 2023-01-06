@@ -6,6 +6,13 @@ import ImagesGalery from "../../components/CardDetails/ImagesGalery";
 import dynamic from "next/dynamic";
 import { images } from "../../data/data";
 
+const MapWrapper2 = dynamic(
+	() => import("../../components/CardDetails/MapWrapper"),
+	{
+		ssr: false,
+	}
+);
+
 const sideInfo = [
 	{
 		id: "typeImmoblier",
@@ -181,6 +188,7 @@ export default function CardDeatails() {
 			<h1 className="text-dark-blue font-semibold text-[28px] mt-10 mb-2">
 				Position sur la carte
 			</h1>
+			<MapWrapper2 />
 		</div>
 	);
 }
