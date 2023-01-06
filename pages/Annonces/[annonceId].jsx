@@ -65,14 +65,14 @@ export default function CardDeatails() {
 	return (
 		<div className="mx-8 sm:mx-10 md:mx-[7vw] lg:mx-[8vw]  mt-3">
 			{/* return to explore page */}
-			<Link href="/">
+			<div onClick={() => router.back()} className="cursor-pointer">
 				<div className="flex items-center gap-1 text-purple font-bold text-[22px] w-fit relative underlineAnimation ">
 					<MdOutlineNavigateBefore color="#7065F0" size={30} />
 					<div className="relative">
 						<p>Retour</p>
 					</div>
 				</div>
-			</Link>
+			</div>
 			{/* title of the annouce */}
 			<h1 className="text-dark-blue font-bold text-[36px] mt-4">
 				{announceInfo.typeImmoblier}

@@ -4,6 +4,7 @@ import { BiTrash } from "react-icons/bi";
 import Image from "next/image";
 import { annouces } from "../../data/data";
 import TableRow from "./TableRow";
+import Link from "next/link";
 
 const MesAnnoncesList = () => {
 	const annonces = annouces;
@@ -27,7 +28,7 @@ const MesAnnoncesList = () => {
 					</p>
 					<div className="modal-action">
 						<a
-							href="#"
+							href="# "
 							className="btn bg-purple border-purple confirm"
 							onClick={(e) => {
 								document
@@ -43,8 +44,9 @@ const MesAnnoncesList = () => {
 						>
 							Confirmer
 						</a>
-						<a
-							href="#"
+						<Link
+							href="# "
+							replace={false}
 							className="btn bg-[#d92525] border-[#d92525]"
 							onClick={(e) => {
 								document
@@ -53,7 +55,7 @@ const MesAnnoncesList = () => {
 							}}
 						>
 							Anuller
-						</a>
+						</Link>
 					</div>
 				</div>
 			</div>

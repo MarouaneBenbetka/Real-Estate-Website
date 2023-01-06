@@ -1,7 +1,9 @@
 import React from "react";
 import { BiTrash } from "react-icons/bi";
+import { FiExternalLink } from "react-icons/fi";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function TableRow({
 	description,
@@ -68,7 +70,10 @@ export default function TableRow({
 						/ {typePayment}
 					</span>
 				</td>
-				<th className="bg-white">
+				<th className="bg-white flex gap-6 items-center">
+					<Link href={"/Annonces/" + id} className="cursor-pointer">
+						<FiExternalLink size={24} color="#000929" />
+					</Link>
 					<button
 						onClick={(e) => {
 							document.querySelector('[id="my-modal2"]').click();
@@ -81,7 +86,7 @@ export default function TableRow({
 						}}
 					>
 						<BiTrash
-							size={24}
+							size={26}
 							color="#d92525"
 							className="bg-white"
 						></BiTrash>
