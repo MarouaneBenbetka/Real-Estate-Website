@@ -22,8 +22,8 @@ export default function MapWrapper() {
 				<Marker
 					position={[36.769445, 3.058147]}
 					icon={L.icon({
-						iconUrl: "/marker.png",
-						iconSize: [60, 60],
+						iconUrl: "/map_marker.svg",
+						iconSize: [42, 42],
 						iconAnchor: [12, 41],
 					})}
 				>
