@@ -2,12 +2,11 @@ import React, { useEffect, useState, useLayoutEffect } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import FormikControl from "./ControlComponents/FormikControl";
-import {comm, options1,options2,options3} from "./AddAnnonceData"
+import { comm, options1, options2, options3 } from "./AddAnnonceData";
 import { toast } from "react-toastify";
 import axios from "axios";
 import annonceCrud from "../../utils/services/annonce";
 import { useSession } from "next-auth/react";
-
 
 const AddAnnonce = () => {
   const status = "loading";
@@ -224,6 +223,7 @@ const AddAnnonce = () => {
       </div>
     </div>
   );
+
 };
 
 export default AddAnnonce;

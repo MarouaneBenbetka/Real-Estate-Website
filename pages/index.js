@@ -4,15 +4,14 @@ import { annouces } from "../data/data";
 import SearchBar from "../components/Home/SearchBar";
 import { toast } from "react-toastify";
 import PagesPagination from "../components/Home/PagesPagination";
-import cookie from 'js-cookie'
+import cookie from "js-cookie";
 
-
-export default function Explore({toasting}) {
+export default function Explore({ toasting }) {
 	const [pageCount, setPageCount] = useState(1);
 	const maxPages = 10;
 
-	if(toasting === "true"){
-toast.error("vous devez entre authentifiee")
+	if (toasting === "true") {
+		toast.error("vous devez entre authentifiee");
 	}
 
 	//search bar handler :
@@ -65,12 +64,11 @@ toast.error("vous devez entre authentifiee")
 }
 
 export async function getServerSideProps(ctx) {
-	
 	// const toasting = req.headers['toasting'] || false
-	const toasting = ctx.query.login || false
-	console.log(toasting)
-  
+	const toasting = ctx.query.login || false;
+	console.log(toasting);
+
 	return {
-	  props: { toasting },
+		props: { toasting },
 	};
-  }
+}

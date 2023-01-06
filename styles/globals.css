@@ -40,12 +40,6 @@ body {
 .underlineAnimation:hover::after {
 	width: 40%;
 }
-/* button,
-[type="button"],
-[type="reset"],
-[type="submit"] {
-	background-color: #f5f5f5;
-} */
 
 textarea {
 	resize: none;
@@ -57,4 +51,14 @@ textarea::placeholder {
 	font-weight: 500;
 	opacity: 1;
 	color: "#000929";
+}
+
+.carousel button {
+	background-color: white;
+}
+
+.table th:first-child {
+	position: static;
+	left: 0px;
+	z-index: 11;
 }
