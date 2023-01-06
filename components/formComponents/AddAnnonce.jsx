@@ -53,7 +53,6 @@ const AddAnnonce = () => {
     const button = document.querySelector("[type=submit]");
     button.innerText = "";
     button.classList.add("loading");
-    console.log("hiiiiiiHHHHHI")
     console.log(values)
     console.log(values.images.length)
     console.log(values.images[0])
