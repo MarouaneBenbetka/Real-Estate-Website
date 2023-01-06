@@ -11,7 +11,7 @@ import L from "leaflet";
 
 export default function MapWrapper() {
 	return (
-		<div className="border-2 border-purple flex max-w-[1000px] justify-center rounded-xl overflow-hidden">
+		<div className="border-2 border-purple flex justify-center rounded-xl overflow-hidden  mx-auto">
 			<MapContainer
 				center={[36.769445, 3.058147]}
 				zoom={15}
