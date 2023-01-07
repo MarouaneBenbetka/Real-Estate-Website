@@ -34,7 +34,7 @@ export default function Navbar() {
 	const openAnimation = useSpring({
 		from: { maxHeight: "0px" },
 		to: { maxHeight: navMobile ? "1000px" : "0px" },
-		config: { duration: "200" },
+		config: { duration: "500" },
 	});
 
 	const pageNavigationHadler = (e, indexPage) => {
@@ -127,7 +127,7 @@ export default function Navbar() {
 				</div>
 			)}
 			{/* The mobile verion of the navbar  */}
-			<div className="block md:hidden relative cursor-pointer h-fit ">
+			<div className=" block md:hidden relative cursor-pointer h-fit ">
 				{navMobile ? (
 					<FaTimes
 						className="text-3xl mr-4"
@@ -149,19 +149,19 @@ export default function Navbar() {
 					<animated.div
 						style={openAnimation}
 						className={
-							"absolute flex flex-col z-20 justify-start items-center gap-4 bg-white2 rounded-lg px-8 pt-[4vh]  text-center top-10 right-0 w-screen h-fit py-4 overflow-hidden"
+							"absolute  flex flex-col z-20 justify-start items-center gap-4 bg-white  rounded-lg px-8 pt-[4vh]  text-center top-10 right-0 w-screen h-fit py-4 overflow-hidden"
 						}
 					>
-						<ul className="flex flex-col text-dark-blue ">
+						<ul className="flex flex-col  text-dark-blue bg-white">
 							{navlinks.map((navLink, index) => (
 								<li
 									key={index}
-									className="relative w-screen  focus:text-purple focus:bg-slate hover:text-purple hover:bg-[#d6d6d6]  rounded-lg focus:underline"
+									className="relative w-screen bg-white  focus:text-purple focus:bg-slate hover:text-purple hover:bg-gray-200 focus:bg-gray-200   rounded-lg focus:underline"
 								>
 									<Link
 										href={navLink.link}
 										className={
-											"block p-4 w-full h-full border-[10px]  " +
+											"block p-4 w-full h-full  " +
 											(index === active
 												? "text-[18px] text-purple font-semibold"
 												: "text-[18px]")
