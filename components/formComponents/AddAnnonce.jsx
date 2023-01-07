@@ -27,7 +27,7 @@ const AddAnnonce = () => {
 	const initialValues = {
 		description: "",
 		commune: "",
-		typeImmoblier: "",
+		typeImmobilier: "",
 		typeAnnonce: "",
 		prix: "",
 		wilaya: "Alger",
@@ -174,7 +174,7 @@ const AddAnnonce = () => {
 									<FormikControl
 										control="select"
 										label="Commune"
-										name={commune}
+										name="commune"
 										options={communes[formik.values.wilaya]}
 										onChange={(e) => {
 											setCommune(e.target.value);
@@ -184,7 +184,12 @@ const AddAnnonce = () => {
 													formik.values.wilaya
 												)
 											);
+											formik.handleChange(e);
 										}}
+										onValueChange={(itemValue) => {
+											setFieldValue("commune", itemValue);
+										  }}
+										
 										onFirstRender={(c) => {
 											setPosition(
 												findLocation(
@@ -280,6 +285,8 @@ const AddAnnonce = () => {
 									>
 										Submit
 									</button>
+									{console.log(formik)}
+
 								</div>
 							</Form>
 						);
