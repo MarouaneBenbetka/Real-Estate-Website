@@ -12,15 +12,6 @@ const MapWrapper2 = dynamic(
 		ssr: false,
 	}
 );
-const LocationPicker2 = dynamic(
-	() =>
-		import(
-			"../../components/formComponents/ControlComponents/LocationPicker"
-		),
-	{
-		ssr: false,
-	}
-);
 
 const sideInfo = [
 	{

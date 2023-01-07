@@ -1,20 +1,25 @@
-import { TileLayer, Marker, MapContainer, useMapEvents } from "react-leaflet";
+import {
+	TileLayer,
+	Marker,
+	MapContainer,
+	useMapEvents,
+	useMap,
+} from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import { useState } from "react";
-
-const center = {
-	lat: 51.505,
-	lng: -0.09,
-};
+import { useRef, useState } from "react";
 
 function LocationMarker({ position, onChangePosition }) {
+	const [fly, setFly] = useState(true);
 	const map = useMapEvents({
 		click(e) {
 			console.log(e.latlng);
 			onChangePosition(e.latlng);
+			setFly(false);
 		},
 	});
+	const map1 = useMap();
+	map1.flyTo(position, 13);
 
 	return position === null ? null : (
 		<Marker
@@ -29,22 +34,20 @@ function LocationMarker({ position, onChangePosition }) {
 	);
 }
 
-export default function LocationPicker() {
-	const [position, setPosition] = useState(null);
-
+export default function LocationPicker({ position, onChangedPosition }) {
 	return (
-		<div className="border-2 border-purple flex justify-center rounded-xl overflow-hidden  mx-auto">
+		<div className="border-2 border-purple w-full flex justify-center rounded-xl overflow-hidden  mx-auto">
 			<MapContainer
-				center={center}
+				center={position}
 				zoom={15}
 				scrollWheelZoom={true}
-				className="h-[400px] w-full focus:outline-none "
+				className="h-[200px] w-full focus:outline-none "
 			>
 				<TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
 				<LocationMarker
 					position={position}
-					onChangePosition={setPosition}
+					onChangePosition={onChangedPosition}
 				/>
 			</MapContainer>
 		</div>
