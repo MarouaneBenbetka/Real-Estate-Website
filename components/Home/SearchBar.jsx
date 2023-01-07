@@ -5,13 +5,14 @@ import DatePicker from "./DatePicker";
 import Selector from "./Selector";
 import TypeSelector from "./TypeSelector";
 import { useState } from "react";
+import { wilayas, communes } from "../formComponents/form_data";
 
 export default function SearchBar({ onSearch, onFilter }) {
 	const [showFilters, setShowFilters] = useState(false);
 	const [searchedText, setSearchedText] = useState("");
 	const [filterData, setFilterData] = useState({
 		typeImmoblier: "",
-		wilaya: "",
+		wilaya: "Alger",
 		commune: "",
 		dateDebut: "",
 		dateFin: "",
@@ -27,7 +28,11 @@ export default function SearchBar({ onSearch, onFilter }) {
 		// console.log(type);
 	};
 	const changeWilayaHandler = (wilaya) => {
-		setFilterData((prev) => ({ ...prev, wilaya: wilaya }));
+		setFilterData((prev) => ({
+			...prev,
+			wilaya: wilaya,
+			commune: "",
+		}));
 		// console.log(wilaya);
 	};
 	const changeCommuneHandler = (commune) => {
@@ -133,18 +138,20 @@ export default function SearchBar({ onSearch, onFilter }) {
 							onOpened={openTypeList}
 						/>
 						<Selector
-							url={"https://restcountries.com/v2/all?fields=name"}
+							items={wilayas}
 							label="Wilaya"
 							onChangeValue={changeWilayaHandler}
 							open={openedList.wilaya}
 							onOpened={openWilayaList}
+							value={filterData.wilaya}
 						/>
 						<Selector
-							url={"https://restcountries.com/v2/all?fields=name"}
+							items={communes[filterData.wilaya]}
 							label="Commune"
 							onChangeValue={changeCommuneHandler}
 							open={openedList.commune}
 							onOpened={openCommuneList}
+							value={filterData.commune}
 						/>
 						<DatePicker
 							onChangeDateDebut={changeDateDebutHandler}

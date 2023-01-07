@@ -2,7 +2,7 @@ import React, { useEffect, useState, useLayoutEffect } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import FormikControl from "./ControlComponents/FormikControl";
-import { comm, options1, options2, options3 } from "./form_data";
+import { communes, typesAnnonces, typesImmobliers, wilayas } from "./form_data";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { useSession } from "next-auth/react";
@@ -162,19 +162,19 @@ const AddAnnonce = () => {
 										control="select"
 										label="Wilaya"
 										name="wilaya"
-										options={options3}
+										options={wilayas}
 									/>
 									<FormikControl
 										control="select"
 										label="Type"
 										name="typeImmobilier"
-										options={options1}
+										options={typesImmobliers}
 									/>
 									<FormikControl
 										control="select"
 										label="Commune"
 										name={commune}
-										options={comm[formik.values.wilaya]}
+										options={communes[formik.values.wilaya]}
 										onChange={(e) => {
 											setCommune(e.target.value);
 											setPosition(
@@ -189,7 +189,7 @@ const AddAnnonce = () => {
 										control="select"
 										label="Categorie"
 										name="typeAnnonce"
-										options={options2}
+										options={typesAnnonces}
 									/>
 
 									<FormikControl

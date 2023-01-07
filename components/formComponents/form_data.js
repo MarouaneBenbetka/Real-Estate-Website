@@ -1,10 +1,10 @@
-export const options1 = [
+export const typesAnnonces = [
 	{ key: "Vente", value: "Vente" },
 	{ key: "Echange", value: "Echange" },
 	{ key: "Location", value: "Location" },
 	{ key: "Loc pour vacances", value: "Loc pour vacances" },
 ];
-export const options2 = [
+export const typesImmobliers = [
 	{ key: " Terrain", value: " Terrain" },
 	{ key: "Terrain Agricole", value: "Terrain Agricole" },
 	{ key: "Appartement", value: "Appartement" },
@@ -12,7 +12,7 @@ export const options2 = [
 	{ key: "Bungalow", value: "Bungalow" },
 ];
 
-export const options3 = [
+export const wilayas = [
 	{ key: "Adrar", value: "Adrar" },
 	{ key: "Chlef", value: "Chlef" },
 	{ key: "Laghouat", value: "Laghouat" },
@@ -73,7 +73,7 @@ export const options3 = [
 	{ key: "El Menia", value: "El Menia" },
 ];
 
-export const comm = {
+export const communes = {
 	Adrar: [
 		{ key: "Timekten", value: "Timekten" },
 		{ key: "Bouda", value: "Bouda" },
