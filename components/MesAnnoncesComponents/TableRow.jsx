@@ -18,7 +18,7 @@ export default function TableRow({
 	id,
 }) {
 	const { status, data: session } = useSession();
-	console.log(session);
+	// console.log(session);
 
 	return (
 		<>
@@ -70,7 +70,7 @@ export default function TableRow({
 						/ {typePayment}
 					</span>
 				</td>
-				<th className="bg-white flex gap-6 items-center">
+				<td className="bg-white flex gap-6 items-center mt-3">
 					<Link href={"/Annonces/" + id} className="cursor-pointer">
 						<FiExternalLink size={24} color="#000929" />
 					</Link>
@@ -91,7 +91,7 @@ export default function TableRow({
 							className="bg-white"
 						></BiTrash>
 					</button>
-				</th>
+				</td>
 			</tr>
 		</>
 	);

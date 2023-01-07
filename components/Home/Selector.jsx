@@ -2,17 +2,10 @@ import React, { useEffect, useState } from "react";
 import { BiChevronDown } from "react-icons/bi";
 import { AiOutlineSearch } from "react-icons/ai";
 
-const Selector = ({ label, url, onChangeValue, open, onOpened }) => {
-	const [items, setItems] = useState(null);
+const Selector = ({ label, onChangeValue, open, onOpened, items, value }) => {
 	const [inputValue, setInputValue] = useState("");
 	const [selected, setSelected] = useState("");
-	useEffect(() => {
-		fetch(url)
-			.then((res) => res.json())
-			.then((data) => {
-				setItems(data);
-			});
-	}, []);
+
 	return (
 		<div>
 			<h2 className="mb-1 pl-2 text-[14px] font-normal text-purple relative">
@@ -27,11 +20,15 @@ const Selector = ({ label, url, onChangeValue, open, onOpened }) => {
 						onOpened(!open);
 					}}
 				>
-					{selected
-						? selected?.length > 16
-							? selected?.substring(0, 16) + "..."
-							: selected
-						: label}
+					{value ? (
+						value?.length > 16 ? (
+							value?.substring(0, 16) + "..."
+						) : (
+							value
+						)
+					) : (
+						<span className="text-gray-500">{label}</span>
+					)}
 					<BiChevronDown
 						size={20}
 						className={`${open && "rotate-180"} cursor-pointer`}
@@ -60,32 +57,32 @@ const Selector = ({ label, url, onChangeValue, open, onOpened }) => {
 							className="placeholder:text-gray-500 p-2 outline-none w-full "
 						/>
 					</div>
-					{items?.map((item) => (
+					{items.map((item) => (
 						<li
-							key={item?.name}
+							key={item.key}
 							className={`p-2 text-sm hover:bg-purple hover:text-white transition-all duration-200 cursor-pointer
             ${
-				item?.name?.toLowerCase() === selected?.toLowerCase() &&
+				item?.value?.toLowerCase() === selected?.toLowerCase() &&
 				"bg-purple text-white"
 			}
             ${
-				item?.name?.toLowerCase().startsWith(inputValue)
+				item?.value?.toLowerCase().startsWith(inputValue)
 					? "block"
 					: "hidden"
 			}`}
 							onClick={() => {
 								if (
-									item?.name?.toLowerCase() !==
+									item?.vlue?.toLowerCase() !==
 									selected.toLowerCase()
 								) {
-									setSelected(item?.name);
+									setSelected(item?.value);
 									onOpened(false);
 									setInputValue("");
-									onChangeValue(item?.name);
+									onChangeValue(item?.value);
 								}
 							}}
 						>
-							{item?.name}
+							{item?.value}
 						</li>
 					))}
 				</ul>
