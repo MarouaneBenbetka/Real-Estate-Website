@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
-import { findLocation } from "./ControlComponents/commune_lag_lng";
+import { findLocation, test } from "./ControlComponents/commune_lag_lng";
 
 const LocationPicker2 = dynamic(
 	() =>
@@ -20,6 +20,7 @@ const LocationPicker2 = dynamic(
 );
 
 const AddAnnonce = () => {
+	test(communes);
 	const status = "loading";
 	const { data: session } = useSession();
 
@@ -178,11 +179,19 @@ const AddAnnonce = () => {
 										onChange={(e) => {
 											setCommune(e.target.value);
 											setPosition(
-												findLocation(e.target.value)
+												findLocation(
+													e.target.value,
+													formik.values.wilaya
+												)
 											);
 										}}
 										onFirstRender={(c) => {
-											setPosition(findLocation(c));
+											setPosition(
+												findLocation(
+													c,
+													formik.values.wilaya
+												)
+											);
 										}}
 									/>
 									<FormikControl

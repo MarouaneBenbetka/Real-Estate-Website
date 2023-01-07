@@ -18,7 +18,7 @@ export default function Explore({ toasting }) {
 
 	const searchHandler = (e, searchText) => {
 		e.preventDefault();
-		// console.log(searchText);
+		console.log(searchText);
 	};
 	const filterHandler = (e, filterData) => {
 		e.preventDefault();

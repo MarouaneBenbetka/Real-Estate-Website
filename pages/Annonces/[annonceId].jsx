@@ -173,7 +173,7 @@ export default function CardDeatails() {
 						</div>
 						<textarea
 							placeholder="Envoyer un message vers l'annonceur"
-							className="h-[100px] bg-gray-300 p-2 w-full md:w-2/3  border  rounded border-purple text-dark-blue focus:border-2 placeholder-gray-500"
+							className="h-[100px] bg-gray-100 p-2 w-full md:w-2/3  border  rounded border-purple text-dark-blue focus:border-2 placeholder-gray-500"
 							onChange={(e) => setMessage(e.target.value)}
 						></textarea>
 						<button
