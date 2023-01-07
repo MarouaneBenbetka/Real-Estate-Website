@@ -100,8 +100,13 @@ export default function SearchBar({ onSearch, onFilter }) {
 							type="text"
 							name="search"
 							placeholder="Rechercher des immobiliers à louer"
-							className="w-full pl-6 pr-12 py-3 bg-white2 placeholder-gray-500 rounded-xl border-white ring-2 ring-gray-300 focus:outline-purple focus:outline-none  "
+							className="w-full pl-6 pr-12 py-3 bg-white2 placeholder-gray-500 rounded-xl border-white ring-2 ring-gray-200 focus:outline-purple focus:outline-none  "
 							onChange={(e) => setSearchedText(e.target.value)}
+							onKeyDown={(e) => {
+								if (e.key === "Enter") {
+									onSearch(e, searchedText);
+								}
+							}}
 						/>
 					</div>
 				</div>

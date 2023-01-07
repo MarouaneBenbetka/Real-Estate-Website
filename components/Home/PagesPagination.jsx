@@ -20,7 +20,7 @@ export default function PagesPagination({
 							className={
 								i + 1 === currentPage
 									? "bg-dark-blue rounded-full text-white text-[16px] px-3 py-2  cursor-pointer transition-all duration-100"
-									: "bg-white2 text-gray-500  text-[16px] px-3 py-2 transition-all  cursor-pointer"
+									: "bg-white text-gray-500  text-[16px] px-3 py-2 transition-all  cursor-pointer"
 							}
 							key={i}
 							onClick={(e) => onSelectionPageClick(e, i + 1)}
@@ -36,7 +36,7 @@ export default function PagesPagination({
 				className={
 					maxPages === currentPage
 						? "bg-dark-blue rounded-full text-white text-[16px] px-3 py-2  cursor-pointer"
-						: "bg-white2 text-gray-500  text-[16px] px-2 cursor-pointer"
+						: "bg-white text-gray-500  text-[16px] px-2 cursor-pointer"
 				}
 				key={maxPages - 1}
 				onClick={(e) => onSelectionPageClick(e, maxPages)}

@@ -5024,7 +5024,7 @@ export const commune_location = [
 	{
 		id: "559",
 		post_code: "16006",
-		name: "Bologhine",
+		name: "Bologhine Ibnou Ziri",
 		wilaya_id: "16",
 		ar_name: "بولوغين",
 		longitude: "36.8039256",
@@ -5186,7 +5186,7 @@ export const commune_location = [
 	{
 		id: "577",
 		post_code: "16024",
-		name: "El Hammamet",
+		name: "Hammamet",
 		wilaya_id: "16",
 		ar_name: "الحمامات",
 		longitude: "36.8024015",
@@ -5276,7 +5276,7 @@ export const commune_location = [
 	{
 		id: "587",
 		post_code: "16034",
-		name: "Birtouta",
+		name: "Bir Touta",
 		wilaya_id: "16",
 		ar_name: "بئر توتة",
 		longitude: "36.6424589",
@@ -5285,7 +5285,7 @@ export const commune_location = [
 	{
 		id: "588",
 		post_code: "16035",
-		name: "Tassala El Merdja",
+		name: "Tessala El Merdja",
 		wilaya_id: "16",
 		ar_name: "تسالة المرجة",
 		longitude: "36.6277781",
@@ -5330,7 +5330,7 @@ export const commune_location = [
 	{
 		id: "593",
 		post_code: "16040",
-		name: "Marsa",
+		name: "El Marsa",
 		wilaya_id: "16",
 		ar_name: "المرسى",
 		longitude: "36.8081013",
@@ -5339,7 +5339,7 @@ export const commune_location = [
 	{
 		id: "594",
 		post_code: "16041",
-		name: "Haraoua",
+		name: "Herraoua",
 		wilaya_id: "16",
 		ar_name: "هراوة",
 		longitude: "36.7726194",
@@ -5393,7 +5393,7 @@ export const commune_location = [
 	{
 		id: "600",
 		post_code: "16047",
-		name: "Mahelma",
+		name: "Maalma",
 		wilaya_id: "16",
 		ar_name: "محالمة",
 		longitude: "36.6721514",
@@ -5456,7 +5456,7 @@ export const commune_location = [
 	{
 		id: "607",
 		post_code: "16054",
-		name: "Douera",
+		name: "Douira",
 		wilaya_id: "16",
 		ar_name: "دويرة",
 		longitude: "36.6681547",
@@ -5474,7 +5474,7 @@ export const commune_location = [
 	{
 		id: "609",
 		post_code: "16056",
-		name: "Khracia",
+		name: "Khraissia",
 		wilaya_id: "16",
 		ar_name: "خرايسية",
 		longitude: "36.6691421",
@@ -5483,7 +5483,7 @@ export const commune_location = [
 	{
 		id: "610",
 		post_code: "16057",
-		name: "Saoula",
+		name: "Sehaoula",
 		wilaya_id: "16",
 		ar_name: "السحاولة",
 		longitude: "36.6866758",
@@ -5915,7 +5915,7 @@ export const commune_location = [
 	{
 		id: "658",
 		post_code: "18012",
-		name: "El Ancer",
+		name: "El Ancor",
 		wilaya_id: "18",
 		ar_name: "العنصر",
 		longitude: "36.7982581",
@@ -9380,7 +9380,7 @@ export const commune_location = [
 	{
 		id: "1043",
 		post_code: "29002",
-		name: "Bou Hanifia",
+		name: "Bouhanifia",
 		wilaya_id: "29",
 		ar_name: "بوحنيفية",
 		longitude: "35.2512",
@@ -9443,7 +9443,7 @@ export const commune_location = [
 	{
 		id: "1050",
 		post_code: "29009",
-		name: "Zelmata",
+		name: "Zelamta",
 		wilaya_id: "29",
 		ar_name: "زلماطة",
 		longitude: "35.2266",
@@ -9497,7 +9497,7 @@ export const commune_location = [
 	{
 		id: "1056",
 		post_code: "29015",
-		name: "Makdha",
+		name: "Makhda",
 		wilaya_id: "29",
 		ar_name: "ماقضة",
 		longitude: "35.1076",
@@ -9686,7 +9686,7 @@ export const commune_location = [
 	{
 		id: "1077",
 		post_code: "29036",
-		name: "Moctadouz",
+		name: "Mocta-Douz",
 		wilaya_id: "29",
 		ar_name: "مقطع الدوز",
 		longitude: "35.5356",
@@ -9704,7 +9704,7 @@ export const commune_location = [
 	{
 		id: "1079",
 		post_code: "29038",
-		name: "Guettena",
+		name: "El Gueitena",
 		wilaya_id: "29",
 		ar_name: "القيطنة",
 		longitude: "35.3207",
@@ -9740,7 +9740,7 @@ export const commune_location = [
 	{
 		id: "1083",
 		post_code: "29042",
-		name: "Gherdjoum",
+		name: "Guerdjoum",
 		wilaya_id: "29",
 		ar_name: "ڤرجوم",
 		longitude: "35.1143",
@@ -9758,7 +9758,7 @@ export const commune_location = [
 	{
 		id: "1085",
 		post_code: "29044",
-		name: "Ras Ain Amirouche",
+		name: "Ras El Ain Amirouche",
 		wilaya_id: "29",
 		ar_name: "رأس العين عميروش",
 		longitude: "35.5289",
@@ -9812,7 +9812,7 @@ export const commune_location = [
 	{
 		id: "1091",
 		post_code: "30003",
-		name: "Ngoussa",
+		name: "N'goussa",
 		wilaya_id: "30",
 		ar_name: "نقوسة",
 		longitude: "32.0744",
@@ -10172,7 +10172,7 @@ export const commune_location = [
 	{
 		id: "1131",
 		post_code: "31022",
-		name: "Sidi Ben Yabka",
+		name: "Sidi Ben Yebka",
 		wilaya_id: "31",
 		ar_name: "سيدي بن يبقى",
 		longitude: "35.7643",
@@ -10199,7 +10199,7 @@ export const commune_location = [
 	{
 		id: "1134",
 		post_code: "31025",
-		name: "Ain Kerma",
+		name: "El Kerma",
 		wilaya_id: "31",
 		ar_name: "عين الكرمة",
 		longitude: "35.5836",
@@ -10271,7 +10271,7 @@ export const commune_location = [
 	{
 		id: "1142",
 		post_code: "32007",
-		name: "El Abiodh Sidi Cheikh",
+		name: "Labiodh Sidi Cheikh",
 		wilaya_id: "32",
 		ar_name: "الابيض سيدي الشيخ",
 		longitude: "32.8311",
@@ -10307,7 +10307,7 @@ export const commune_location = [
 	{
 		id: "1146",
 		post_code: "32011",
-		name: "El Kheither",
+		name: "El Kheiter",
 		wilaya_id: "32",
 		ar_name: "الخيثر",
 		longitude: "34.0777",
@@ -10406,7 +10406,7 @@ export const commune_location = [
 	{
 		id: "1157",
 		post_code: "32022",
-		name: "Sidi Tifour",
+		name: "Sidi Tiffour",
 		wilaya_id: "32",
 		ar_name: "سيدي طيفور",
 		longitude: "33.6512",
@@ -10469,7 +10469,7 @@ export const commune_location = [
 	{
 		id: "1164",
 		post_code: "34001",
-		name: "Bordj Bou Arreridj",
+		name: "B. B. Arreridj",
 		wilaya_id: "34",
 		ar_name: "برج بوعريريج",
 		longitude: "36.0025",
@@ -10487,7 +10487,7 @@ export const commune_location = [
 	{
 		id: "1166",
 		post_code: "34003",
-		name: "Bordj Zemoura",
+		name: "Bordj Zemmoura",
 		wilaya_id: "34",
 		ar_name: "برج زمورة",
 		longitude: "36.2288",
@@ -10505,7 +10505,7 @@ export const commune_location = [
 	{
 		id: "1168",
 		post_code: "34005",
-		name: "El Mhir",
+		name: "El M'hir",
 		wilaya_id: "34",
 		ar_name: "المھير",
 		longitude: "36.0535",
@@ -10541,7 +10541,7 @@ export const commune_location = [
 	{
 		id: "1172",
 		post_code: "34009",
-		name: "Bordj Ghdir",
+		name: "Bordj Ghedir",
 		wilaya_id: "34",
 		ar_name: "برج غدير",
 		longitude: "35.8356",
@@ -10703,7 +10703,7 @@ export const commune_location = [
 	{
 		id: "1190",
 		post_code: "34027",
-		name: "El Ach",
+		name: "El Euch",
 		wilaya_id: "34",
 		ar_name: "العش",
 		longitude: "35.8846",
@@ -10721,7 +10721,7 @@ export const commune_location = [
 	{
 		id: "1192",
 		post_code: "34029",
-		name: "Tesmart",
+		name: "",
 		wilaya_id: "34",
 		ar_name: "تسمارت",
 		longitude: "36.2044",
@@ -11441,7 +11441,7 @@ export const commune_location = [
 	{
 		id: "1272",
 		post_code: "38017",
-		name: "Maasem",
+		name: "Maacem",
 		wilaya_id: "38",
 		ar_name: "المعاصم",
 		longitude: "35.5959",
@@ -11459,7 +11459,7 @@ export const commune_location = [
 	{
 		id: "1274",
 		post_code: "38019",
-		name: "Tamalaht",
+		name: "Tamellahet",
 		wilaya_id: "38",
 		ar_name: "تاملاحت",
 		longitude: "35.7499",
@@ -11621,7 +11621,7 @@ export const commune_location = [
 	{
 		id: "1292",
 		post_code: "39015",
-		name: "Douar El Ma",
+		name: "Douar El Maa",
 		wilaya_id: "39",
 		ar_name: "دوار الماء",
 		longitude: "33.1962",
@@ -11657,7 +11657,7 @@ export const commune_location = [
 	{
 		id: "1296",
 		post_code: "39019",
-		name: "Beni Guecha",
+		name: "Ben Guecha",
 		wilaya_id: "39",
 		ar_name: "بن ڨشة",
 		longitude: "33.9331",
@@ -11774,7 +11774,7 @@ export const commune_location = [
 	{
 		id: "1309",
 		post_code: "40002",
-		name: "Mtoussa",
+		name: "M'toussa",
 		wilaya_id: "40",
 		ar_name: "متوسة",
 		longitude: "35.5356",
@@ -11855,7 +11855,7 @@ export const commune_location = [
 	{
 		id: "1318",
 		post_code: "40011",
-		name: "Cherchar",
+		name: "Chechar",
 		wilaya_id: "40",
 		ar_name: "ششار",
 		longitude: "34.9749",
@@ -11918,7 +11918,7 @@ export const commune_location = [
 	{
 		id: "1325",
 		post_code: "40018",
-		name: "Msara",
+		name: "M'sara",
 		wilaya_id: "40",
 		ar_name: "أمصارة",
 		longitude: "35.1749",
@@ -12080,7 +12080,7 @@ export const commune_location = [
 	{
 		id: "1343",
 		post_code: "41015",
-		name: "Mdaourouche",
+		name: "M'daourouche",
 		wilaya_id: "41",
 		ar_name: "مداوروش",
 		longitude: "36.0124",
@@ -12116,7 +12116,7 @@ export const commune_location = [
 	{
 		id: "1347",
 		post_code: "41019",
-		name: "Quillen",
+		name: "Ouillen",
 		wilaya_id: "41",
 		ar_name: "ويلان",
 		longitude: "36.2653",
@@ -12161,7 +12161,7 @@ export const commune_location = [
 	{
 		id: "1352",
 		post_code: "41024",
-		name: "Oued Keberit",
+		name: "Oued Kebrit",
 		wilaya_id: "41",
 		ar_name: "وادى الكبريت",
 		longitude: "35.8701",
@@ -12305,7 +12305,7 @@ export const commune_location = [
 	{
 		id: "1368",
 		post_code: "42022",
-		name: "Cherchel",
+		name: "Cherchell",
 		wilaya_id: "42",
 		ar_name: "شرشال",
 		longitude: "36.5461",
@@ -12422,7 +12422,7 @@ export const commune_location = [
 	{
 		id: "1381",
 		post_code: "42041",
-		name: "Beni Milleuk",
+		name: "Beni Mileuk",
 		wilaya_id: "42",
 		ar_name: "بني ميلك",
 		longitude: "36.3538",
@@ -12431,7 +12431,7 @@ export const commune_location = [
 	{
 		id: "1382",
 		post_code: "42042",
-		name: "Hadjerat Ennous",
+		name: "Hadjret Ennous",
 		wilaya_id: "42",
 		ar_name: "حجرة النص",
 		longitude: "36.5107",
@@ -14337,40 +14337,99 @@ const wilayas_lat_lng = [
 	},
 ];
 
+const wilayas_code = {
+	Adrar: "1",
+	Chlef: "2",
+	Laghouat: "3",
+	"Oum El Bouaghi": "4",
+	Batna: "5",
+	Béjaïa: "6",
+	Biskra: "7",
+	Béchar: "8",
+	Blida: "9",
+	Bouira: "10",
+	Tamanrasset: "11",
+	Tébessa: "12",
+	Tlemcen: "13",
+	Tiaret: "14",
+	"Tizi Ouzou": "15",
+	Alger: "16",
+	Djelfa: "17",
+	Jijel: "18",
+	Sétif: "19",
+	Saïda: "20",
+	Skikda: "21",
+	"Sidi Bel Abbès": "22",
+	Annaba: "23",
+	Guelma: "24",
+	Constantine: "25",
+	Médéa: "26",
+	Mostaganem: "27",
+	"M'Sila": "28",
+	Mascara: "29",
+	Ouargla: "30",
+	Oran: "31",
+	"El Bayadh": "32",
+	Illizi: "33",
+	"Bordj Bou Arreridj": "34",
+	Boumerdès: "35",
+	"El Tarf": "36",
+	Tindouf: "37",
+	Tissemsilt: "38",
+	"El Oued": "39",
+	Khenchela: "40",
+	"Souk Ahras": "41",
+	Tipaza: "42",
+	Mila: "43",
+	"Aïn Defla": "44",
+	Naâma: "45",
+	"Aïn Témouchent": "46",
+	Ghardaïa: "47",
+	Relizane: "48",
+	"El Meghaier": "49",
+	"El Menia": "50",
+	"Ouled Djellal": "51",
+	"Bordj Badji Mokhtar": "52",
+	"Béni Abbès": "53",
+	Timimoun: "54",
+	Touggourt: "55",
+	Djanet: "56",
+	"In Salah": "57",
+	"In Guezzam": "58",
+};
+
 export const test = (wilayas) => {
 	let cpt = 0;
-	Object.values(wilayas).forEach((wilaya) => {
+	for (const [key, wilaya] of Object.entries(wilayas)) {
 		for (var i = 0; i < wilaya.length; i++) {
-			let commune = wilaya[i].key;
-
+			var commune = wilaya[i].key;
 			if (findLocation(commune) == null) {
 				console.log("form :", commune);
 				cpt++;
 			}
 		}
-	});
+	}
 	console.log(cpt);
 };
 
-export const findLocation = (commune, wilaya) => {
+export const findLocation = (commune) => {
 	for (var i = 0; i < commune_location.length; i++) {
-		if (commune.toLowerCase() === commune_location[i].name.toLowerCase())
-			return {
-				lat: commune_location[i].longitude,
-				lng: commune_location[i].latitude,
-			};
-		else if (
-			commune.toLowerCase().replace(/[^bcdfghjklmnpqrstvwxyz]/gi, "") ===
+		if (
+			commune
+				.toLowerCase()
+				.replace(/ |-|_|'/g, "")
+				.replace(/e/g, "a") ===
 			commune_location[i].name
 				.toLowerCase()
-				.replace(/[^bcdfghjklmnpqrstvwxyz]/gi, "")
-		) {
+				.replace(/ |-|_|'/g, "")
+				.replace(/e/g, "a")
+		)
 			return {
 				lat: commune_location[i].longitude,
 				lng: commune_location[i].latitude,
 			};
-		}
 	}
+	return null;
 	return findWilaya(wilaya);
 };
 

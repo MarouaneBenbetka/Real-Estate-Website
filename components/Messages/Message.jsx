@@ -23,8 +23,8 @@ export default function Message({ infos }) {
 			className={
 				"border border-purple rounded-xl p-2 shadow-xl  relative cursor-pointer mb-5 " +
 				(seen
-					? " bg-gray-300 "
-					: "  bg-purple bg-opacity-30 border-2 border-purple ")
+					? " bg-gray-200 "
+					: "  bg-purple bg-opacity-20 border-2 border-purple ")
 			}
 			onMouseEnter={() => setShowExpand(true)}
 			onMouseLeave={() => setShowExpand(false)}
