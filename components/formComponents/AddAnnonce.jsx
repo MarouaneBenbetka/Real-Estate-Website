@@ -7,11 +7,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
-import {
-	findLocation,
-	commune_location,
-	test,
-} from "./ControlComponents/commune_lag_lng";
+import { findLocation } from "./ControlComponents/commune_lag_lng";
 
 const LocationPicker2 = dynamic(
 	() =>
@@ -24,10 +20,6 @@ const LocationPicker2 = dynamic(
 );
 
 const AddAnnonce = () => {
-	console.log("debut test");
-	test(comm);
-	console.log("fin test");
-
 	const status = "loading";
 	const { data: session } = useSession();
 
@@ -166,19 +158,6 @@ const AddAnnonce = () => {
 										formik={formik}
 										placeholder="Entrer une Description de l'annonce"
 									/>
-
-									<FormikControl
-										control="select"
-										label="Type"
-										name="typeImmobilier"
-										options={options1}
-									/>
-									<FormikControl
-										control="select"
-										label="Categorie"
-										name="typeAnnonce"
-										options={options2}
-									/>
 									<FormikControl
 										control="select"
 										label="Wilaya"
@@ -187,18 +166,32 @@ const AddAnnonce = () => {
 									/>
 									<FormikControl
 										control="select"
+										label="Type"
+										name="typeImmobilier"
+										options={options1}
+									/>
+									<FormikControl
+										control="select"
 										label="Commune"
 										name={commune}
 										options={comm[formik.values.wilaya]}
 										onChange={(e) => {
 											setCommune(e.target.value);
-											console.log(e.target.value);
-
 											setPosition(
 												findLocation(e.target.value)
 											);
 										}}
+										onFirstRender={(c) => {
+											setPosition(findLocation(c));
+										}}
 									/>
+									<FormikControl
+										control="select"
+										label="Categorie"
+										name="typeAnnonce"
+										options={options2}
+									/>
+
 									<FormikControl
 										control="input"
 										type="text"
@@ -249,7 +242,7 @@ const AddAnnonce = () => {
 											htmlFor="image"
 										>
 											<span className="label-text  text-lg">
-												Position sur la cart
+												Position sur la carte
 											</span>
 										</label>
 										<LocationPicker2

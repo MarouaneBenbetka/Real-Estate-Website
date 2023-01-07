@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Field, ErrorMessage } from "formik";
 import TextError from "./TextError";
 
 function Select(props) {
-	const { label, name, options, ...rest } = props;
+	const { label, name, options, onFirstRender, ...rest } = props;
+
+	useEffect(() => {
+		if (label === "Commune") {
+			onFirstRender(options[0].key);
+			console.log("yo");
+		}
+	}, [options]);
 	return (
 		<div className="form-control">
 			<label className=" label label-text  text-lg" htmlFor={name}>
