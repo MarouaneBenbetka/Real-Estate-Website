@@ -125,7 +125,7 @@ export default function SearchBar({ onSearch, onFilter }) {
 			{/* filter bar */}
 			<animated.div
 				className={
-					"relative  z-50 " + (!showFilters && "overflow-hidden")
+					"relative  z-10 " + (!showFilters && "overflow-hidden")
 				}
 				style={openAnimation}
 			>
@@ -135,7 +135,7 @@ export default function SearchBar({ onSearch, onFilter }) {
 						setOpenedLists("");
 					}}
 				>
-					<div className=" mt-2 mb-4 flex gap-x-2 gap-y-[6px] justify-center items-end flex-wrap relative z-100 overflow-visible">
+					<div className=" mt-2 mb-4 flex gap-x-2 gap-y-[6px] justify-center items-end flex-wrap relative z-10 overflow-visible">
 						<TypeSelector
 							label="Type"
 							onChangeValue={changeTypeHandler}

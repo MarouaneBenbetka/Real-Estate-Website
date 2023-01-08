@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useLayoutEffect } from "react";
+import React, { useState } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import FormikControl from "./ControlComponents/FormikControl";
@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
-import { findLocation, test } from "./ControlComponents/commune_lag_lng";
+import { findLocation } from "./ControlComponents/commune_lag_lng";
 
 const LocationPicker2 = dynamic(
 	() =>
@@ -20,7 +20,6 @@ const LocationPicker2 = dynamic(
 );
 
 const AddAnnonce = () => {
-	test(communes);
 	const status = "loading";
 	const { data: session } = useSession();
 
@@ -188,8 +187,7 @@ const AddAnnonce = () => {
 										}}
 										onValueChange={(itemValue) => {
 											setFieldValue("commune", itemValue);
-										  }}
-										
+										}}
 										onFirstRender={(c) => {
 											setPosition(
 												findLocation(
@@ -286,7 +284,6 @@ const AddAnnonce = () => {
 										Submit
 									</button>
 									{console.log(formik)}
-
 								</div>
 							</Form>
 						);

@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CardsGrid from "../components/Home/CardsGrid";
 import { annouces } from "../data/data";
 import SearchBar from "../components/Home/SearchBar";
 import { toast } from "react-toastify";
 import PagesPagination from "../components/Home/PagesPagination";
 import cookie from "js-cookie";
+import axios from "axios";
 
 export default function Explore({ toasting }) {
 	const [pageCount, setPageCount] = useState(1);
@@ -42,7 +43,7 @@ export default function Explore({ toasting }) {
 	};
 
 	return (
-		<div className="flex flex-col justify-center  mx-4 sm:mx-10 md:mx-[7vw] lg:mx-[11vw]">
+		<div className="flex flex-col justify-center  mx-4 sm:mx-10 md:mx-[3vw] lg:mx-[10vw]">
 			<div className="my-4 relative z-1">
 				<h1 className="font-bold text-[32px]">Explorer nos annonces</h1>
 				{/* Search Bar + Filter Bar */}
