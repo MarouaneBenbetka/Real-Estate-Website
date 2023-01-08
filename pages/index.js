@@ -1,15 +1,31 @@
 import { useEffect, useState } from "react";
 import CardsGrid from "../components/Home/CardsGrid";
-import { annouces } from "../data/data";
+import { DUMMY_ANNOUNCES } from "../data/data";
 import SearchBar from "../components/Home/SearchBar";
 import { toast } from "react-toastify";
 import PagesPagination from "../components/Home/PagesPagination";
 import cookie from "js-cookie";
 import axios from "axios";
+import annonceCrud from "../utils/services/annonce";
 
 export default function Explore({ toasting }) {
 	const [pageCount, setPageCount] = useState(1);
-	const maxPages = 10;
+	const [announces, setAnnounces] = useState(DUMMY_ANNOUNCES);
+	const [maxPages, setMaxPages] = useState(1);
+	const [lastSearch, setLastSearch] = useState("");
+
+	// useEffect(() => {
+	// 	axios
+	// 		.get(`http://192.168.145.12:5000/annonces?page=${pageCount}`)
+	// 		.then((res) => {
+	// 			setAnnounces(res.data.data);
+	// 			setMaxPages(res.data.max_pages);
+	// 			console.log(res.data);
+	// 		})
+	// 		.catch((err) => {
+	// 			console.log(err);
+	// 		});
+	// }, [pageCount]);
 
 	if (toasting === "true") {
 		toast.error("vous devez entre authentifiee");
@@ -19,11 +35,39 @@ export default function Explore({ toasting }) {
 
 	const searchHandler = (e, searchText) => {
 		e.preventDefault();
-		console.log(searchText);
+		// axios
+		// 	.get(
+		// 		`http://192.168.145.12:5000/annonces/search?q=${searchText}&page=${pageCount}`
+		// 	)
+		// 	.then((res) => {
+		// 		if (res.data.data) {
+		// 			setAnnounces(res.data.data);
+		// 			setPageCount(1);
+		// 			setLastSearch(searchText);
+		// 		}
+		// 		setMaxPages(res.data.max_pages);
+
+		// 		console.log(res.data);
+		// 	})
+		// 	.catch((err) => {
+		// 		console.log(err);
+		// 	});
 	};
+
 	const filterHandler = (e, filterData) => {
 		e.preventDefault();
-		// console.log(filterData);
+		// axios
+		// 	.get(
+		// 		`http://192.168.145.12:5000/annonces/search?q=${lastSearch}&min_date=${filterData.dateDebut}&max_date=${filterData.dateFin}&wilaya=${filterData.wilaya}&commune=${filterData.commune}&type=${filterData.typeAnnonce}&page=${pageCount}`
+		// 	)
+		// 	.then((res) => {
+		// 		setAnnounces(res.data.data);
+		// 		setMaxPages(res.data.max_pages);
+		// 		console.log(res.data);
+		// 	})
+		// 	.catch((err) => {
+		// 		console.log(err);
+		// 	});
 	};
 
 	// pages navigation handlers :
@@ -32,14 +76,28 @@ export default function Explore({ toasting }) {
 		e.preventDefault();
 		if (pageCount < maxPages)
 			setPageCount((prevPageCount) => prevPageCount + 1);
+		window.scrollTo({
+			top: 0,
+			behavior: "smooth",
+		});
 	};
 	const previousPageHandler = (e) => {
 		e.preventDefault();
 		if (pageCount > 1) setPageCount((prevPageCount) => prevPageCount - 1);
+		window.scrollTo({
+			top: 0,
+			behavior: "smooth",
+		});
 	};
 	const selectPageHandler = (e, num) => {
 		e.preventDefault();
-		setPageCount(num);
+		if (num != pageCount) {
+			setPageCount(num);
+			window.scrollTo({
+				top: 0,
+				behavior: "smooth",
+			});
+		}
 	};
 
 	return (
@@ -50,7 +108,7 @@ export default function Explore({ toasting }) {
 				<SearchBar onSearch={searchHandler} onFilter={filterHandler} />
 
 				{/*Cards*/}
-				<CardsGrid annouces={annouces} />
+				<CardsGrid annouces={announces} />
 				{/*Cards pages slider*/}
 				<PagesPagination
 					maxPages={maxPages}

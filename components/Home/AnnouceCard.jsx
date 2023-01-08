@@ -45,6 +45,15 @@ const annoucesIcon = {
 	echange: <TbExchange color="#7065F0" size={16} />,
 };
 
+const announcesRenameType = {
+	Vente: "vente",
+	Location: "location",
+	"Location vacances": "vacance",
+	Terrain: "location",
+	Partage: "echange",
+	"Bureaux & Commerces": "location",
+};
+
 export default function AnnouceCard({
 	id,
 	typeImmoblier,
@@ -57,11 +66,17 @@ export default function AnnouceCard({
 	images,
 }) {
 	const { classes } = useStyles();
-	const slides = images.map((image) => (
-		<Carousel.Slide key={image}>
-			<Image src={image} height={220} />
+	const slides = images.length ? (
+		images.map((image, index) => (
+			<Carousel.Slide key={index}>
+				<Image src={image} height={220} />
+			</Carousel.Slide>
+		))
+	) : (
+		<Carousel.Slide>
+			<Image src={"/house-placeholder.png"} height={220} />
 		</Carousel.Slide>
-	));
+	);
 
 	return (
 		<Card
@@ -86,16 +101,17 @@ export default function AnnouceCard({
 			<Link href={"/Annonces/" + id} className="cursor-pointer">
 				<Group position="apart" mt="xs">
 					<Text className="text-dark-blue font-bold text-[18px] ">
-						{typeImmoblier}
+						{typeImmoblier.charAt(0).toUpperCase() +
+							typeImmoblier.slice(1)}
 					</Text>
 
 					<Group
 						className="flex items-center justify-end"
 						spacing={5}
 					>
-						{annoucesIcon[typeAnnoce.toLowerCase()]}
+						{annoucesIcon[announcesRenameType[typeAnnoce]]}
 						<Text className="text-purple font-semibold text-[16px] py-1">
-							{typeAnnoce}
+							{announcesRenameType[typeAnnoce]}
 						</Text>
 					</Group>
 				</Group>

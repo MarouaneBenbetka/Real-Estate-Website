@@ -11,7 +11,7 @@ export default function SearchBar({ onSearch, onFilter }) {
 	const [showFilters, setShowFilters] = useState(false);
 	const [searchedText, setSearchedText] = useState("");
 	const [filterData, setFilterData] = useState({
-		typeImmoblier: "",
+		typeAnnonce: "",
 		wilaya: "Alger",
 		commune: "",
 		dateDebut: "",
@@ -24,7 +24,7 @@ export default function SearchBar({ onSearch, onFilter }) {
 	});
 
 	const changeTypeHandler = (type) => {
-		setFilterData((prev) => ({ ...prev, typeImmoblier: type }));
+		setFilterData((prev) => ({ ...prev, typeAnnonce: type }));
 		// console.log(type);
 	};
 	const changeWilayaHandler = (wilaya) => {

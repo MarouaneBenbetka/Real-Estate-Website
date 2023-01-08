@@ -13,7 +13,7 @@ export const images = [
 ];
 
 //annouces template :
-export const annouces = [
+export const DUMMY_ANNOUNCES = [
 	{
 		id: 0,
 		typeImmoblier: "Appartement",
