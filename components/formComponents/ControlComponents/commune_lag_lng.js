@@ -110,7 +110,7 @@ export const commune_location = [
 	{
 		id: "13",
 		post_code: "01013",
-		name: "Timokten",
+		name: "Timekten",
 		wilaya_id: "1",
 		ar_name: "تيمقتن",
 		longitude: "27.0221605",
@@ -182,7 +182,7 @@ export const commune_location = [
 	{
 		id: "21",
 		post_code: "01021",
-		name: "Ouled Ahmed Tammi",
+		name: "Ouled Ahmed Timmi",
 		wilaya_id: "1",
 		ar_name: "أولاد أحمد تيمى",
 		longitude: "27.9766155",
@@ -14398,21 +14398,21 @@ const wilayas_code = {
 	"In Guezzam": "58",
 };
 
-export const test = (wilayas) => {
-	let cpt = 0;
-	for (const [key, wilaya] of Object.entries(wilayas)) {
-		for (var i = 0; i < wilaya.length; i++) {
-			var commune = wilaya[i].key;
-			if (findLocation(commune) == null) {
-				console.log("form :", commune);
-				cpt++;
-			}
-		}
-	}
-	console.log(cpt);
-};
+// export const test = (wilayas) => {
+// 	let cpt = 0;
+// 	for (const [key, wilaya] of Object.entries(wilayas)) {
+// 		for (var i = 0; i < wilaya.length; i++) {
+// 			var commune = wilaya[i].key;
+// 			if (findLocation(commune) == null) {
+// 				console.log("form :", commune);
+// 				cpt++;
+// 			}
+// 		}
+// 	}
+// 	console.log(cpt);
+// };
 
-export const findLocation = (commune) => {
+export const findLocation = (commune, wilaya) => {
 	for (var i = 0; i < commune_location.length; i++) {
 		if (
 			commune
@@ -14429,7 +14429,6 @@ export const findLocation = (commune) => {
 				lng: commune_location[i].latitude,
 			};
 	}
-	return null;
 	return findWilaya(wilaya);
 };
 

@@ -149,7 +149,7 @@ export default function Navbar() {
 					<animated.div
 						style={openAnimation}
 						className={
-							"absolute  flex flex-col z-20 justify-start items-center gap-4 bg-white  rounded-lg px-8 pt-[4vh]  text-center top-10 right-0 w-screen h-fit py-4 overflow-hidden"
+							"absolute  flex flex-col z-50 justify-start items-center gap-4 bg-white2  rounded-lg px-8 pt-[4vh]  text-center top-10 right-0 w-screen h-fit py-4 overflow-hidden "
 						}
 					>
 						<ul className="flex flex-col  text-dark-blue bg-white">
