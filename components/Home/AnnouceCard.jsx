@@ -1,10 +1,10 @@
 import { createStyles, Image, Card, Text, Group, Button } from "@mantine/core";
 import { Carousel } from "@mantine/carousel";
-
-import { TbExchange } from "react-icons/tb";
-import { MdOutlineSell, MdOutlineDateRange } from "react-icons/md";
-import { FaUmbrellaBeach } from "react-icons/fa";
-
+import {
+	announcesRenameType,
+	typeImmobilierTOtypeAnnonce,
+	annoucesIcon,
+} from "../../data/data";
 import Link from "next/link";
 
 const useStyles = createStyles((theme, _params, getRef) => ({
@@ -36,32 +36,6 @@ const useStyles = createStyles((theme, _params, getRef) => ({
 		},
 	},
 }));
-
-// for each type of annouce associate an icon
-const annoucesIcon = {
-	location: <MdOutlineDateRange color="#7065F0" size={16} />,
-	vacance: <FaUmbrellaBeach color="#7065F0" size={16} />,
-	vente: <MdOutlineSell color="#7065F0" size={16} />,
-	echange: <TbExchange color="#7065F0" size={16} />,
-};
-
-const announcesRenameType = {
-	vente: "vente",
-	vacance: "vacance",
-	echange: "echange",
-	location: "location",
-	"Location vacances": "vacance",
-	terrain: "location",
-	partage: "echange",
-	"bureaux & commerces": "location",
-};
-
-const typeImmobilierTOtypeAnnonce = {
-	vente: "",
-	location: "mois",
-	vacance: "jour",
-	echange: "",
-};
 
 export default function AnnouceCard({
 	id,

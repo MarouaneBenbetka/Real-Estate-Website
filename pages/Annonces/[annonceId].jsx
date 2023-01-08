@@ -5,6 +5,11 @@ import { MdOutlineNavigateBefore } from "react-icons/md";
 import ImagesGalery from "../../components/CardDetails/ImagesGalery";
 import dynamic from "next/dynamic";
 import { images } from "../../data/data";
+import {
+	announcesRenameType,
+	typeImmobilierTOtypeAnnonce,
+	annoucesIcon,
+} from "../../data/data";
 
 const MapWrapper2 = dynamic(
 	() => import("../../components/CardDetails/MapWrapper"),
@@ -55,7 +60,6 @@ export default function CardDeatails() {
 			"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
 		surface: 200,
 		prix: 10000,
-		typePayment: "jour",
 		images: images,
 		datePublication: "01-01-2023",
 		ownerName: "Houari Boumedian",
@@ -165,9 +169,21 @@ export default function CardDeatails() {
 								DA
 							</span>
 
-							{announceInfo.typePayment && (
+							{typeImmobilierTOtypeAnnonce[
+								announcesRenameType[
+									announceInfo.typeAnnoce.toLowerCase()
+								]
+							] && (
 								<span className="text-gray-500 text-[20px]">
-									/ {announceInfo.typePayment}
+									{" "}
+									/{" "}
+									{
+										typeImmobilierTOtypeAnnonce[
+											announcesRenameType[
+												announceInfo.typeAnnoce.toLowerCase()
+											]
+										]
+									}
 								</span>
 							)}
 						</div>

@@ -21,8 +21,8 @@ const Selector = ({ label, onChangeValue, open, onOpened, items, value }) => {
 					}}
 				>
 					{value ? (
-						value?.length > 16 ? (
-							value?.substring(0, 16) + "..."
+						value?.length > 10 ? (
+							value?.substring(0, 10) + "..."
 						) : (
 							value
 						)
@@ -57,10 +57,30 @@ const Selector = ({ label, onChangeValue, open, onOpened, items, value }) => {
 							className="placeholder:text-gray-500 p-2 outline-none w-full "
 						/>
 					</div>
-					{items.map((item) => (
-						<li
-							key={item.key}
-							className={`p-2 text-sm hover:bg-purple hover:text-white transition-all duration-200 cursor-pointer
+					<li
+						className={`p-2 text-sm hover:bg-purple hover:text-white transition-all duration-200 cursor-pointer
+            ${"" === selected?.toLowerCase() && "bg-purple text-white"}
+            ${
+				"Par défaut".toLowerCase().startsWith(inputValue)
+					? "block"
+					: "hidden"
+			}`}
+						onClick={() => {
+							setSelected("");
+							onOpened(false);
+							setInputValue("");
+							onChangeValue("");
+						}}
+					>
+						{label === "Commune" && !items
+							? "Sélectionner une wilaya"
+							: "Par défaut *"}
+					</li>
+					{items &&
+						items.map((item) => (
+							<li
+								key={item.key}
+								className={`p-2 text-sm hover:bg-purple hover:text-white transition-all duration-200 cursor-pointer
             ${
 				item?.value?.toLowerCase() === selected?.toLowerCase() &&
 				"bg-purple text-white"
@@ -70,21 +90,21 @@ const Selector = ({ label, onChangeValue, open, onOpened, items, value }) => {
 					? "block"
 					: "hidden"
 			}`}
-							onClick={() => {
-								if (
-									item?.vlue?.toLowerCase() !==
-									selected.toLowerCase()
-								) {
-									setSelected(item?.value);
-									onOpened(false);
-									setInputValue("");
-									onChangeValue(item?.value);
-								}
-							}}
-						>
-							{item?.value}
-						</li>
-					))}
+								onClick={() => {
+									if (
+										item?.vlue?.toLowerCase() !==
+										selected.toLowerCase()
+									) {
+										setSelected(item?.value);
+										onOpened(false);
+										setInputValue("");
+										onChangeValue(item?.value);
+									}
+								}}
+							>
+								{item?.value}
+							</li>
+						))}
 				</ul>
 			</div>
 		</div>

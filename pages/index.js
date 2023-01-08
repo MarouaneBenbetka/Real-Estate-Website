@@ -67,6 +67,7 @@ export default function Explore({ toasting }) {
 	};
 
 	const filterHandler = (e, filterData) => {
+		console.log(filterData);
 		e.preventDefault();
 		// axios
 		// 	.get(

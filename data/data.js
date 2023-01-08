@@ -2,6 +2,9 @@ import facebook from "../public/facebook.svg";
 import instagram from "../public/instagram.svg";
 import linkedin from "../public/linkedin.svg";
 import twitter from "../public/twitter.svg";
+import { MdOutlineSell, MdOutlineDateRange } from "react-icons/md";
+import { FaUmbrellaBeach } from "react-icons/fa";
+import { TbExchange } from "react-icons/tb";
 
 // images for the cards
 export const images = [
@@ -11,6 +14,34 @@ export const images = [
 	"https://images.unsplash.com/photo-1554995207-c18c203602cb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=720&q=80",
 	"https://images.unsplash.com/photo-1616486029423-aaa4789e8c9a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=720&q=80",
 ];
+
+//dictionary to rename annouces type :
+export const announcesRenameType = {
+	vente: "vente",
+	vacance: "vacance",
+	echange: "echange",
+	location: "location",
+	"Location vacances": "vacance",
+	terrain: "location",
+	partage: "echange",
+	"bureaux & commerces": "location",
+};
+
+//detection of the payment type based on the announce type
+export const typeImmobilierTOtypeAnnonce = {
+	vente: "",
+	location: "mois",
+	vacance: "jour",
+	echange: "",
+};
+
+// for each type of annouce associate an icon
+export const annoucesIcon = {
+	location: <MdOutlineDateRange color="#7065F0" size={16} />,
+	vacance: <FaUmbrellaBeach color="#7065F0" size={16} />,
+	vente: <MdOutlineSell color="#7065F0" size={16} />,
+	echange: <TbExchange color="#7065F0" size={16} />,
+};
 
 //annouces template :
 export const DUMMY_ANNOUNCES = [

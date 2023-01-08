@@ -22,8 +22,8 @@ const TypeSelector = ({ label, onChangeValue, open, onOpened }) => {
 					}}
 				>
 					{selected
-						? selected?.length > 16
-							? selected?.substring(0, 16) + "..."
+						? selected?.length > 11
+							? selected?.substring(0, 11) + "..."
 							: selected
 						: label}
 					<BiChevronDown

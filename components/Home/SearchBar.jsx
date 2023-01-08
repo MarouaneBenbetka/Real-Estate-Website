@@ -12,7 +12,7 @@ export default function SearchBar({ onSearch, onFilter }) {
 	const [searchedText, setSearchedText] = useState("");
 	const [filterData, setFilterData] = useState({
 		typeAnnonce: "",
-		wilaya: "Alger",
+		wilaya: "",
 		commune: "",
 		dateDebut: "",
 		dateFin: "",
