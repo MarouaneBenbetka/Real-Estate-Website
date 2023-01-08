@@ -7,6 +7,7 @@ import PagesPagination from "../components/Home/PagesPagination";
 import cookie from "js-cookie";
 import axios from "axios";
 import annonceCrud from "../utils/services/annonce";
+import NothingFound from "../components/Home/NothingFound";
 
 const wait_function_test = async function test() {
 	console.log("start timer");
@@ -26,7 +27,6 @@ export default function Explore({ toasting }) {
 		setTimeout(() => {
 			setIsLoading(false);
 		}, "1500");
-
 		// axios
 		// 	.get(`http://192.168.145.12:5000/annonces?page=${pageCount}`)
 		// 	.then((res) => {
@@ -123,16 +123,22 @@ export default function Explore({ toasting }) {
 				{/* Search Bar + Filter Bar */}
 				<SearchBar onSearch={searchHandler} onFilter={filterHandler} />
 
-				{/*Cards*/}
-				<CardsGrid annouces={announces} isLoading={isLoading} />
-				{/*Cards pages slider*/}
-				<PagesPagination
-					maxPages={maxPages}
-					currentPage={pageCount}
-					onNextPageClick={nextPageHandler}
-					onPreviousPageClick={previousPageHandler}
-					onSelectionPageClick={selectPageHandler}
-				/>
+				{!isLoading && !announces ? (
+					<NothingFound />
+				) : (
+					<div>
+						{/*Cards*/}
+						<CardsGrid annouces={announces} isLoading={isLoading} />
+						{/*Cards pages slider*/}
+						<PagesPagination
+							maxPages={maxPages}
+							currentPage={pageCount}
+							onNextPageClick={nextPageHandler}
+							onPreviousPageClick={previousPageHandler}
+							onSelectionPageClick={selectPageHandler}
+						/>
+					</div>
+				)}
 			</div>
 		</div>
 	);

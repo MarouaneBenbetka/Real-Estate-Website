@@ -61,7 +61,7 @@ const Selector = ({ label, onChangeValue, open, onOpened, items, value }) => {
 						className={`p-2 text-sm hover:bg-purple hover:text-white transition-all duration-200 cursor-pointer
             ${"" === selected?.toLowerCase() && "bg-purple text-white"}
             ${
-				"Par défaut".toLowerCase().startsWith(inputValue)
+				"Aucun filtre *".toLowerCase().startsWith(inputValue)
 					? "block"
 					: "hidden"
 			}`}
@@ -74,7 +74,7 @@ const Selector = ({ label, onChangeValue, open, onOpened, items, value }) => {
 					>
 						{label === "Commune" && !items
 							? "Sélectionner une wilaya"
-							: "Par défaut *"}
+							: "Aucun filtre *"}
 					</li>
 					{items &&
 						items.map((item) => (

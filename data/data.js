@@ -1,10 +1,7 @@
-import facebook from "../public/facebook.svg";
-import instagram from "../public/instagram.svg";
-import linkedin from "../public/linkedin.svg";
-import twitter from "../public/twitter.svg";
 import { MdOutlineSell, MdOutlineDateRange } from "react-icons/md";
 import { FaUmbrellaBeach } from "react-icons/fa";
 import { TbExchange } from "react-icons/tb";
+import { BsFacebook, BsLinkedin, BsTwitter, BsInstagram } from "react-icons/bs";
 
 // images for the cards
 export const images = [
@@ -326,22 +323,22 @@ export const footerLinks = [
 export const socialMedia = [
 	{
 		id: "social-media-1",
-		icon: instagram,
+		icon: <BsInstagram size={24} color="#7065F0" />,
 		link: "https://www.instagram.com/",
 	},
 	{
 		id: "social-media-2",
-		icon: facebook,
+		icon: <BsFacebook size={24} color="#7065F0" />,
 		link: "https://www.facebook.com/",
 	},
 	{
 		id: "social-media-3",
-		icon: twitter,
+		icon: <BsTwitter size={24} color="#7065F0" />,
 		link: "https://www.twitter.com/",
 	},
 	{
 		id: "social-media-4",
-		icon: linkedin,
+		icon: <BsLinkedin size={24} color="#7065F0" />,
 		link: "https://www.linkedin.com/",
 	},
 ];
