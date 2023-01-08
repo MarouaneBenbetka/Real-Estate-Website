@@ -8,24 +8,36 @@ import cookie from "js-cookie";
 import axios from "axios";
 import annonceCrud from "../utils/services/annonce";
 
+const wait_function_test = async function test() {
+	console.log("start timer");
+	await new Promise((resolve) => setTimeout(resolve, 1000));
+	console.log("after 1 second");
+};
+
 export default function Explore({ toasting }) {
 	const [pageCount, setPageCount] = useState(1);
 	const [announces, setAnnounces] = useState(DUMMY_ANNOUNCES);
 	const [maxPages, setMaxPages] = useState(1);
 	const [lastSearch, setLastSearch] = useState("");
+	const [isLoading, setIsLoading] = useState(true);
 
-	// useEffect(() => {
-	// 	axios
-	// 		.get(`http://192.168.145.12:5000/annonces?page=${pageCount}`)
-	// 		.then((res) => {
-	// 			setAnnounces(res.data.data);
-	// 			setMaxPages(res.data.max_pages);
-	// 			console.log(res.data);
-	// 		})
-	// 		.catch((err) => {
-	// 			console.log(err);
-	// 		});
-	// }, [pageCount]);
+	useEffect(() => {
+		setIsLoading(true);
+		setTimeout(() => {
+			setIsLoading(false);
+		}, "1500");
+
+		// axios
+		// 	.get(`http://192.168.145.12:5000/annonces?page=${pageCount}`)
+		// 	.then((res) => {
+		// 		setAnnounces(res.data.data);
+		// 		setMaxPages(res.data.max_pages);
+		// 		console.log(res.data);
+		// 	})
+		// 	.catch((err) => {
+		// 		console.log(err);
+		// 	});
+	}, [pageCount]);
 
 	if (toasting === "true") {
 		toast.error("vous devez entre authentifiee");
@@ -74,20 +86,23 @@ export default function Explore({ toasting }) {
 
 	const nextPageHandler = (e) => {
 		e.preventDefault();
-		if (pageCount < maxPages)
+		if (pageCount < maxPages) {
 			setPageCount((prevPageCount) => prevPageCount + 1);
-		window.scrollTo({
-			top: 0,
-			behavior: "smooth",
-		});
+			window.scrollTo({
+				top: 0,
+				behavior: "smooth",
+			});
+		}
 	};
 	const previousPageHandler = (e) => {
 		e.preventDefault();
-		if (pageCount > 1) setPageCount((prevPageCount) => prevPageCount - 1);
-		window.scrollTo({
-			top: 0,
-			behavior: "smooth",
-		});
+		if (pageCount > 1) {
+			setPageCount((prevPageCount) => prevPageCount - 1);
+			window.scrollTo({
+				top: 0,
+				behavior: "smooth",
+			});
+		}
 	};
 	const selectPageHandler = (e, num) => {
 		e.preventDefault();
@@ -108,7 +123,7 @@ export default function Explore({ toasting }) {
 				<SearchBar onSearch={searchHandler} onFilter={filterHandler} />
 
 				{/*Cards*/}
-				<CardsGrid annouces={announces} />
+				<CardsGrid annouces={announces} isLoading={isLoading} />
 				{/*Cards pages slider*/}
 				<PagesPagination
 					maxPages={maxPages}
