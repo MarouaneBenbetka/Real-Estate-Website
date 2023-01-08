@@ -46,12 +46,21 @@ const annoucesIcon = {
 };
 
 const announcesRenameType = {
-	Vente: "vente",
-	Location: "location",
+	vente: "vente",
+	vacance: "vacance",
+	echange: "echange",
+	location: "location",
 	"Location vacances": "vacance",
-	Terrain: "location",
-	Partage: "echange",
-	"Bureaux & Commerces": "location",
+	terrain: "location",
+	partage: "echange",
+	"bureaux & commerces": "location",
+};
+
+const typeImmobilierTOtypeAnnonce = {
+	vente: "",
+	location: "mois",
+	vacance: "jour",
+	echange: "",
 };
 
 export default function AnnouceCard({
@@ -62,7 +71,6 @@ export default function AnnouceCard({
 	commune,
 	description,
 	prix,
-	typePayment,
 	images,
 }) {
 	const { classes } = useStyles();
@@ -82,7 +90,7 @@ export default function AnnouceCard({
 		<Card
 			radius="md"
 			withBorder
-			className="max-w-xs px-4 pb-2 h-[372px] shadow-xl  transition-all duration-75 "
+			className="max-w-xs px-4 pb-2 h-[372px] hover:scale-[1.04] shadow-xl  transition-all duration-75 "
 		>
 			<Card.Section>
 				<Carousel
@@ -109,9 +117,13 @@ export default function AnnouceCard({
 						className="flex items-center justify-end"
 						spacing={5}
 					>
-						{annoucesIcon[announcesRenameType[typeAnnoce]]}
+						{
+							annoucesIcon[
+								announcesRenameType[typeAnnoce.toLowerCase()]
+							]
+						}
 						<Text className="text-purple font-semibold text-[16px] py-1">
-							{announcesRenameType[typeAnnoce]}
+							{announcesRenameType[typeAnnoce.toLowerCase()]}
 						</Text>
 					</Group>
 				</Group>
@@ -135,10 +147,19 @@ export default function AnnouceCard({
 							{prix.toLocaleString("en-US")}
 							<span className="text-[16px] font-normal"> DA</span>
 						</Text>
-						{typePayment && (
+						{typeImmobilierTOtypeAnnonce[
+							announcesRenameType[typeAnnoce.toLowerCase()]
+						] && (
 							<Text span size="sm" color="dimmed">
 								{" "}
-								/ {typePayment}
+								/{" "}
+								{
+									typeImmobilierTOtypeAnnonce[
+										announcesRenameType[
+											typeAnnoce.toLowerCase()
+										]
+									]
+								}
 							</Text>
 						)}
 					</div>

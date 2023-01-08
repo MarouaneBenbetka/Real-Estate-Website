@@ -17,7 +17,7 @@ export const DUMMY_ANNOUNCES = [
 	{
 		id: 0,
 		typeImmoblier: "Appartement",
-		typeAnnoce: "Vente",
+		typeAnnonce: "Vente",
 		wilaya: "Alger",
 		commune: "Baba Hassen",
 		description: "une belle maison qui se bala bala ",
@@ -29,7 +29,7 @@ export const DUMMY_ANNOUNCES = [
 	{
 		id: 1,
 		typeImmoblier: "Appartement",
-		typeAnnoce: "Location",
+		typeAnnonce: "Location",
 		wilaya: "Alger",
 		commune: "Baba Hassen",
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
@@ -41,7 +41,7 @@ export const DUMMY_ANNOUNCES = [
 	{
 		id: 2,
 		typeImmoblier: "Appartement",
-		typeAnnoce: "Location",
+		typeAnnonce: "Location",
 		wilaya: "Alger",
 		commune: "Baba Hassen",
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
@@ -53,7 +53,7 @@ export const DUMMY_ANNOUNCES = [
 	{
 		id: 3,
 		typeImmoblier: "Appartement",
-		typeAnnoce: "Vacance",
+		typeAnnonce: "Vacance",
 		wilaya: "Alger",
 		commune: "Baba Hassen",
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
@@ -65,7 +65,7 @@ export const DUMMY_ANNOUNCES = [
 	{
 		id: 4,
 		typeImmoblier: "Appartement",
-		typeAnnoce: "Location",
+		typeAnnonce: "Location",
 		wilaya: "Alger",
 		commune: "Baba Hassen",
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
@@ -77,7 +77,7 @@ export const DUMMY_ANNOUNCES = [
 	{
 		id: 5,
 		typeImmoblier: "Appartement",
-		typeAnnoce: "Location",
+		typeAnnonce: "Location",
 		wilaya: "Alger",
 		commune: "Baba Hassen",
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
@@ -89,7 +89,7 @@ export const DUMMY_ANNOUNCES = [
 	{
 		id: 6,
 		typeImmoblier: "Appartement",
-		typeAnnoce: "Location",
+		typeAnnonce: "Location",
 		wilaya: "Alger",
 		commune: "Baba Hassen",
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
@@ -101,7 +101,7 @@ export const DUMMY_ANNOUNCES = [
 	{
 		id: 7,
 		typeImmoblier: "Appartement",
-		typeAnnoce: "Echange",
+		typeAnnonce: "Echange",
 		wilaya: "Alger",
 		commune: "Baba Hassen",
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
@@ -113,7 +113,7 @@ export const DUMMY_ANNOUNCES = [
 	{
 		id: 8,
 		typeImmoblier: "Appartement",
-		typeAnnoce: "Location",
+		typeAnnonce: "Location",
 		wilaya: "Alger",
 		commune: "Baba Hassen",
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
@@ -125,7 +125,7 @@ export const DUMMY_ANNOUNCES = [
 	{
 		id: 9,
 		typeImmoblier: "Appartement",
-		typeAnnoce: "Location",
+		typeAnnonce: "Location",
 		wilaya: "Alger",
 		commune: "Baba Hassen",
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
@@ -137,7 +137,7 @@ export const DUMMY_ANNOUNCES = [
 	{
 		id: 10,
 		typeImmoblier: "Appartement",
-		typeAnnoce: "Location",
+		typeAnnonce: "Location",
 		wilaya: "Alger",
 		commune: "Baba Hassen",
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
@@ -149,7 +149,7 @@ export const DUMMY_ANNOUNCES = [
 	{
 		id: 11,
 		typeImmoblier: "Appartement",
-		typeAnnoce: "Location",
+		typeAnnonce: "Location",
 		wilaya: "Alger",
 		commune: "Baba Hassen",
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
