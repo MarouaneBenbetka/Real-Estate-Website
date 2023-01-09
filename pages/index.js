@@ -8,6 +8,7 @@ import cookie from "js-cookie";
 import axios from "axios";
 import annonceCrud from "../utils/services/annonce";
 import NothingFound from "../components/errors/NothingFound";
+import ConnectionError from "../components/errors/ConnectionError";
 
 const wait_function_test = async function test() {
 	console.log("start timer");
@@ -30,7 +31,7 @@ export default function Explore({ toasting }) {
 		// 	setIsLoading(false);
 		// }, "1500");
 		axios
-			.get(`http://192.168.145.12:5000/annonces?page=${pageCount}`)
+			.get(`http://192.168sdd.145.12:5000/annonces?page=${pageCount}`)
 			.then((res) => {
 				setConnectionError(false);
 				setAnnounces(res.data.data);
@@ -58,6 +59,7 @@ export default function Explore({ toasting }) {
 				`http://192.168.145.12:5000/annonces/search?q=${searchText}&page=${pageCount}`
 			)
 			.then((res) => {
+				setConnectionError(false);
 				if (res.data.data) {
 					setAnnounces(res.data.data);
 					setPageCount(1);
@@ -70,7 +72,7 @@ export default function Explore({ toasting }) {
 				console.log(res.data);
 			})
 			.catch((err) => {
-				console.log(err);
+				setConnectionError(true);
 			});
 	};
 
@@ -82,12 +84,13 @@ export default function Explore({ toasting }) {
 				`http://192.168.145.12:5000/annonces/search?q=${lastSearch}&min_date=${filterData.dateDebut}&max_date=${filterData.dateFin}&wilaya=${filterData.wilaya}&commune=${filterData.commune}&type=${filterData.typeAnnonce}&page=${pageCount}`
 			)
 			.then((res) => {
+				setConnectionError(false);
 				setAnnounces(res.data.data);
 				setMaxPages(res.data.max_pages);
 				console.log(res.data);
 			})
 			.catch((err) => {
-				console.log(err);
+				setConnectionError(true);
 			});
 	};
 
@@ -126,28 +129,39 @@ export default function Explore({ toasting }) {
 
 	return (
 		<div className="flex flex-col justify-center  mx-4 sm:mx-10 md:mx-[3vw] lg:mx-[10vw]">
-			<div className="my-4 relative z-1">
-				<h1 className="font-bold text-[32px]">Explorer nos annonces</h1>
-				{/* Search Bar + Filter Bar */}
-				<SearchBar onSearch={searchHandler} onFilter={filterHandler} />
-
-				{noResultFound ? (
-					<NothingFound />
-				) : (
-					<div>
-						{/*Cards*/}
-						<CardsGrid annouces={announces} isLoading={isLoading} />
-						{/*Cards pages slider*/}
-						<PagesPagination
-							maxPages={maxPages}
-							currentPage={pageCount}
-							onNextPageClick={nextPageHandler}
-							onPreviousPageClick={previousPageHandler}
-							onSelectionPageClick={selectPageHandler}
-						/>
-					</div>
-				)}
-			</div>
+			{connectionError ? (
+				<ConnectionError />
+			) : (
+				<div className="my-4 relative z-1">
+					<h1 className="font-bold text-[32px]">
+						Explorer nos annonces
+					</h1>
+					{/* Search Bar + Filter Bar */}
+					<SearchBar
+						onSearch={searchHandler}
+						onFilter={filterHandler}
+					/>
+					{noResultFound ? (
+						<NothingFound />
+					) : (
+						<div>
+							{/*Cards*/}
+							<CardsGrid
+								annouces={announces}
+								isLoading={isLoading}
+							/>
+							{/*Cards pages slider*/}
+							<PagesPagination
+								maxPages={maxPages}
+								currentPage={pageCount}
+								onNextPageClick={nextPageHandler}
+								onPreviousPageClick={previousPageHandler}
+								onSelectionPageClick={selectPageHandler}
+							/>
+						</div>
+					)}
+				</div>
+			)}
 		</div>
 	);
 }
