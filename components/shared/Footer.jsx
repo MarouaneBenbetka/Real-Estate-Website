@@ -57,16 +57,16 @@ const Footer = () => {
 				<div className="flex flex-row md:mt-0 mt-6">
 					{socialMedia?.map((social, index) => (
 						// eslint-disable-next-line @next/next/no-img-element
-						<img
+						<div
 							key={social.id}
-							src={social.icon.src}
-							alt={social.id}
-							className={`object-contain cursor-pointer align-top mr-4 color-purple`}
+							className={`cursor-pointer align-top mr-4 `}
 							onClick={() => {
 								window.open(social.link);
 								console.log(social.icon);
 							}}
-						/>
+						>
+							{social.icon}{" "}
+						</div>
 					))}
 				</div>
 			</div>
