@@ -7,7 +7,7 @@ import PagesPagination from "../components/Home/PagesPagination";
 import cookie from "js-cookie";
 import axios from "axios";
 import annonceCrud from "../utils/services/annonce";
-import NothingFound from "../components/Home/NothingFound";
+import NothingFound from "../components/errors/NothingFound";
 
 const wait_function_test = async function test() {
 	console.log("start timer");
@@ -17,26 +17,32 @@ const wait_function_test = async function test() {
 
 export default function Explore({ toasting }) {
 	const [pageCount, setPageCount] = useState(1);
-	const [announces, setAnnounces] = useState(DUMMY_ANNOUNCES);
+	const [announces, setAnnounces] = useState(null);
 	const [maxPages, setMaxPages] = useState(1);
 	const [lastSearch, setLastSearch] = useState("");
 	const [isLoading, setIsLoading] = useState(true);
+	const [noResultFound, setNoResultFound] = useState(false);
+	const [connectionError, setConnectionError] = useState(false);
 
 	useEffect(() => {
 		setIsLoading(true);
-		setTimeout(() => {
-			setIsLoading(false);
-		}, "1500");
-		// axios
-		// 	.get(`http://192.168.145.12:5000/annonces?page=${pageCount}`)
-		// 	.then((res) => {
-		// 		setAnnounces(res.data.data);
-		// 		setMaxPages(res.data.max_pages);
-		// 		console.log(res.data);
-		// 	})
-		// 	.catch((err) => {
-		// 		console.log(err);
-		// 	});
+		// setTimeout(() => {
+		// 	setIsLoading(false);
+		// }, "1500");
+		axios
+			.get(`http://192.168.145.12:5000/annonces?page=${pageCount}`)
+			.then((res) => {
+				setConnectionError(false);
+				setAnnounces(res.data.data);
+				setMaxPages(res.data.max_pages);
+				if (res.data.data.length == 0) setNoResultFound(true);
+				else setNoResultFound(false);
+				console.log(res.data);
+			})
+			.catch((err) => {
+				setConnectionError(true);
+			})
+			.then(setIsLoading(false));
 	}, [pageCount]);
 
 	if (toasting === "true") {
@@ -47,40 +53,42 @@ export default function Explore({ toasting }) {
 
 	const searchHandler = (e, searchText) => {
 		e.preventDefault();
-		// axios
-		// 	.get(
-		// 		`http://192.168.145.12:5000/annonces/search?q=${searchText}&page=${pageCount}`
-		// 	)
-		// 	.then((res) => {
-		// 		if (res.data.data) {
-		// 			setAnnounces(res.data.data);
-		// 			setPageCount(1);
-		// 			setLastSearch(searchText);
-		// 		}
-		// 		setMaxPages(res.data.max_pages);
+		axios
+			.get(
+				`http://192.168.145.12:5000/annonces/search?q=${searchText}&page=${pageCount}`
+			)
+			.then((res) => {
+				if (res.data.data) {
+					setAnnounces(res.data.data);
+					setPageCount(1);
+					setLastSearch(searchText);
+				}
+				if (res.data.data.length == 0) setNoResultFound(true);
+				else setNoResultFound(false);
+				setMaxPages(res.data.max_pages);
 
-		// 		console.log(res.data);
-		// 	})
-		// 	.catch((err) => {
-		// 		console.log(err);
-		// 	});
+				console.log(res.data);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
 	};
 
 	const filterHandler = (e, filterData) => {
 		console.log(filterData);
 		e.preventDefault();
-		// axios
-		// 	.get(
-		// 		`http://192.168.145.12:5000/annonces/search?q=${lastSearch}&min_date=${filterData.dateDebut}&max_date=${filterData.dateFin}&wilaya=${filterData.wilaya}&commune=${filterData.commune}&type=${filterData.typeAnnonce}&page=${pageCount}`
-		// 	)
-		// 	.then((res) => {
-		// 		setAnnounces(res.data.data);
-		// 		setMaxPages(res.data.max_pages);
-		// 		console.log(res.data);
-		// 	})
-		// 	.catch((err) => {
-		// 		console.log(err);
-		// 	});
+		axios
+			.get(
+				`http://192.168.145.12:5000/annonces/search?q=${lastSearch}&min_date=${filterData.dateDebut}&max_date=${filterData.dateFin}&wilaya=${filterData.wilaya}&commune=${filterData.commune}&type=${filterData.typeAnnonce}&page=${pageCount}`
+			)
+			.then((res) => {
+				setAnnounces(res.data.data);
+				setMaxPages(res.data.max_pages);
+				console.log(res.data);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
 	};
 
 	// pages navigation handlers :
@@ -123,7 +131,7 @@ export default function Explore({ toasting }) {
 				{/* Search Bar + Filter Bar */}
 				<SearchBar onSearch={searchHandler} onFilter={filterHandler} />
 
-				{!isLoading && !announces ? (
+				{noResultFound ? (
 					<NothingFound />
 				) : (
 					<div>

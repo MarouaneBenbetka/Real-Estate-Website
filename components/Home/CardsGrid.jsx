@@ -1,11 +1,12 @@
 import { images } from "../../data/data";
 import AnnouceCard from "./AnnouceCard";
+import NothingFound from "../errors/NothingFound";
 import SkeltonCard from "./SkeltonCard";
 
 export default function CardsGrid({ annouces, isLoading }) {
 	return (
 		<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-6 mt-3 relative  z-0">
-			{isLoading
+			{isLoading || !annouces
 				? [...Array(12)].map((e, index) => <SkeltonCard key={index} />)
 				: annouces.map((annouce) => (
 						<div
