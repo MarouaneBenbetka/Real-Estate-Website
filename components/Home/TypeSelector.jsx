@@ -22,8 +22,8 @@ const TypeSelector = ({ label, onChangeValue, open, onOpened }) => {
 					}}
 				>
 					{selected
-						? selected?.length > 16
-							? selected?.substring(0, 16) + "..."
+						? selected?.length > 11
+							? selected?.substring(0, 11) + "..."
 							: selected
 						: label}
 					<BiChevronDown
@@ -39,6 +39,23 @@ const TypeSelector = ({ label, onChangeValue, open, onOpened }) => {
 							: "max-h-0"
 					} `}
 				>
+					<li
+						className={`p-2 text-sm hover:bg-purple hover:text-white transition-all duration-200 cursor-pointer
+            ${"" === selected?.toLowerCase() && "bg-purple text-white"}
+            ${
+				"Aucun filtre *".toLowerCase().startsWith(inputValue)
+					? "block"
+					: "hidden"
+			}`}
+						onClick={() => {
+							setSelected("");
+							onOpened(false);
+							setInputValue("");
+							onChangeValue("");
+						}}
+					>
+						Aucun filtre *
+					</li>
 					{items?.map((item) => (
 						<li
 							key={item}

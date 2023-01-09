@@ -5,6 +5,7 @@ import { useSpring, animated } from "react-spring";
 import Link from "next/link";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { toast } from "react-toastify";
+import Image from "next/image";
 
 export default function Navbar() {
 	const { status, data: session } = useSession();
@@ -55,7 +56,12 @@ export default function Navbar() {
 	return (
 		<div className="flex justify-between items-center    py-4 md:px-6 lg:px-8 border-b">
 			<div className="ml-4 font-bold text-[24px]">
-				<h1>Real State</h1>
+				<Image
+					src="/logo_immo.png"
+					alt="IMMO_LOGO"
+					height={140}
+					width={140}
+				/>
 			</div>
 			<ul className="hidden md:flex items-center gap-2 font-medium">
 				{navlinks.map((navLink, index) => (

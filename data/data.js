@@ -1,7 +1,7 @@
-import facebook from "../public/facebook.svg";
-import instagram from "../public/instagram.svg";
-import linkedin from "../public/linkedin.svg";
-import twitter from "../public/twitter.svg";
+import { MdOutlineSell, MdOutlineDateRange } from "react-icons/md";
+import { FaUmbrellaBeach } from "react-icons/fa";
+import { TbExchange } from "react-icons/tb";
+import { BsFacebook, BsLinkedin, BsTwitter, BsInstagram } from "react-icons/bs";
 
 // images for the cards
 export const images = [
@@ -12,12 +12,40 @@ export const images = [
 	"https://images.unsplash.com/photo-1616486029423-aaa4789e8c9a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=720&q=80",
 ];
 
+//dictionary to rename annouces type :
+export const announcesRenameType = {
+	vente: "vente",
+	vacance: "vacance",
+	echange: "echange",
+	location: "location",
+	"Location vacances": "vacance",
+	terrain: "location",
+	partage: "echange",
+	"bureaux & commerces": "location",
+};
+
+//detection of the payment type based on the announce type
+export const typeImmobilierTOtypeAnnonce = {
+	vente: "",
+	location: "mois",
+	vacance: "jour",
+	echange: "",
+};
+
+// for each type of annouce associate an icon
+export const annoucesIcon = {
+	location: <MdOutlineDateRange color="#7065F0" size={16} />,
+	vacance: <FaUmbrellaBeach color="#7065F0" size={16} />,
+	vente: <MdOutlineSell color="#7065F0" size={16} />,
+	echange: <TbExchange color="#7065F0" size={16} />,
+};
+
 //annouces template :
-export const annouces = [
+export const DUMMY_ANNOUNCES = [
 	{
 		id: 0,
 		typeImmoblier: "Appartement",
-		typeAnnoce: "Vente",
+		typeAnnonce: "Vente",
 		wilaya: "Alger",
 		commune: "Baba Hassen",
 		description: "une belle maison qui se bala bala ",
@@ -29,7 +57,7 @@ export const annouces = [
 	{
 		id: 1,
 		typeImmoblier: "Appartement",
-		typeAnnoce: "Location",
+		typeAnnonce: "Location",
 		wilaya: "Alger",
 		commune: "Baba Hassen",
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
@@ -41,7 +69,7 @@ export const annouces = [
 	{
 		id: 2,
 		typeImmoblier: "Appartement",
-		typeAnnoce: "Location",
+		typeAnnonce: "Location",
 		wilaya: "Alger",
 		commune: "Baba Hassen",
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
@@ -53,7 +81,7 @@ export const annouces = [
 	{
 		id: 3,
 		typeImmoblier: "Appartement",
-		typeAnnoce: "Vacance",
+		typeAnnonce: "Vacance",
 		wilaya: "Alger",
 		commune: "Baba Hassen",
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
@@ -65,7 +93,7 @@ export const annouces = [
 	{
 		id: 4,
 		typeImmoblier: "Appartement",
-		typeAnnoce: "Location",
+		typeAnnonce: "Location",
 		wilaya: "Alger",
 		commune: "Baba Hassen",
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
@@ -77,7 +105,7 @@ export const annouces = [
 	{
 		id: 5,
 		typeImmoblier: "Appartement",
-		typeAnnoce: "Location",
+		typeAnnonce: "Location",
 		wilaya: "Alger",
 		commune: "Baba Hassen",
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
@@ -89,7 +117,7 @@ export const annouces = [
 	{
 		id: 6,
 		typeImmoblier: "Appartement",
-		typeAnnoce: "Location",
+		typeAnnonce: "Location",
 		wilaya: "Alger",
 		commune: "Baba Hassen",
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
@@ -101,7 +129,7 @@ export const annouces = [
 	{
 		id: 7,
 		typeImmoblier: "Appartement",
-		typeAnnoce: "Echange",
+		typeAnnonce: "Echange",
 		wilaya: "Alger",
 		commune: "Baba Hassen",
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
@@ -113,7 +141,7 @@ export const annouces = [
 	{
 		id: 8,
 		typeImmoblier: "Appartement",
-		typeAnnoce: "Location",
+		typeAnnonce: "Location",
 		wilaya: "Alger",
 		commune: "Baba Hassen",
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
@@ -125,7 +153,7 @@ export const annouces = [
 	{
 		id: 9,
 		typeImmoblier: "Appartement",
-		typeAnnoce: "Location",
+		typeAnnonce: "Location",
 		wilaya: "Alger",
 		commune: "Baba Hassen",
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
@@ -137,7 +165,7 @@ export const annouces = [
 	{
 		id: 10,
 		typeImmoblier: "Appartement",
-		typeAnnoce: "Location",
+		typeAnnonce: "Location",
 		wilaya: "Alger",
 		commune: "Baba Hassen",
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
@@ -149,7 +177,7 @@ export const annouces = [
 	{
 		id: 11,
 		typeImmoblier: "Appartement",
-		typeAnnoce: "Location",
+		typeAnnonce: "Location",
 		wilaya: "Alger",
 		commune: "Baba Hassen",
 		description: "une belle aparaewlkfjasdlk adkslfjalk askldf alkdjf",
@@ -295,22 +323,22 @@ export const footerLinks = [
 export const socialMedia = [
 	{
 		id: "social-media-1",
-		icon: instagram,
+		icon: <BsInstagram size={24} color="#7065F0" />,
 		link: "https://www.instagram.com/",
 	},
 	{
 		id: "social-media-2",
-		icon: facebook,
+		icon: <BsFacebook size={24} color="#7065F0" />,
 		link: "https://www.facebook.com/",
 	},
 	{
 		id: "social-media-3",
-		icon: twitter,
+		icon: <BsTwitter size={24} color="#7065F0" />,
 		link: "https://www.twitter.com/",
 	},
 	{
 		id: "social-media-4",
-		icon: linkedin,
+		icon: <BsLinkedin size={24} color="#7065F0" />,
 		link: "https://www.linkedin.com/",
 	},
 ];

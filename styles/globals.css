@@ -37,6 +37,11 @@ body {
 	transition: 0.3s;
 }
 
+button:focus,
+a:focus {
+	outline: none;
+}
+
 .underlineAnimation:hover::after {
 	width: 40%;
 }

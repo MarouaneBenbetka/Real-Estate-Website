@@ -1,10 +1,10 @@
 import { createStyles, Image, Card, Text, Group, Button } from "@mantine/core";
 import { Carousel } from "@mantine/carousel";
-
-import { TbExchange } from "react-icons/tb";
-import { MdOutlineSell, MdOutlineDateRange } from "react-icons/md";
-import { FaUmbrellaBeach } from "react-icons/fa";
-
+import {
+	announcesRenameType,
+	typeImmobilierTOtypeAnnonce,
+	annoucesIcon,
+} from "../../data/data";
 import Link from "next/link";
 
 const useStyles = createStyles((theme, _params, getRef) => ({
@@ -37,14 +37,6 @@ const useStyles = createStyles((theme, _params, getRef) => ({
 	},
 }));
 
-// for each type of annouce associate an icon
-const annoucesIcon = {
-	location: <MdOutlineDateRange color="#7065F0" size={16} />,
-	vacance: <FaUmbrellaBeach color="#7065F0" size={16} />,
-	vente: <MdOutlineSell color="#7065F0" size={16} />,
-	echange: <TbExchange color="#7065F0" size={16} />,
-};
-
 export default function AnnouceCard({
 	id,
 	typeImmoblier,
@@ -53,21 +45,26 @@ export default function AnnouceCard({
 	commune,
 	description,
 	prix,
-	typePayment,
 	images,
 }) {
 	const { classes } = useStyles();
-	const slides = images.map((image) => (
-		<Carousel.Slide key={image}>
-			<Image src={image} height={220} />
+	const slides = images.length ? (
+		images.map((image, index) => (
+			<Carousel.Slide key={index}>
+				<Image src={image} height={220} />
+			</Carousel.Slide>
+		))
+	) : (
+		<Carousel.Slide>
+			<Image src={"/house-placeholder.png"} height={220} />
 		</Carousel.Slide>
-	));
+	);
 
 	return (
 		<Card
 			radius="md"
 			withBorder
-			className="max-w-xs px-4 pb-2  shadow-xl hover:scale-[1.04] transition-all duration-75 "
+			className="max-w-xs px-4 pb-2 h-[372px] max-h-[372px] hover:scale-[1.04] shadow-md  transition-all duration-75 "
 		>
 			<Card.Section>
 				<Carousel
@@ -86,16 +83,21 @@ export default function AnnouceCard({
 			<Link href={"/Annonces/" + id} className="cursor-pointer">
 				<Group position="apart" mt="xs">
 					<Text className="text-dark-blue font-bold text-[18px] ">
-						{typeImmoblier}
+						{typeImmoblier.charAt(0).toUpperCase() +
+							typeImmoblier.slice(1)}
 					</Text>
 
 					<Group
 						className="flex items-center justify-end"
 						spacing={5}
 					>
-						{annoucesIcon[typeAnnoce.toLowerCase()]}
+						{
+							annoucesIcon[
+								announcesRenameType[typeAnnoce.toLowerCase()]
+							]
+						}
 						<Text className="text-purple font-semibold text-[16px] py-1">
-							{typeAnnoce}
+							{announcesRenameType[typeAnnoce.toLowerCase()]}
 						</Text>
 					</Group>
 				</Group>
@@ -119,10 +121,19 @@ export default function AnnouceCard({
 							{prix.toLocaleString("en-US")}
 							<span className="text-[16px] font-normal"> DA</span>
 						</Text>
-						{typePayment && (
+						{typeImmobilierTOtypeAnnonce[
+							announcesRenameType[typeAnnoce.toLowerCase()]
+						] && (
 							<Text span size="sm" color="dimmed">
 								{" "}
-								/ {typePayment}
+								/{" "}
+								{
+									typeImmobilierTOtypeAnnonce[
+										announcesRenameType[
+											typeAnnoce.toLowerCase()
+										]
+									]
+								}
 							</Text>
 						)}
 					</div>
