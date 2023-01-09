@@ -6,8 +6,8 @@ import { annouces } from "../../data/data";
 import TableRow from "./TableRow";
 import Link from "next/link";
 
-const MesAnnoncesList = () => {
-	const annonces = annouces;
+const MesAnnoncesList = ({mesannonces}) => {
+	const annonces = mesannonces;
 
 	return (
 		<div>

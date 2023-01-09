@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import CardsGrid from "../components/Home/CardsGrid";
 import { annouces } from "../data/data";
@@ -6,6 +7,7 @@ import { toast } from "react-toastify";
 import PagesPagination from "../components/Home/PagesPagination";
 import cookie from "js-cookie";
 import axios from "axios";
+import annonceCrud from "../utils/services/annonce";
 
 export default function Explore({ toasting }) {
 	const [pageCount, setPageCount] = useState(1);
@@ -14,6 +16,14 @@ export default function Explore({ toasting }) {
 	if (toasting === "true") {
 		toast.error("vous devez entre authentifiee");
 	}
+
+	const [ann, SetAnn] = useState([])
+	useEffect(async ()=> {
+
+const result = await annonceCrud.getAll()
+console.log(result)
+
+	},[ann])
 
 	//search bar handler :
 

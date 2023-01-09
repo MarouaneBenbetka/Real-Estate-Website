@@ -4,10 +4,12 @@ import MesAnnoncesList from "../components/MesAnnoncesComponents/MesAnnoncesList
 import { isLogin } from "../utils/services/auth";
 import { getSession } from "next-auth/react";
 import { toast } from "react-toastify";
+import mesannoncesCrud from "../utils/services/mesannonces";
 
-const MesAnnonces = () => {
+const MesAnnonces = ({mesannonces}) => {
 	return (
 		<div className="flex flex-col justify-center mx-2 sm:mx-8 md:mx-[6vw] lg:mx-[8vw]">
+			{console.log(mesannonces)}
 			<div className=" min-h-[120px] bg-center flex flex-col justify-end">
 				<div className="  min-h-[120px]">
 					{" "}
@@ -47,7 +49,7 @@ const MesAnnonces = () => {
 						/>
 					</div>
 				</div>
-				<MesAnnoncesList />
+				<MesAnnoncesList mesannonces={mesannonces}/>
 			</div>
 		</div>
 	);
@@ -66,8 +68,13 @@ export async function getServerSideProps({ req }) {
 			},
 		};
 	}
+		const result = await mesannoncesCrud.getAll({headers:{'Authorization': `Bearer ${session.user.jwt}`}})
+		console.log("hahahahhahahahaha",result.data)
+		const mesannonces = await result.data
+	
+
 
 	return {
-		props: { session },
+		props: { mesannonces },
 	};
 }

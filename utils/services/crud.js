@@ -2,10 +2,12 @@ import axios from "axios"
 
 
 const env = process.env.NODE_ENV
-export const URL = env==="development"?"http://localhost:5000":"https://immo..render"
+export const URL = env==="development"?"http://192.168.145.12:5000":"https://immo..render"
 
 export const ANNONCE = "annonces"
 export const USER = "users"
+export const MESANNONCE = "mesannonces"
+
 
 // these functions serve as a wrapper for the axios functions in order to avoid writting the url over and over again
 export async function getAll(endpoint, options = {}) {

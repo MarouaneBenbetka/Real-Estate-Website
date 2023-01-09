@@ -101,6 +101,7 @@ const AddAnnonce = () => {
 
 				links.push(result.data.secure_url);
 			}
+			console.log(session)
 
 			// const response = await annonceCrud.post({ wilaya, commune, description, typeImmobilier, tyoeAnnonce, address, images:links }, {  headers: {
 			//   'Authorization': `Bearer ${session.user.jwt}`
@@ -127,7 +128,7 @@ const AddAnnonce = () => {
 		//   };
 		//   const { data } = await axios.post(
 		//     "/api/auth/register",
-		//     { email, password },
+		//     {},
 		//     config
 		//   );
 		//   console.log(data);

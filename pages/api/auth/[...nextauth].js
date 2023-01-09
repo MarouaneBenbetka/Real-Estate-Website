@@ -2,6 +2,7 @@ import NextAuth from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
 import Error from 'next/error'
 import jsonwebtoken from 'jsonwebtoken'
+import axios from 'axios'
 
 export default NextAuth({
   secret: process.env.JWT_SECRET,
@@ -18,20 +19,36 @@ export default NextAuth({
         console.log(account)
         console.log(account.id_token, account.token_type)
         console.log('token ~~~~~~~~~~~~~~~~~~~~~', token)
-        
-const jwt = jsonwebtoken.sign(token,process.env.JWT_SECRET)
-console.log("jwttttttttttttttttt", jwt)
+
+        // const jwt = jsonwebtoken.sign(token, process.env.JWT_SECRET)
+        // console.log('jwttttttttttttttttt', jwt)
+        const data = {
+          email: user.email,
+          name: user.name,
+          image: user.image,
+        }
+
+        console.log(data)
+
+        const result = await axios.post(
+          'http://192.168.145.12:5000/users',
+          data,
+          {
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          }
+        )
+
+        console.log(result.data)
+        const jwt =  jsonwebtoken.decode(result.data.data.token,process.env.JWT_SECRET)
+        console.log("fdljaflkdjlkfajdkls",jwt)
 
         token = {
           email: user.email,
           name: user.name,
-          jwt: jwt
-          //     isDonator: user.isDonator,
-          //     id: user.id,
-          //     fullname: user.fullname,
-          //     image: user.image,
-          //     phoneNum: user.phoneNum,
-          //     isValid: user.isValid
+          jwt: result.data.data.token,
+          id:jwt.userId
         }
       }
       return token
@@ -41,14 +58,11 @@ console.log("jwttttttttttttttttt", jwt)
       token?.email ? (session.user.email = token.email) : ''
       token?.name ? (session.user.name = token.name) : ''
       token?.jwt ? (session.user.jwt = token.jwt) : ''
+      token?.id ? (session.user.id = token.id) : ''
 
-      console.log("token ",token)
 
-      // token?.isDonator ? (session.user.isDonator = token.isDonator) : ''
-      // token?.fullname ? (session.user.fullname = token.fullname) : ''
-      // token?.image ? (session.user.image = token.image) : ''
-      // token?.phoneNum ? (session.user.phoneNum = token.phoneNum) : ''
-      // !(token?.isValid)? (session.user.isValid = token.isValid):''
+      console.log('token ', token)
+
       console.log('session', session)
 
       return session
