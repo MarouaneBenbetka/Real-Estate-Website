@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import CardsGrid from "../components/Home/CardsGrid";
 import { DUMMY_ANNOUNCES } from "../data/data";
@@ -49,6 +50,12 @@ export default function Explore({ toasting }) {
 	if (toasting === "true") {
 		toast.error("vous devez entre authentifiee");
 	}
+
+	const [ann, SetAnn] = useState([]);
+	useEffect(async () => {
+		const result = await annonceCrud.getAll();
+		console.log(result);
+	}, [ann]);
 
 	//search bar handler :
 

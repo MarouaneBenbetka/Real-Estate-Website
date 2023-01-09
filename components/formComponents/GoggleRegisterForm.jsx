@@ -14,10 +14,6 @@ function GoggleRegisterForm() {
 
     const { data: session } = useSession();
 
-  const options = [
-    { key: "Donator", value: true },
-    { key: "Requester", value: false },
-  ];
   const initialValues = {
     phoneNum: "",
     adress: "",
@@ -25,21 +21,23 @@ function GoggleRegisterForm() {
   };
 
   const validationSchema = Yup.object({
-    phoneNum: Yup.string().required("Required"),
-    adress: Yup.string().required("Required"),
+    phoneNumber: Yup.string().required("Required"),
+    address: Yup.string().required("Required"),
   });
 
   const [status, setStatus] = useState("idle");
   const onSubmit = async (values) => {
+    console.log(session)
     console.log("Form data", values);
     document.querySelector("#my-modal5").click();
     const config = {
       headers: {
         "Content-Type": "application/json",
+        'Authorization': `Bearer ${session.user.jwt}`
       },
     };
     try {
-      const result = await axios.patch(`${URL}/auth/register/${session?.user.id}`, values);
+      const result = await axios.put(`http://192.168.145.12:5000/users/user`, values, config);
 
       console.log(result);
       setStatus("pending");
@@ -70,7 +68,7 @@ function GoggleRegisterForm() {
                     control="input"
                     type="text"
                     label="Numero de telephone"
-                    name="phoneNum"
+                    name="phoneNumber"
                     placeholder="06*****"
                     formik={formik}
                   />
@@ -78,7 +76,7 @@ function GoggleRegisterForm() {
                     control="input"
                     type="text"
                     label="Adresse"
-                    name="adress"
+                    name="address"
                     formik={formik}
                     placeholder="adresse complete"
                   />
