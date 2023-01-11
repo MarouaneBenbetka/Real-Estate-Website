@@ -69,8 +69,8 @@ export async function getServerSideProps({ req }) {
 		};
 	}
 		const result = await mesannoncesCrud.getAll({headers:{'Authorization': `Bearer ${session.user.jwt}`}})
-		console.log("hahahahhahahahaha",result.data)
-		const mesannonces = await result.data
+		console.log("hahahahhahahahaha",result.data.data)
+		const mesannonces = await result.data.data
 	
 
 
