@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MdOutlineNavigateBefore } from "react-icons/md";
 import ImagesGalery from "../../components/CardDetails/ImagesGalery";
 import dynamic from "next/dynamic";
 import { images } from "../../data/data";
+import axios from "axios";
+import { findLocation } from "../../components/formComponents/ControlComponents/commune_lag_lng";
 import {
 	announcesRenameType,
 	typeImmobilierTOtypeAnnonce,
@@ -36,44 +38,48 @@ const sideInfo = [
 		title: "Commune",
 	},
 	{
-		id: "adresse",
+		id: "address",
 		title: "Adresse",
 	},
 	{
-		id: "datePublication",
+		id: "date",
 		title: "Date de publication",
 	},
 ];
 
 export default function CardDeatails() {
+	//get the id of the announce
 	const router = useRouter();
-	const annonceId = router.query.annonceId; //get the id of the announce
+
 	const [message, setMessage] = useState("");
-	const [announceInfo, setAnnounceInfo] = useState({
-		id: 9,
-		typeImmoblier: "Appartement",
-		typeAnnoce: "Location",
-		wilaya: "Alger",
-		commune: "Baba Hassen",
-		adresse: "cite 18 fevrier , BabaHassen , Alger ",
-		description:
-			"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-		surface: 200,
-		prix: 10000,
-		images: images,
-		datePublication: "01-01-2023",
-		ownerName: "Houari Boumedian",
-		ownerImg:
-			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz-LJaTp0HFRT2GHznf3n7iSAzu-z7och7Vc0GsJkTHWEk67OjQ0t0o6piSTpTv9sr7UI&usqp=CAU",
-		ownerEmail: "km_benbetka@gmail.com",
-		ownerPhone: "07 38 48 29 38",
-	});
+	const [announceInfo, setAnnounceInfo] = useState(null);
+
+	useEffect(() => {
+		const annonceId = window.location.href.split("/").pop();
+		console.log(annonceId);
+		axios
+			.get(`http://192.168.145.12:5000/annonces/${annonceId}`)
+			.then((res) => {
+				const data = res.data.data;
+				if (!data.coordinates.latitude) {
+					const lat_lng = findLocation(data.commune, data.wilaya);
+					data.coordinates = {
+						latitude: lat_lng.lat,
+						longitude: lat_lng.lng,
+					};
+				}
+				setAnnounceInfo(data);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	}, []);
 
 	const sendMessageHandler = () => {
 		// console.log(message, "is been sent");
 	};
 
-	return (
+	return announceInfo ? (
 		<div className="mx-8 sm:mx-10 md:mx-[7vw] lg:mx-[8vw]  mt-3">
 			{/* return to explore page */}
 			<div onClick={() => router.back()} className="cursor-pointer">
@@ -86,11 +92,9 @@ export default function CardDeatails() {
 			</div>
 			{/* title of the annouce */}
 			<h1 className="text-dark-blue font-bold text-[36px] mt-4">
-				{announceInfo.typeImmoblier}
+				{announceInfo.typeAnnonce}
 			</h1>
-			<h2 className="text-gray-600 text-[18px]">
-				{announceInfo.adresse}
-			</h2>
+			<h2 className="text-gray-600 text-[18px]">{announceInfo.adress}</h2>
 
 			{/*Grid 2x2  [images-infos][description - message]  */}
 			<div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
@@ -132,24 +136,44 @@ export default function CardDeatails() {
 						<div className="flex items-center gap-4">
 							<img
 								className="w-[72px] h-[72px] rounded-full  border-purple object-cover object-center"
-								src={announceInfo.ownerImg}
+								src={
+									announceInfo.contactInfo &&
+									announceInfo.contactInfo.picture
+										? announceInfo.contactInfo.picture
+										: "/profile-picture-placehoder.png"
+								}
 							/>
 							<div>
 								<h2 className="text-[20px] font-semibold leading-3 pb-1 mt-3 ">
-									{announceInfo.ownerName}
+									{announceInfo.contactInfo &&
+									announceInfo.contactInfo.name
+										? announceInfo.contactInfo.name
+										: "admin"}
 								</h2>
 								<a
-									href={"mailto:" + announceInfo.ownerEmail}
+									href={
+										"mailto:" +
+										(announceInfo.contactInfo &&
+										announceInfo.contactInfo.email
+											? announceInfo.contactInfo.email
+											: "")
+									}
 									target="_blank"
 									rel="noreferrer"
 								>
 									<h3 className="text-gray-600 ">
-										{announceInfo.ownerEmail}
+										{announceInfo.contactInfo &&
+										announceInfo.contactInfo.email
+											? announceInfo.contactInfo.email
+											: "/"}
 									</h3>
 								</a>
 
 								<h3 className="text-gray-600 text-[14px] leading-3 pt-1">
-									{announceInfo.ownerPhone}
+									{announceInfo.contactInfo &&
+									announceInfo.contactInfo.email
+										? announceInfo.contactInfo.phoneNumber
+										: "00 00 00 00 00"}
 								</h3>
 							</div>
 						</div>
@@ -171,7 +195,7 @@ export default function CardDeatails() {
 
 							{typeImmobilierTOtypeAnnonce[
 								announcesRenameType[
-									announceInfo.typeAnnoce.toLowerCase()
+									announceInfo.typeAnnonce.toLowerCase()
 								]
 							] && (
 								<span className="text-gray-500 text-[20px]">
@@ -180,7 +204,7 @@ export default function CardDeatails() {
 									{
 										typeImmobilierTOtypeAnnonce[
 											announcesRenameType[
-												announceInfo.typeAnnoce.toLowerCase()
+												announceInfo.typeAnnonce.toLowerCase()
 											]
 										]
 									}
@@ -206,7 +230,12 @@ export default function CardDeatails() {
 				Position sur la carte
 			</h1>
 
-			<MapWrapper2 />
+			<MapWrapper2
+				lat={announceInfo.coordinates.latitude}
+				lng={announceInfo.coordinates.longitude}
+			/>
 		</div>
+	) : (
+		<div>not loaded</div>
 	);
 }

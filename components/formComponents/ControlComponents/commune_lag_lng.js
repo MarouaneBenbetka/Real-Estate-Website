@@ -5843,7 +5843,7 @@ export const commune_location = [
 	{
 		id: "650",
 		post_code: "18004",
-		name: "Ziamma Mansouriah",
+		name: "Ziama Mansouriah",
 		wilaya_id: "18",
 		ar_name: "زيامة منصورية",
 		longitude: "36.6501629",
