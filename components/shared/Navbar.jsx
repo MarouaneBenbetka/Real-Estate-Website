@@ -43,7 +43,7 @@ export default function Navbar() {
 	const [active, setActive] = useState(0);
 	const [navMobile, setNavMobile] = useState(false);
 	const [nbNotifications, setNbNotifications] = useState(9);
-	const [isAdmin, setIsAdmin] = useState(true);
+	const [isAdmin, setIsAdmin] = useState(false);
 
 	const env = process.env.NODE_ENV;
 
@@ -174,33 +174,35 @@ export default function Navbar() {
 						}
 					>
 						<ul className="flex flex-col  text-dark-blue bg-white">
-							{navlinks.map((navLink, index) => (
-								<li
-									key={index}
-									className="relative w-screen bg-white  focus:text-purple focus:bg-slate hover:text-purple hover:bg-gray-200 focus:bg-gray-200   rounded-lg focus:underline"
-								>
-									<Link
-										href={navLink.link}
-										className={
-											"block p-4 w-full h-full  " +
-											(index === active
-												? "text-[18px] text-purple font-semibold"
-												: "text-[18px]")
-										}
-										onClick={(e) =>
-											pageNavigationHadler(e, index)
-										}
+							{(isAdmin ? adminNavLinks : navlinks).map(
+								(navLink, index) => (
+									<li
+										key={index}
+										className="relative w-screen bg-white  focus:text-purple focus:bg-slate hover:text-purple hover:bg-gray-200 focus:bg-gray-200   rounded-lg focus:underline"
 									>
-										{navLink.title}
-									</Link>
-									{navLink.id === "messages" &&
-										nbNotifications > 0 && (
-											<div className="absolute text-[12px] w-6 h-6 rounded-full bg-purple text-white font-bold top-[16px] right-[calc(50vw-70px)] flex items-center justify-center ">
-												{nbNotifications}
-											</div>
-										)}
-								</li>
-							))}
+										<Link
+											href={navLink.link}
+											className={
+												"block p-4 w-full h-full  " +
+												(index === active
+													? "text-[18px] text-purple font-semibold"
+													: "text-[18px]")
+											}
+											onClick={(e) =>
+												pageNavigationHadler(e, index)
+											}
+										>
+											{navLink.title}
+										</Link>
+										{navLink.id === "messages" &&
+											nbNotifications > 0 && (
+												<div className="absolute text-[12px] w-6 h-6 rounded-full bg-purple text-white font-bold top-[16px] right-[calc(50vw-70px)] flex items-center justify-center ">
+													{nbNotifications}
+												</div>
+											)}
+									</li>
+								)
+							)}
 						</ul>
 						<div className="flex gap-1">
 							{status !== "unauthenticated" &&

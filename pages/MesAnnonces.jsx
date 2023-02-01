@@ -5,11 +5,12 @@ import { isLogin } from "../utils/services/auth";
 import { getSession } from "next-auth/react";
 import { toast } from "react-toastify";
 import mesannoncesCrud from "../utils/services/mesannonces";
+import { DUMMY_ANNOUNCES } from "../data/data";
 
 const MesAnnonces = ({ mesannonces }) => {
+	mesannonces = DUMMY_ANNOUNCES;
 	return (
 		<div className="flex flex-col justify-center mx-2 sm:mx-8 md:mx-[6vw] lg:mx-[8vw]">
-			{console.log(mesannonces)}
 			<div className=" min-h-[120px] bg-center flex flex-col justify-end">
 				<div className="  min-h-[120px]">
 					{" "}
@@ -57,24 +58,24 @@ const MesAnnonces = ({ mesannonces }) => {
 
 export default MesAnnonces;
 
-export async function getServerSideProps({ req }) {
-	const session = await getSession({ req });
+// export async function getServerSideProps({ req }) {
+// 	const session = await getSession({ req });
 
-	if (!session) {
-		return {
-			redirect: {
-				destination: "/?login=true",
-				permanent: false,
-			},
-		};
-	}
-	const result = await mesannoncesCrud.getAll({
-		headers: { Authorization: `Bearer ${session.user.jwt}` },
-	});
-	console.log("hahahahhahahahaha", result.data.data);
-	const mesannonces = await result.data.data;
+// 	if (!session) {
+// 		return {
+// 			redirect: {
+// 				destination: "/?login=true",
+// 				permanent: false,
+// 			},
+// 		};
+// 	}
+// 	const result = await mesannoncesCrud.getAll({
+// 		headers: { Authorization: `Bearer ${session.user.jwt}` },
+// 	});
+// 	console.log("hahahahhahahahaha", result.data.data);
+// 	const mesannonces = await result.data.data;
 
-	return {
-		props: { mesannonces },
-	};
-}
+// 	return {
+// 		props: { mesannonces },
+// 	};
+// }

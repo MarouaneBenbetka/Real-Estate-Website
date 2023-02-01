@@ -24,58 +24,6 @@ export default function TableRow({
 
 	return (
 		<>
-			<input
-				type="checkbox"
-				id="my-modal2"
-				defaultChecked={false}
-				className="modal-toggle"
-			/>
-			<div className="modal hero lg:min-w-xl" id="my-modal-2">
-				<div className="modal-box">
-					<h3 className="font-bold text-lg">
-						Voulez vous supprimer cette annonce !
-					</h3>
-					<p className="py-4">
-						une fois que vous supprimer cette annonce vous ne pourez
-						plus la recuperer
-					</p>
-					<div className="modal-action">
-						<a
-							href="# "
-							className="btn bg-purple border-purple confirm"
-							onClick={(e) => {
-								document
-									.querySelector('[id="my-modal2"]')
-									.click();
-								// dispatch(deleteDonation(e.target.getAttribute("data")));
-								// console.log("this is the id",e.target.getAttribute("data"));
-								console.log(id);
-								const result = annonceCrud.remove(id, {
-									headers: {
-										Authorization: `Bearer ${session.user.jwt}`,
-									},
-								});
-								console.log(result.data);
-								toast.success("Annonce supprimee avec usc");
-							}}
-						>
-							Confirmer
-						</a>
-						<Link
-							href="# "
-							replace={false}
-							className="btn bg-[#d92525] border-[#d92525]"
-							onClick={(e) => {
-								document
-									.querySelector('[id="my-modal2"]')
-									.click();
-							}}
-						>
-							Anuller
-						</Link>
-					</div>
-				</div>
-			</div>
 			<tr className="bg-white ">
 				<td className="bg-white ">
 					<div className="flex items-center space-x-3 w-fit	">
@@ -138,6 +86,63 @@ export default function TableRow({
 					<Link href={"/Annonces/" + id} className="cursor-pointer">
 						<FiExternalLink size={24} color="#000929" />
 					</Link>
+					<input
+						type="checkbox"
+						id="my-modal2"
+						defaultChecked={false}
+						className="modal-toggle"
+					/>
+					<div className="modal hero lg:min-w-xl" id="my-modal-2">
+						<div className="modal-box">
+							<h3 className="font-bold text-lg">
+								Voulez vous supprimer cette annonce !
+							</h3>
+							<p className="py-4">
+								une fois que vous supprimer cette annonce vous
+								ne pourez plus la recuperer
+							</p>
+							<div className="modal-action">
+								<Link
+									href=""
+									scroll={false}
+									replace={false}
+									className="btn bg-purple border-purple confirm"
+									onClick={(e) => {
+										document
+											.querySelector('[id="my-modal2"]')
+											.click();
+										// dispatch(deleteDonation(e.target.getAttribute("data")));
+										// console.log("this is the id",e.target.getAttribute("data"));
+										console.log(id);
+										const result = annonceCrud.remove(id, {
+											headers: {
+												Authorization: `Bearer ${session.user.jwt}`,
+											},
+										});
+										console.log(result.data);
+										toast.success(
+											"Annonce supprimee avec usc"
+										);
+									}}
+								>
+									Confirmer
+								</Link>
+								<Link
+									href=""
+									replace={false}
+									scroll={false}
+									className="btn bg-[#d92525] border-[#d92525]"
+									onClick={(e) => {
+										document
+											.querySelector('[id="my-modal2"]')
+											.click();
+									}}
+								>
+									Anuller
+								</Link>
+							</div>
+						</div>
+					</div>
 					<button
 						onClick={(e) => {
 							document.querySelector('[id="my-modal2"]').click();
