@@ -1,9 +1,8 @@
 import { Carousel } from "@mantine/carousel";
-import { images } from "../../data/data";
 import { MdOutlineNavigateNext, MdOutlineNavigateBefore } from "react-icons/md";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
-export default function ImagesGalery() {
+export default function ImagesGalery({ images }) {
 	return (
 		<div className="border-2 border-purple w-fit rounded-[6px] mt-2 mx-auto md:mx-0">
 			<Carousel

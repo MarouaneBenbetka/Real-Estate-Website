@@ -188,7 +188,7 @@ export const DUMMY_ANNOUNCES = [
 	},
 ];
 
-export const messages = [
+export const DUMMY_MESSAGE = [
 	{
 		id: 0,
 		name: "Cristiano Ronaldo dos Santos Aveiro",

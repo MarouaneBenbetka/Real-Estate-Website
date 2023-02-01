@@ -99,7 +99,7 @@ export default function CardDeatails() {
 			{/*Grid 2x2  [images-infos][description - message]  */}
 			<div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
 				{/* images galery */}
-				<ImagesGalery />
+				<ImagesGalery images={announceInfo.images} />
 				{/* Details de l'annonce */}
 				<div className=" md:ml-10 flex flex-col justify-center max-w-[400px] mb-4 sm:mb-0">
 					<h1 className="text-purple font-bold text-[28px] mb-4">

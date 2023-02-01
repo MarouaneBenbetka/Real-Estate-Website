@@ -28,11 +28,8 @@ export default function Explore({ toasting }) {
 
 	useEffect(() => {
 		setIsLoading(true);
-		// setTimeout(() => {
-		// 	setIsLoading(false);
-		// }, "1500");
 		axios
-			.get(`http://192.168sdd.145.12:5000/annonces?page=${pageCount}`)
+			.get(`http://192.168.145.12:5000/annonces?page=${pageCount}`)
 			.then((res) => {
 				setConnectionError(false);
 				setAnnounces(res.data.data);
@@ -51,11 +48,11 @@ export default function Explore({ toasting }) {
 		toast.error("vous devez entre authentifiee");
 	}
 
-	const [ann, SetAnn] = useState([]);
-	useEffect(async () => {
-		const result = await annonceCrud.getAll();
-		console.log(result);
-	}, [ann]);
+	// const [ann, SetAnn] = useState([]);
+	// useEffect(async () => {
+	// 	const result = await annonceCrud.getAll();
+	// 	console.log(result);
+	// }, [ann]);
 
 	//search bar handler :
 
