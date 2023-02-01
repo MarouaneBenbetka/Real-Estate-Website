@@ -7,30 +7,45 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import { toast } from "react-toastify";
 import Image from "next/image";
 
+const navlinks = [
+	{
+		id: "explorer",
+		title: "Explorer",
+		link: "/",
+	},
+	{
+		id: "mes_annonces",
+		title: "Mes annonces",
+		link: "/MesAnnonces",
+	},
+	{
+		id: "messages",
+		title: "Messages",
+		link: "/Messages",
+	},
+];
+
+const adminNavLinks = [
+	{
+		id: "dashbord",
+		title: "Dashbord",
+		link: "/Admin/Dashbord",
+	},
+	{
+		id: "annonces",
+		title: "Annonces",
+		link: "/Admin/Annonces",
+	},
+];
+
 export default function Navbar() {
 	const { status, data: session } = useSession();
 	const [active, setActive] = useState(0);
 	const [navMobile, setNavMobile] = useState(false);
 	const [nbNotifications, setNbNotifications] = useState(9);
-	const env = process.env.NODE_ENV;
+	const [isAdmin, setIsAdmin] = useState(true);
 
-	const navlinks = [
-		{
-			id: "explorer",
-			title: "Explorer",
-			link: "/",
-		},
-		{
-			id: "mes_annonces",
-			title: "Mes annonces",
-			link: "/MesAnnonces",
-		},
-		{
-			id: "messages",
-			title: "Messages",
-			link: "/Messages",
-		},
-	];
+	const env = process.env.NODE_ENV;
 
 	const openAnimation = useSpring({
 		from: { maxHeight: "0px" },
@@ -64,7 +79,7 @@ export default function Navbar() {
 				/>
 			</div>
 			<ul className="hidden md:flex items-center gap-2 font-medium">
-				{navlinks.map((navLink, index) => (
+				{(isAdmin ? adminNavLinks : navlinks).map((navLink, index) => (
 					<li
 						key={index}
 						className={

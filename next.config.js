@@ -6,6 +6,7 @@ const nextConfig = {
 			"images.unsplash.com",
 			"www.annonce-algerie.com",
 			"ncrypted-tbn0.gstatic.com",
+			"images.pexels.com",
 		],
 	},
 };

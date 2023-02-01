@@ -13,7 +13,6 @@ const Messages = () => {
 	const maxPages = 3;
 
 	useEffect(async () => {
-		console.log("hi");
 		try {
 			const response = await axios
 				.get(`http://192.168.145.12:5000/messages/messages`, {
