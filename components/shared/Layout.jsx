@@ -11,23 +11,24 @@ function Layout({ children }) {
 
 	const { status, data: session } = useSession();
 	const checkIfNewUser = async (id) => {
-		// const response = await userCrud.get(id,{headers:{'Authorization': `Bearer ${session.user.jwt}`}});
-		// console.log(response);
-		// const isNewUser = response.data.data.isValid;
-		// return isNewUser;
-		return true;
+		const response = await userCrud.get(id, {
+			headers: { Authorization: `Bearer ${session.user.jwt}` },
+		});
+		console.log(response);
+		const isNewUser = response.data.data.isValid;
+		return isNewUser;
 	};
 
 	useEffect(() => {
+		const fetchData = async () => {
+			const result = await checkIfNewUser(session?.user.id);
+			setIsNewUser(result);
+			console.log(isNewUser);
+		};
 		if (session) {
-			const fetchData = async () => {
-				const result = await checkIfNewUser(session?.user.id);
-				setIsNewUser(result);
-				console.log(isNewUser);
-			};
 			fetchData();
 		}
-	}, [session, isNewUser]);
+	}, []);
 	return (
 		<div className="text-dark-blue font-libre-franklin">
 			<input
