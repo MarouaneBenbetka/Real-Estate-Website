@@ -74,7 +74,6 @@ export default function Dashbord() {
 			{/* stats */}
 			<div className="w-full flex place-items-center sm:grid mx-auto gap-6 overflow-x-scroll sm:overflow-visible scrollbar-hide grid-cols-4 sm:grid-cols-2  md:grid-cols-2 lg:grid-cols-4 ">
 				{cards.map((card) => {
-					console.log(card);
 					return (
 						<StatsCard
 							key={card.id}

@@ -12,20 +12,18 @@ const Messages = () => {
 	const [pageCount, setPageCount] = useState(1);
 	const maxPages = 3;
 
-	useEffect(async () => {
-		try {
-			const response = await axios
-				.get(`http://192.168.145.12:5000/messages/messages`, {
-					headers: {
-						Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJiZWE4NjNjZS05MWFlLTExZWQtYTdiMy1mYzA4NGFkNzQ3NTMifQ.xrB-JpZamMVR0YbgxTutSGSscQGBx4YclI_9pTffJ1M`,
-					},
-				})
-				.catch((err) => console.log(err));
-			console.log(response.data.data);
-			setMassages(response.data.data);
-		} catch {
-			console.log("hi");
-		}
+	useEffect(() => {
+		axios
+			.get(`http://127.0.0.1:5000/messages/messages`, {
+				headers: {
+					Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJiZWE4NjNjZS05MWFlLTExZWQtYTdiMy1mYzA4NGFkNzQ3NTMifQ.xrB-JpZamMVR0YbgxTutSGSscQGBx4YclI_9pTffJ1M`,
+				},
+			})
+			.then((res) => {
+				console.log(res.data.data);
+				setMassages(res.data.data);
+			})
+			.catch((err) => console.log(err));
 	}, []);
 
 	// pages navigation handlers :
@@ -68,18 +66,18 @@ const Messages = () => {
 
 export default Messages;
 
-// export async function getServerSideProps({ req }) {
-// 	const session = await getSession({ req });
-// 	// if (!session) {
-// 	// 	return {
-// 	// 		redirect: {
-// 	// 			destination: "/?login=true",
-// 	// 			permanent: true,
-// 	// 		},
-// 	// 	};
-// 	// }
+export async function getServerSideProps({ req }) {
+	const session = await getSession({ req });
+	if (!session) {
+		return {
+			redirect: {
+				destination: "/?login=true",
+				permanent: true,
+			},
+		};
+	}
 
-// 	return {
-// 		props: { session },
-// 	};
-// }
+	return {
+		props: { session },
+	};
+}

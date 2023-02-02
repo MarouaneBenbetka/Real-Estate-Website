@@ -11,7 +11,7 @@ export default function Scrapping({ onCloseModal }) {
 			</div>
 			<div className="flex flex-col justify-center items-center">
 				<p className="text-[20px] my-4">
-					Vous allez fairde du scrapping sur deux sites différents
+					Vous allez faire du scrapping sur deux sites différents
 				</p>
 				<div className="flex justify-center items-center gap-6">
 					<a

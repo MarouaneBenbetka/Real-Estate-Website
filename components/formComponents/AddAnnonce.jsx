@@ -99,7 +99,7 @@ const AddAnnonce = () => {
 			}
 			console.log(session);
 			const response = await axios.post(
-				`http://192.168.145.12:5000/annonces`,
+				`http://127.0.0.1:5000/annonces`,
 				{
 					wilaya,
 					commune,

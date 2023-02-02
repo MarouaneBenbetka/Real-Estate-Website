@@ -58,24 +58,23 @@ const MesAnnonces = ({ mesannonces }) => {
 
 export default MesAnnonces;
 
-// export async function getServerSideProps({ req }) {
-// 	const session = await getSession({ req });
+export async function getServerSideProps({ req }) {
+	const session = await getSession({ req });
 
-// 	if (!session) {
-// 		return {
-// 			redirect: {
-// 				destination: "/?login=true",
-// 				permanent: false,
-// 			},
-// 		};
-// 	}
-// 	const result = await mesannoncesCrud.getAll({
-// 		headers: { Authorization: `Bearer ${session.user.jwt}` },
-// 	});
-// 	console.log("hahahahhahahahaha", result.data.data);
-// 	const mesannonces = await result.data.data;
-
-// 	return {
-// 		props: { mesannonces },
-// 	};
-// }
+	if (!session) {
+		return {
+			redirect: {
+				destination: "/?login=true",
+				permanent: false,
+			},
+		};
+	}
+	const result = await mesannoncesCrud.getAll({
+		headers: { Authorization: `Bearer ${session.user.jwt}` },
+	});
+	console.log("hahahahhahahahaha", result.data.data);
+	const mesannonces = await result.data.data;
+	return {
+		props: { mesannonces },
+	};
+}

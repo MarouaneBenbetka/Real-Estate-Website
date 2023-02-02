@@ -1,4 +1,5 @@
 import { Carousel } from "@mantine/carousel";
+import Image from "next/image";
 import { MdOutlineNavigateNext, MdOutlineNavigateBefore } from "react-icons/md";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
@@ -6,7 +7,7 @@ export default function ImagesGalery({ images }) {
 	return (
 		<div className="border-2 border-purple w-fit rounded-[6px] mt-2 mx-auto md:mx-0">
 			<Carousel
-				sx={{ maxWidth: 700 }}
+				sx={{ maxWidth: 650 }}
 				mx="auto"
 				withIndicators
 				className="carousel"
@@ -45,11 +46,14 @@ export default function ImagesGalery({ images }) {
 					<Carousel.Slide key={img}>
 						<TransformWrapper>
 							<TransformComponent>
-								<img
-									src={img}
-									alt="img"
-									className="w-[700px] h-[380px] object-cover object-center rounded-[4px]"
-								/>{" "}
+								<div className="w-[86vw] md:w-[50vw] h-[380px] ">
+									<Image
+										src={img}
+										alt="img"
+										fill
+										className="object-cover object-center rounded-[4px]"
+									/>
+								</div>
 							</TransformComponent>
 						</TransformWrapper>
 					</Carousel.Slide>

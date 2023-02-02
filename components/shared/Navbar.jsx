@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { toast } from "react-toastify";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 const navlinks = [
 	{
@@ -42,8 +43,11 @@ export default function Navbar() {
 	const { status, data: session } = useSession();
 	const [active, setActive] = useState(0);
 	const [navMobile, setNavMobile] = useState(false);
-	const [nbNotifications, setNbNotifications] = useState(9);
-	const [isAdmin, setIsAdmin] = useState(true);
+	const [nbNotifications, setNbNotifications] = useState(0);
+	const [isAdmin, setIsAdmin] = useState(false);
+	const router = useRouter();
+	const currentRoute = router.pathname;
+	console.log(currentRoute);
 
 	const env = process.env.NODE_ENV;
 
@@ -95,7 +99,10 @@ export default function Navbar() {
 							href={navLink.link}
 							className={
 								"md:px-3 lg:px-5 w-full  z-10" +
-								(index === active
+								(currentRoute === navLink.link ||
+								(currentRoute === "/Annonces/[annonceId]" &&
+									(navLink.link === "/Admin/Annonces" ||
+										navLink.link === "/MesAnnonces"))
 									? "text-[18px] text-purple font-semibold"
 									: "text-[18px]")
 							}
@@ -184,7 +191,14 @@ export default function Navbar() {
 											href={navLink.link}
 											className={
 												"block p-4 w-full h-full  " +
-												(index === active
+												(currentRoute ===
+													navLink.link ||
+												(currentRoute ===
+													"/Annonces/[annonceId]" &&
+													(navLink.link ===
+														"/Admin/Annonces" ||
+														navLink.link ===
+															"/MesAnnonces"))
 													? "text-[18px] text-purple font-semibold"
 													: "text-[18px]")
 											}

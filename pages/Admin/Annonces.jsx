@@ -29,8 +29,9 @@ export default function Annonces() {
 			>
 				Mise a jour annonces
 			</button>
-
-			<MesAnnoncesList mesannonces={DUMMY_ANNOUNCES} />
+			<div className="max-w-[100vw] overflow-x-auto">
+				<MesAnnoncesList mesannonces={DUMMY_ANNOUNCES} />
+			</div>
 		</div>
 	);
 }

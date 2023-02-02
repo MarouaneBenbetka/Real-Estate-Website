@@ -22,6 +22,7 @@ export default function UsersTable({ users }) {
 								<div className="w-[50px] h-[50px] relative rounded-full overflow-hidden">
 									<Image
 										src={user.photo}
+										alt="user"
 										fill
 										style={{
 											objectFit: "cover",

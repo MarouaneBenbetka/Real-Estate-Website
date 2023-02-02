@@ -1,13 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import CardsGrid from "../components/Home/CardsGrid";
-import { DUMMY_ANNOUNCES } from "../data/data";
 import SearchBar from "../components/Home/SearchBar";
 import { toast } from "react-toastify";
 import PagesPagination from "../components/Home/PagesPagination";
-import cookie from "js-cookie";
 import axios from "axios";
-import annonceCrud from "../utils/services/annonce";
 import NothingFound from "../components/errors/NothingFound";
 import ConnectionError from "../components/errors/ConnectionError";
 
@@ -29,7 +26,7 @@ export default function Explore({ toasting }) {
 	useEffect(() => {
 		setIsLoading(true);
 		axios
-			.get(`http://192.168.145.12:5000/annonces?page=${pageCount}`)
+			.get(`http://127.0.0.1:5000/annonces?page=${pageCount}`)
 			.then((res) => {
 				setConnectionError(false);
 				setAnnounces(res.data.data);
@@ -44,9 +41,11 @@ export default function Explore({ toasting }) {
 			.then(setIsLoading(false));
 	}, [pageCount]);
 
-	if (toasting === "true") {
-		toast.error("vous devez entre authentifiee");
-	}
+	useEffect(() => {
+		if (toasting === "true") {
+			toast.error("vous devez entre authentifiee");
+		}
+	}, []);
 
 	// const [ann, SetAnn] = useState([]);
 	// useEffect(async () => {
@@ -60,7 +59,7 @@ export default function Explore({ toasting }) {
 		e.preventDefault();
 		axios
 			.get(
-				`http://192.168.145.12:5000/annonces/search?q=${searchText}&page=${pageCount}`
+				`http://127.0.0.1:5000/annonces/search?q=${searchText}&page=${pageCount}`
 			)
 			.then((res) => {
 				setConnectionError(false);
@@ -85,11 +84,13 @@ export default function Explore({ toasting }) {
 		e.preventDefault();
 		axios
 			.get(
-				`http://192.168.145.12:5000/annonces/search?q=${lastSearch}&min_date=${filterData.dateDebut}&max_date=${filterData.dateFin}&wilaya=${filterData.wilaya}&commune=${filterData.commune}&type=${filterData.typeAnnonce}&page=${pageCount}`
+				`http://127.0.0.1:5000/annonces/search?q=${lastSearch}&min_date=${filterData.dateDebut}&max_date=${filterData.dateFin}&wilaya=${filterData.wilaya}&commune=${filterData.commune}&type=${filterData.typeAnnonce}&page=${pageCount}`
 			)
 			.then((res) => {
 				setConnectionError(false);
 				setAnnounces(res.data.data);
+				if (res.data.data.length == 0) setNoResultFound(true);
+				else setNoResultFound(false);
 				setMaxPages(res.data.max_pages);
 				console.log(res.data);
 			})
@@ -173,7 +174,6 @@ export default function Explore({ toasting }) {
 export async function getServerSideProps(ctx) {
 	// const toasting = req.headers['toasting'] || false
 	const toasting = ctx.query.login || false;
-	console.log(toasting);
 
 	return {
 		props: { toasting },

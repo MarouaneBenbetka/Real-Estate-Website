@@ -81,14 +81,14 @@ export default function AnnouceCard({
 			</Card.Section>
 
 			<Link href={"/Annonces/" + id} className="cursor-pointer">
-				<Group position="apart" mt="xs">
-					<Text className="text-dark-blue font-bold text-[18px] ">
+				<div className="flex justify-between flex-nowrap items-start">
+					<Text className="text-dark-blue font-bold text-[18px] whitespace-nowrap overflow-hidden text-ellipsis mr-2">
 						{typeImmoblier.charAt(0).toUpperCase() +
 							typeImmoblier.slice(1)}
 					</Text>
 
-					<Group
-						className="flex items-center justify-end"
+					<div
+						className="flex items-center justify-end flex-nowrap"
 						spacing={5}
 					>
 						{
@@ -99,14 +99,19 @@ export default function AnnouceCard({
 						<Text className="text-purple font-semibold text-[16px] py-1">
 							{announcesRenameType[typeAnnoce.toLowerCase()]}
 						</Text>
-					</Group>
-				</Group>
+					</div>
+				</div>
 
 				<Text className="text-[14px] text-purple leading-[10px]">
 					{commune} / {wilaya}
 				</Text>
 
-				<Text size="sm" color="dimmed" mt="sm" className="h-[44px]">
+				<Text
+					size="sm"
+					color="dimmed"
+					mt="sm"
+					className="h-[44px] overflow-hidden"
+				>
 					{description.length > 64
 						? description.substring(0, 64) + "..."
 						: description}
