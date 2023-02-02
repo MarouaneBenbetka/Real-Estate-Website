@@ -1,4 +1,5 @@
 import { info } from "autoprefixer";
+import Image from "next/image";
 import { useState } from "react";
 import { MdExpandMore } from "react-icons/md";
 import { useSpring, animated } from "react-spring";
@@ -36,9 +37,12 @@ export default function Message({ infos }) {
 			<div className="flex justify-start items-start">
 				<div className="flex items-center mr-2">
 					<div className="   flex items-center justify-center mr-2">
-						<img
+						<Image
 							className="w-[48px] h-[48px] rounded-full  border-purple object-cover object-center"
-							src={infos.photo}
+							src={"/house-placeholder.png"}
+							alt="hi"
+							width={48}
+							height={48}
 						/>
 					</div>
 					<h2

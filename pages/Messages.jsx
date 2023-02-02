@@ -1,14 +1,30 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PagesPagination from "../components/Home/PagesPagination";
 import Message from "../components/Messages/Message";
-import { messages } from "../data/data";
-import {isLogin} from "../utils/services/auth"
-import { getSession } from "next-auth/react"
-import cookie from 'js-cookie'
+import { DUMMY_MESSAGE } from "../data/data";
+import { isLogin } from "../utils/services/auth";
+import { getSession } from "next-auth/react";
+import cookie from "js-cookie";
+import axios from "axios";
 
 const Messages = () => {
+	const [messages, setMassages] = useState(DUMMY_MESSAGE);
 	const [pageCount, setPageCount] = useState(1);
 	const maxPages = 3;
+
+	useEffect(() => {
+		axios
+			.get(`http://127.0.0.1:5000/messages/messages`, {
+				headers: {
+					Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJiZWE4NjNjZS05MWFlLTExZWQtYTdiMy1mYzA4NGFkNzQ3NTMifQ.xrB-JpZamMVR0YbgxTutSGSscQGBx4YclI_9pTffJ1M`,
+				},
+			})
+			.then((res) => {
+				console.log(res.data.data);
+				setMassages(res.data.data);
+			})
+			.catch((err) => console.log(err));
+	}, []);
 
 	// pages navigation handlers :
 
@@ -50,19 +66,18 @@ const Messages = () => {
 
 export default Messages;
 
-export async function getServerSideProps({req}) {
-	const session = await getSession({req});
+export async function getServerSideProps({ req }) {
+	const session = await getSession({ req });
 	if (!session) {
-	  return {
-		redirect: {
-		  
-		  destination: "/?login=true",
-		  permanent: true,
-		},
-	  };
+		return {
+			redirect: {
+				destination: "/?login=true",
+				permanent: true,
+			},
+		};
 	}
-  
+
 	return {
-	  props: { session },
+		props: { session },
 	};
-  }
+}

@@ -56,9 +56,8 @@ export default function CardDeatails() {
 
 	useEffect(() => {
 		const annonceId = window.location.href.split("/").pop();
-		console.log(annonceId);
 		axios
-			.get(`http://192.168.145.12:5000/annonces/${annonceId}`)
+			.get(`http://127.0.0.1:5000/annonces/${annonceId}`)
 			.then((res) => {
 				const data = res.data.data;
 				if (!data.coordinates.latitude) {
@@ -67,6 +66,10 @@ export default function CardDeatails() {
 						latitude: lat_lng.lat,
 						longitude: lat_lng.lng,
 					};
+					console.log(data.images);
+					if (!data.images || data.images.length === 0) {
+						data.images = ["/house-placeholder.png"];
+					}
 				}
 				setAnnounceInfo(data);
 			})
@@ -99,9 +102,11 @@ export default function CardDeatails() {
 			{/*Grid 2x2  [images-infos][description - message]  */}
 			<div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
 				{/* images galery */}
-				<ImagesGalery />
+				<ImagesGalery
+					images={announceInfo.images ? announceInfo.images : images}
+				/>
 				{/* Details de l'annonce */}
-				<div className=" md:ml-10 flex flex-col justify-center max-w-[400px] mb-4 sm:mb-0">
+				<div className=" md:ml-20 flex flex-col justify-center  max-w-[400px] mb-4 sm:mb-0">
 					<h1 className="text-purple font-bold text-[28px] mb-4">
 						Détails de l'annonce :
 					</h1>
@@ -180,9 +185,9 @@ export default function CardDeatails() {
 					</div>
 				</div>
 				{/* Prix et message */}
-				<div className="w-full my-auto">
+				<div className="w-full mt-10 mb-auto">
 					<div className="flex  flex-col justify-center items-center ">
-						<div className="ml-4 md:ml-10 mt-4 ">
+						<div className="  mt-4 ">
 							<span className="text-gray-500 font-semibold text-[18px]  leading-[8px] pr-4">
 								Prix
 							</span>
@@ -213,11 +218,11 @@ export default function CardDeatails() {
 						</div>
 						<textarea
 							placeholder="Envoyer un message vers l'annonceur"
-							className="h-[100px] bg-gray-100 p-2 w-full md:w-2/3  border  rounded border-purple text-dark-blue focus:border-2 placeholder-gray-500"
+							className="h-[100px] bg-gray-100 p-2  w-[76vw] md:w-2/3  border  rounded border-purple text-dark-blue focus:border-2 placeholder-gray-500"
 							onChange={(e) => setMessage(e.target.value)}
 						></textarea>
 						<button
-							className=" px-4 py-2 mt-2	 w-2/3 text-white2 bg-purple rounded-[4px] font-semibold border-2 border-purple hover:bg-white hover:text-purple transition"
+							className=" px-4 py-2 mt-2	w-[76vw] md:w-2/3 text-white2 bg-purple rounded-[4px] font-semibold border-2 border-purple hover:bg-white hover:text-purple transition"
 							onClick={sendMessageHandler}
 						>
 							Envoyer Message

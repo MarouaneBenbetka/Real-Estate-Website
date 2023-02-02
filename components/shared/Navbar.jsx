@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../../styles/NavBar.module.css";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { useSpring, animated } from "react-spring";
@@ -6,31 +6,50 @@ import Link from "next/link";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { toast } from "react-toastify";
 import Image from "next/image";
+import { useRouter } from "next/router";
+
+const navlinks = [
+	{
+		id: "explorer",
+		title: "Explorer",
+		link: "/",
+	},
+	{
+		id: "mes_annonces",
+		title: "Mes annonces",
+		link: "/MesAnnonces",
+	},
+	{
+		id: "messages",
+		title: "Messages",
+		link: "/Messages",
+	},
+];
+
+const adminNavLinks = [
+	{
+		id: "dashbord",
+		title: "Dashbord",
+		link: "/Admin/Dashbord",
+	},
+	{
+		id: "annonces",
+		title: "Annonces",
+		link: "/Admin/Annonces",
+	},
+];
 
 export default function Navbar() {
 	const { status, data: session } = useSession();
 	const [active, setActive] = useState(0);
 	const [navMobile, setNavMobile] = useState(false);
-	const [nbNotifications, setNbNotifications] = useState(9);
-	const env = process.env.NODE_ENV;
+	const [nbNotifications, setNbNotifications] = useState(0);
+	const [isAdmin, setIsAdmin] = useState(false);
+	const router = useRouter();
+	const currentRoute = router.pathname;
+	console.log(currentRoute);
 
-	const navlinks = [
-		{
-			id: "explorer",
-			title: "Explorer",
-			link: "/",
-		},
-		{
-			id: "mes_annonces",
-			title: "Mes annonces",
-			link: "/MesAnnonces",
-		},
-		{
-			id: "messages",
-			title: "Messages",
-			link: "/Messages",
-		},
-	];
+	const env = process.env.NODE_ENV;
 
 	const openAnimation = useSpring({
 		from: { maxHeight: "0px" },
@@ -55,16 +74,16 @@ export default function Navbar() {
 
 	return (
 		<div className="flex justify-between items-center    py-4 md:px-6 lg:px-8 border-b">
-			<div className="ml-4 font-bold text-[24px]">
+			<div className="w-[140px] h-[40px] ml-4 font-bold text-[24px] relative">
 				<Image
 					src="/logo_immo.png"
 					alt="IMMO_LOGO"
-					height={140}
-					width={140}
+					fill
+					style={{ objectFit: "contain" }}
 				/>
 			</div>
 			<ul className="hidden md:flex items-center gap-2 font-medium">
-				{navlinks.map((navLink, index) => (
+				{(isAdmin ? adminNavLinks : navlinks).map((navLink, index) => (
 					<li
 						key={index}
 						className={
@@ -80,7 +99,10 @@ export default function Navbar() {
 							href={navLink.link}
 							className={
 								"md:px-3 lg:px-5 w-full  z-10" +
-								(index === active
+								(currentRoute === navLink.link ||
+								(currentRoute === "/Annonces/[annonceId]" &&
+									(navLink.link === "/Admin/Annonces" ||
+										navLink.link === "/MesAnnonces"))
 									? "text-[18px] text-purple font-semibold"
 									: "text-[18px]")
 							}
@@ -159,33 +181,42 @@ export default function Navbar() {
 						}
 					>
 						<ul className="flex flex-col  text-dark-blue bg-white">
-							{navlinks.map((navLink, index) => (
-								<li
-									key={index}
-									className="relative w-screen bg-white  focus:text-purple focus:bg-slate hover:text-purple hover:bg-gray-200 focus:bg-gray-200   rounded-lg focus:underline"
-								>
-									<Link
-										href={navLink.link}
-										className={
-											"block p-4 w-full h-full  " +
-											(index === active
-												? "text-[18px] text-purple font-semibold"
-												: "text-[18px]")
-										}
-										onClick={(e) =>
-											pageNavigationHadler(e, index)
-										}
+							{(isAdmin ? adminNavLinks : navlinks).map(
+								(navLink, index) => (
+									<li
+										key={index}
+										className="relative w-screen bg-white  focus:text-purple focus:bg-slate hover:text-purple hover:bg-gray-200 focus:bg-gray-200   rounded-lg focus:underline"
 									>
-										{navLink.title}
-									</Link>
-									{navLink.id === "messages" &&
-										nbNotifications > 0 && (
-											<div className="absolute text-[12px] w-6 h-6 rounded-full bg-purple text-white font-bold top-[16px] right-[calc(50vw-70px)] flex items-center justify-center ">
-												{nbNotifications}
-											</div>
-										)}
-								</li>
-							))}
+										<Link
+											href={navLink.link}
+											className={
+												"block p-4 w-full h-full  " +
+												(currentRoute ===
+													navLink.link ||
+												(currentRoute ===
+													"/Annonces/[annonceId]" &&
+													(navLink.link ===
+														"/Admin/Annonces" ||
+														navLink.link ===
+															"/MesAnnonces"))
+													? "text-[18px] text-purple font-semibold"
+													: "text-[18px]")
+											}
+											onClick={(e) =>
+												pageNavigationHadler(e, index)
+											}
+										>
+											{navLink.title}
+										</Link>
+										{navLink.id === "messages" &&
+											nbNotifications > 0 && (
+												<div className="absolute text-[12px] w-6 h-6 rounded-full bg-purple text-white font-bold top-[16px] right-[calc(50vw-70px)] flex items-center justify-center ">
+													{nbNotifications}
+												</div>
+											)}
+									</li>
+								)
+							)}
 						</ul>
 						<div className="flex gap-1">
 							{status !== "unauthenticated" &&

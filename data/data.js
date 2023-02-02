@@ -188,7 +188,7 @@ export const DUMMY_ANNOUNCES = [
 	},
 ];
 
-export const messages = [
+export const DUMMY_MESSAGE = [
 	{
 		id: 0,
 		name: "Cristiano Ronaldo dos Santos Aveiro",
@@ -340,5 +340,71 @@ export const socialMedia = [
 		id: "social-media-4",
 		icon: <BsLinkedin size={24} color="#7065F0" />,
 		link: "https://www.linkedin.com/",
+	},
+];
+
+export const DUMMY_USERS = [
+	{
+		id: 1,
+		name: "marouane benbetka",
+		photo: "https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+		mail: "km_benbetka@esi.dz",
+		phone: "0754329212",
+		adress: "city 18 feverier,baba hassen",
+		nbAnnonces: 12,
+	},
+	{
+		id: 2,
+		name: "marouane benbetka",
+		photo: "https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+		mail: "km_benbetka@esi.dz",
+		phone: "0754329212",
+		adress: "city 18 feverier,baba hassen",
+		nbAnnonces: 12,
+	},
+	{
+		id: 3,
+		name: "marouane benbetka",
+		photo: "https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+		mail: "km_benbetka@esi.dz",
+		phone: "0754329212",
+		adress: "city 18 feverier,baba hassen",
+		nbAnnonces: 12,
+	},
+	{
+		id: 4,
+		name: "marouane benbetka",
+		photo: "https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+		mail: "km_benbetka@esi.dz",
+		phone: "0754329212",
+		adress: "city 18 feverier,baba hassen",
+		nbAnnonces: 12,
+	},
+	{
+		id: 5,
+		name: "marouane benbetka",
+		photo: "https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+		mail: "km_benbetka@esi.dz",
+		phone: "0754329212",
+		adress: "city 18 feverier,baba hassen",
+		nbAnnonces: 12,
+	},
+	{
+		id: 6,
+		name: "marouane benbetka",
+		photo: "https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+		mail: "km_benbetka@esi.dz",
+		phone: "0754329212",
+		adress: "city 18 feverier,baba hassen",
+		nbAnnonces: 12,
+	},
+	{
+		id: 7,
+		name: "marouane benbetka",
+		photo: "https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+		mail: "km_benbetka@esi.dz",
+		phone: "0754329212",
+		adress: "city 18 feverier,baba hassen",
+		nbAnnonces: 12,
 	},
 ];
