@@ -20,7 +20,14 @@ export default function UsersTable({ users }) {
 						<tr key={user.id}>
 							<td>
 								<div className="w-[50px] h-[50px] relative rounded-full overflow-hidden">
-									<Image src={user.photo} fill />
+									<Image
+										src={user.photo}
+										fill
+										style={{
+											objectFit: "cover",
+											objectPosition: "center",
+										}}
+									/>
 								</div>
 							</td>
 							<td>{user.name}</td>

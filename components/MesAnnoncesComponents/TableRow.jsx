@@ -97,7 +97,7 @@ export default function TableRow({
 							<h3 className="font-bold text-lg">
 								Voulez vous supprimer cette annonce !
 							</h3>
-							<p className="py-4">
+							<p className="py-4 whitespace-normal">
 								une fois que vous supprimer cette annonce vous
 								ne pourez plus la recuperer
 							</p>

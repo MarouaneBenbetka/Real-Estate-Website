@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../../styles/NavBar.module.css";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { useSpring, animated } from "react-spring";
@@ -43,7 +43,7 @@ export default function Navbar() {
 	const [active, setActive] = useState(0);
 	const [navMobile, setNavMobile] = useState(false);
 	const [nbNotifications, setNbNotifications] = useState(9);
-	const [isAdmin, setIsAdmin] = useState(false);
+	const [isAdmin, setIsAdmin] = useState(true);
 
 	const env = process.env.NODE_ENV;
 
@@ -70,12 +70,12 @@ export default function Navbar() {
 
 	return (
 		<div className="flex justify-between items-center    py-4 md:px-6 lg:px-8 border-b">
-			<div className="ml-4 font-bold text-[24px]">
+			<div className="w-[140px] h-[40px] ml-4 font-bold text-[24px] relative">
 				<Image
 					src="/logo_immo.png"
 					alt="IMMO_LOGO"
-					height={140}
-					width={140}
+					fill
+					style={{ objectFit: "contain" }}
 				/>
 			</div>
 			<ul className="hidden md:flex items-center gap-2 font-medium">
