@@ -24,7 +24,6 @@ export default function Explore({ toasting }) {
 	const [connectionError, setConnectionError] = useState(false);
 
 	useEffect(() => {
-		setIsLoading(true);
 		axios
 			.get(`http://127.0.0.1:5000/annonces?page=${pageCount}`)
 			.then((res) => {
@@ -34,11 +33,12 @@ export default function Explore({ toasting }) {
 				if (res.data.data.length == 0) setNoResultFound(true);
 				else setNoResultFound(false);
 				console.log(res.data);
+				setIsLoading(false);
 			})
 			.catch((err) => {
 				setConnectionError(true);
-			})
-			.then(setIsLoading(false));
+				setIsLoading(false);
+			});
 	}, [pageCount]);
 
 	useEffect(() => {
@@ -105,6 +105,7 @@ export default function Explore({ toasting }) {
 		e.preventDefault();
 		if (pageCount < maxPages) {
 			setPageCount((prevPageCount) => prevPageCount + 1);
+			setIsLoading(true);
 			window.scrollTo({
 				top: 0,
 				behavior: "smooth",
@@ -115,6 +116,7 @@ export default function Explore({ toasting }) {
 		e.preventDefault();
 		if (pageCount > 1) {
 			setPageCount((prevPageCount) => prevPageCount - 1);
+			setIsLoading(true);
 			window.scrollTo({
 				top: 0,
 				behavior: "smooth",
@@ -125,6 +127,7 @@ export default function Explore({ toasting }) {
 		e.preventDefault();
 		if (num != pageCount) {
 			setPageCount(num);
+			setIsLoading(true);
 			window.scrollTo({
 				top: 0,
 				behavior: "smooth",

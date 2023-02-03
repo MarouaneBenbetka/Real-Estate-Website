@@ -60,7 +60,11 @@ const Messages = ({ session }) => {
 
 					{messages && messages.length > 0 ? (
 						messages.map((message) => (
-							<Message infos={message} key={message.id} />
+							<Message
+								infos={message}
+								key={message.id}
+								userJwt={session.user.jwt}
+							/>
 						))
 					) : (
 						<EmptyMessages />

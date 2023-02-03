@@ -4,6 +4,7 @@ import NothingFound from "../errors/NothingFound";
 import SkeltonCard from "./SkeltonCard";
 
 export default function CardsGrid({ annouces, isLoading }) {
+	console.log("grid ", isLoading);
 	return (
 		<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-6 mt-3 relative  z-0">
 			{isLoading || !annouces

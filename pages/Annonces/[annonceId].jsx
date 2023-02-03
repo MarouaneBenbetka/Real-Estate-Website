@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { MdOutlineNavigateBefore } from "react-icons/md";
 import ImagesGalery from "../../components/CardDetails/ImagesGalery";
 import dynamic from "next/dynamic";
@@ -12,6 +12,9 @@ import {
 	typeImmobilierTOtypeAnnonce,
 	annoucesIcon,
 } from "../../data/data";
+import { getSession } from "next-auth/react";
+import { toast } from "react-toastify";
+import Image from "next/image";
 
 const MapWrapper2 = dynamic(
 	() => import("../../components/CardDetails/MapWrapper"),
@@ -47,12 +50,20 @@ const sideInfo = [
 	},
 ];
 
-export default function CardDeatails() {
+export default function CardDeatails({ session }) {
 	//get the id of the announce
 	const router = useRouter();
+	const buttonRef = useRef();
 
 	const [message, setMessage] = useState("");
 	const [announceInfo, setAnnounceInfo] = useState(null);
+
+	// useEffect(() => {
+	// 	if (announceInfo) {
+	// 		buttonRef.current.disabled = true;
+	// 		console.log(buttonRef.current);
+	// 	}
+	// }, [announceInfo]);
 
 	useEffect(() => {
 		const annonceId = window.location.href.split("/").pop();
@@ -66,12 +77,13 @@ export default function CardDeatails() {
 						latitude: lat_lng.lat,
 						longitude: lat_lng.lng,
 					};
-					console.log(data.images);
+
 					if (!data.images || data.images.length === 0) {
 						data.images = ["/house-placeholder.png"];
 					}
 				}
 				setAnnounceInfo(data);
+				console.log(data);
 			})
 			.catch((err) => {
 				console.log(err);
@@ -79,7 +91,41 @@ export default function CardDeatails() {
 	}, []);
 
 	const sendMessageHandler = () => {
-		// console.log(message, "is been sent");
+		if (!session) {
+			toast.error("vous devez etre authentifiee");
+			return;
+		}
+
+		if (!announceInfo.userId) {
+			toast.error(
+				"Cette annonce est ajoute par l'administrateur vous ne pouvez pas envoyer des message"
+			);
+			return;
+		}
+
+		axios
+			.post(
+				`http://127.0.0.1:5000/messages/ok`,
+				{ annonceId: announceInfo.id, content: message },
+				{
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${session.user.jwt}`,
+					},
+				}
+			)
+			.then((res) => {
+				if (res.data.status === "failed") {
+					toast.error(
+						"Vous ne pouvez pas envoyer un message vers tois meme"
+					);
+				} else {
+					toast.success("Evoie du message avec succes");
+				}
+			})
+			.catch((err) => {
+				toast.error("Erreur lors du l'envoie du message");
+			});
 	};
 
 	return announceInfo ? (
@@ -103,7 +149,11 @@ export default function CardDeatails() {
 			<div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
 				{/* images galery */}
 				<ImagesGalery
-					images={announceInfo.images ? announceInfo.images : images}
+					images={
+						announceInfo.images && announceInfo.images.length > 0
+							? announceInfo.images
+							: ["/house-placeholder.png"]
+					}
 				/>
 				{/* Details de l'annonce */}
 				<div className=" md:ml-20 flex flex-col justify-center  max-w-[400px] mb-4 sm:mb-0">
@@ -139,12 +189,14 @@ export default function CardDeatails() {
 							Propriétaire de l'annonce{" "}
 						</h2>
 						<div className="flex items-center gap-4">
-							<img
+							<Image
+								width={72}
+								height={72}
 								className="w-[72px] h-[72px] rounded-full  border-purple object-cover object-center"
 								src={
-									announceInfo.contactInfo &&
-									announceInfo.contactInfo.picture
-										? announceInfo.contactInfo.picture
+									announceInfo.ownerImage &&
+									announceInfo.ownerImage.length > 0
+										? announceInfo.ownerImage
 										: "/profile-picture-placehoder.png"
 								}
 							/>
@@ -222,6 +274,7 @@ export default function CardDeatails() {
 							onChange={(e) => setMessage(e.target.value)}
 						></textarea>
 						<button
+							ref={buttonRef}
 							className=" px-4 py-2 mt-2	w-[76vw] md:w-2/3 text-white2 bg-purple rounded-[4px] font-semibold border-2 border-purple hover:bg-white hover:text-purple transition"
 							onClick={sendMessageHandler}
 						>
@@ -243,4 +296,12 @@ export default function CardDeatails() {
 	) : (
 		<div>not loaded</div>
 	);
+}
+
+export async function getServerSideProps({ req }) {
+	const session = await getSession({ req });
+
+	return {
+		props: { session },
+	};
 }

@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { toast } from "react-toastify";
 import annonceCrud from "../../utils/services/annonce";
+import { typeImmobilierTOtypeAnnonce } from "../../data/data";
 
 export default function TableRow({
 	description,
@@ -78,9 +79,12 @@ export default function TableRow({
 					<span className="text-[16px] font-normal pr-1 pl-1">
 						DA
 					</span>
-					<span className="text-gray-500 text-[18px]">
-						/ {typePayment}
-					</span>
+					{typeImmobilierTOtypeAnnonce[typeImmoblier] && (
+						<span className="text-gray-500 text-[20px]">
+							{" "}
+							/ {typeImmobilierTOtypeAnnonce[typeImmoblier]}
+						</span>
+					)}
 				</td>
 				<td className="bg-white flex gap-6 items-center mt-3">
 					<Link href={"/Annonces/" + id} className="cursor-pointer">

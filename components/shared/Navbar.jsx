@@ -51,6 +51,14 @@ export default function Navbar() {
 
 	const env = process.env.NODE_ENV;
 
+	useEffect(() => {
+		if (session) {
+			console.log("implement notifications");
+		} else {
+			setNbNotifications(0);
+		}
+	}, []);
+
 	const openAnimation = useSpring({
 		from: { maxHeight: "0px" },
 		to: { maxHeight: navMobile ? "1000px" : "0px" },

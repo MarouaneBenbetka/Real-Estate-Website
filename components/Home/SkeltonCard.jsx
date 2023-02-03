@@ -5,7 +5,7 @@ const y_offset = 6;
 
 export default function SkeltonCard() {
 	return (
-		<div className="  h-[360px] w-[280px]  shadow-md  rounded-md overflow-hidden">
+		<div className="h-[360px] w-[280px]  shadow-md  rounded-md overflow-hidden">
 			<div
 				// src="/house-placeholder.png"
 				// alt="Image d'imoblier"

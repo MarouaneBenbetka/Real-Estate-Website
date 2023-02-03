@@ -9,6 +9,7 @@ const nextConfig = {
 			"images.pexels.com",
 			"www.beytic.com",
 			"res.cloudinary.com",
+			"lh3.googleusercontent.com",
 		],
 	},
 };

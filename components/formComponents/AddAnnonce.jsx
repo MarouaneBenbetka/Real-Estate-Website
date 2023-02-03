@@ -30,6 +30,7 @@ const AddAnnonce = () => {
 		typeImmobilier: "",
 		typeAnnonce: "",
 		prix: "",
+		surface: "",
 		wilaya: "Alger",
 		address: "",
 		images: "",
@@ -79,6 +80,7 @@ const AddAnnonce = () => {
 			typeAnnonce,
 			address,
 			prix,
+			surface,
 		} = values;
 
 		if (commune == "") commune = communes[wilaya][0].value;
@@ -115,7 +117,7 @@ const AddAnnonce = () => {
 					coordinates: position,
 					address,
 					price: prix,
-					surface: 1,
+					surface,
 				},
 				{
 					headers: {
@@ -147,7 +149,7 @@ const AddAnnonce = () => {
 			>
 				✕
 			</label>
-			<div className="card-body ">
+			<div className="card-body p-4	px-8">
 				<Formik
 					initialValues={initialValues}
 					validationSchema={validationSchema}
@@ -223,6 +225,14 @@ const AddAnnonce = () => {
 											name="prix"
 											formik={formik}
 											placeholder="50000 da"
+										/>
+										<FormikControl
+											control="input"
+											type="number"
+											label="Surface"
+											name="surface"
+											formik={formik}
+											placeholder="200㎡"
 										/>
 										<div className="form-control">
 											<label
