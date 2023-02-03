@@ -6,24 +6,30 @@ import { isLogin } from "../utils/services/auth";
 import { getSession } from "next-auth/react";
 import cookie from "js-cookie";
 import axios from "axios";
+import EmptyMessages from "../components/errors/EmptyMessages";
+import ConnectionError from "../components/errors/ConnectionError";
 
-const Messages = () => {
-	const [messages, setMassages] = useState(DUMMY_MESSAGE);
+const Messages = ({ session }) => {
 	const [pageCount, setPageCount] = useState(1);
-	const maxPages = 3;
+	const [connectionError, setConnectionError] = useState(false);
+	const [messages, setMessages] = useState(null);
+	const maxPages = 1;
 
 	useEffect(() => {
 		axios
 			.get(`http://127.0.0.1:5000/messages/messages`, {
 				headers: {
-					Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJiZWE4NjNjZS05MWFlLTExZWQtYTdiMy1mYzA4NGFkNzQ3NTMifQ.xrB-JpZamMVR0YbgxTutSGSscQGBx4YclI_9pTffJ1M`,
+					Authorization: `Bearer ${session.user.jwt}`,
 				},
 			})
 			.then((res) => {
+				setMessages(res.data.data);
+				setConnectionError(false);
 				console.log(res.data.data);
-				setMassages(res.data.data);
 			})
-			.catch((err) => console.log(err));
+			.catch((err) => {
+				setConnectionError(true);
+			});
 	}, []);
 
 	// pages navigation handlers :
@@ -44,22 +50,31 @@ const Messages = () => {
 
 	return (
 		<div className="flex flex-col justify-center  mx-4 sm:mx-10 md:mx-[7vw] lg:mx-[11vw]">
-			<div className="my-4">
-				<h1 className="font-bold text-[32px] mb-4">
-					Boîte de réception{" "}
-				</h1>
+			{connectionError ? (
+				<ConnectionError />
+			) : (
+				<div className="my-4">
+					<h1 className="font-bold text-[32px] mb-4">
+						Boîte de réception{" "}
+					</h1>
 
-				{messages.map((message) => (
-					<Message infos={message} key={message.id} />
-				))}
-				<PagesPagination
-					maxPages={maxPages}
-					currentPage={pageCount}
-					onNextPageClick={nextPageHandler}
-					onPreviousPageClick={previousPageHandler}
-					onSelectionPageClick={selectPageHandler}
-				/>
-			</div>
+					{messages && messages.length > 0 ? (
+						messages.map((message) => (
+							<Message infos={message} key={message.id} />
+						))
+					) : (
+						<EmptyMessages />
+					)}
+
+					<PagesPagination
+						maxPages={maxPages}
+						currentPage={pageCount}
+						onNextPageClick={nextPageHandler}
+						onPreviousPageClick={previousPageHandler}
+						onSelectionPageClick={selectPageHandler}
+					/>
+				</div>
+			)}
 		</div>
 	);
 };

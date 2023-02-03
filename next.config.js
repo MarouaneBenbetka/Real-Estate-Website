@@ -7,6 +7,8 @@ const nextConfig = {
 			"www.annonce-algerie.com",
 			"ncrypted-tbn0.gstatic.com",
 			"images.pexels.com",
+			"www.beytic.com",
+			"res.cloudinary.com",
 		],
 	},
 };

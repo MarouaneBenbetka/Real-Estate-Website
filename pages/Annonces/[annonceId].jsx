@@ -176,7 +176,7 @@ export default function CardDeatails() {
 
 								<h3 className="text-gray-600 text-[14px] leading-3 pt-1">
 									{announceInfo.contactInfo &&
-									announceInfo.contactInfo.email
+									announceInfo.contactInfo.phoneNumber
 										? announceInfo.contactInfo.phoneNumber
 										: "00 00 00 00 00"}
 								</h3>

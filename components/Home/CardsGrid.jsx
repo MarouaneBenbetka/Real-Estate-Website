@@ -7,7 +7,11 @@ export default function CardsGrid({ annouces, isLoading }) {
 	return (
 		<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-6 mt-3 relative  z-0">
 			{isLoading || !annouces
-				? [...Array(12)].map((e, index) => <SkeltonCard key={index} />)
+				? [...Array(12)].map((e, index) => (
+						<div key={index} className="flex flex-col items-center">
+							<SkeltonCard />
+						</div>
+				  ))
 				: annouces.map((annouce) => (
 						<div
 							key={annouce.id}

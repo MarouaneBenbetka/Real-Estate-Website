@@ -6,7 +6,7 @@ export const URL =
 
 export const ANNONCE = "annonces";
 export const USER = "users";
-export const MESANNONCE = "mesannonces";
+export const MESANNONCE = "mesannonces/";
 
 // these functions serve as a wrapper for the axios functions in order to avoid writting the url over and over again
 export async function getAll(endpoint, options = {}) {

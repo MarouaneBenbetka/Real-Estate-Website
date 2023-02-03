@@ -43,11 +43,11 @@ const AddAnnonce = () => {
 	const [commune, setCommune] = useState("Alger");
 
 	const validationSchema = Yup.object({
-		wilaya: Yup.string().required("Required"),
-		commune: Yup.string().required("Required"),
+		// wilaya: Yup.string().required("Required"),
+		// commune: Yup.string().required("Required"),
 		description: Yup.string().required("Required"),
-		typeImmobilier: Yup.string().required("Required"),
-		typeAnnonce: Yup.string().required("Required"),
+		// typeImmobilier: Yup.string().required("Required"),
+		// typeAnnonce: Yup.string().required("Required"),
 		prix: Yup.number().required("Required"),
 		address: Yup.string().required("Required"),
 		// images: Yup.mixed()
@@ -65,20 +65,25 @@ const AddAnnonce = () => {
 	});
 
 	const onSubmit = async (values, onSubmitProps) => {
+		console.log("onSubmit", values);
 		const links = [];
 		const button = document.querySelector("[type=submit]");
 		button.innerText = "";
 		button.classList.add("loading");
 
-		const {
+		let {
 			wilaya,
 			commune,
 			description,
 			typeImmobilier,
-			tyoeAnnonce,
+			typeAnnonce,
 			address,
+			prix,
 		} = values;
-		//   console.log("Form data", { donator: user_id, ...values });
+
+		if (commune == "") commune = communes[wilaya][0].value;
+		if (typeAnnonce == "") typeAnnonce = "Vente";
+
 		try {
 			for (let i = 0; i < values.images.length; i++) {
 				let formdata = new FormData();
@@ -99,16 +104,18 @@ const AddAnnonce = () => {
 			}
 			console.log(session);
 			const response = await axios.post(
-				`http://127.0.0.1:5000/annonces`,
+				`http://127.0.0.1:5000/annonces/`,
 				{
 					wilaya,
 					commune,
 					description,
 					typeId: 1,
-					category: tyoeAnnonce,
+					category: typeAnnonce,
 					images: links,
 					coordinates: position,
-					price: 234231,
+					address,
+					price: prix,
+					surface: 1,
 				},
 				{
 					headers: {
@@ -117,25 +124,6 @@ const AddAnnonce = () => {
 					},
 				}
 			);
-
-			//   const response = await annonceCrud.post(
-			//     {
-			//       wilaya,
-			//       commune,
-			//       description,
-			//       typeId: 1,
-			//       category: tyoeAnnonce,
-			//       images: links,
-			//       coordinates: position,
-			//       price: 234231,
-			//     },
-			//     {
-			//       headers: {
-			//         "Content-Type": "application/json",
-			//         Authorization: `Bearer ${session.user.jwt}`,
-			//       },
-			//     }
-			//   );
 
 			console.log(response.data);
 
@@ -149,21 +137,6 @@ const AddAnnonce = () => {
 				console.log(error);
 			};
 		}
-
-		//second
-
-		//   document.querySelector("#my-modal").click();
-		//   const config = {
-		//     headers: {
-		//       "Content-Type": "application/json",
-		//     },
-		//   };
-		//   const { data } = await axios.post(
-		//     "/api/auth/register",
-		//     {},
-		//     config
-		//   );
-		//   console.log(data);
 	};
 
 	return (
@@ -313,7 +286,6 @@ const AddAnnonce = () => {
 									>
 										Submit
 									</button>
-									{console.log(formik)}
 								</div>
 							</Form>
 						);

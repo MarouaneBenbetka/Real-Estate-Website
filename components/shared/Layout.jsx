@@ -23,12 +23,12 @@ function Layout({ children }) {
 		const fetchData = async () => {
 			const result = await checkIfNewUser(session?.user.id);
 			setIsNewUser(result);
-			console.log(isNewUser);
+			console.log("is new user", isNewUser);
 		};
 		if (session) {
 			fetchData();
 		}
-	}, []);
+	}, [session]);
 	return (
 		<div className="text-dark-blue font-libre-franklin">
 			<input
