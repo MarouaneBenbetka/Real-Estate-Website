@@ -8,14 +8,24 @@ import cookie from "js-cookie";
 import axios from "axios";
 import EmptyMessages from "../components/errors/EmptyMessages";
 import ConnectionError from "../components/errors/ConnectionError";
+import SkeltonMessage from "../components/Messages/SkeltonMessage";
 
 const Messages = ({ session }) => {
 	const [pageCount, setPageCount] = useState(1);
 	const [connectionError, setConnectionError] = useState(false);
 	const [messages, setMessages] = useState(null);
+	const [isLoading, setIsLoading] = useState(true);
 	const maxPages = 1;
 
+	const wait_function_test = async function test() {
+		console.log("start timer");
+		await new Promise((resolve) => setTimeout(resolve, 1000));
+		console.log("after 1 second");
+	};
+
 	useEffect(() => {
+		setIsLoading(true);
+
 		axios
 			.get(`http://127.0.0.1:5000/messages/messages`, {
 				headers: {
@@ -26,9 +36,11 @@ const Messages = ({ session }) => {
 				setMessages(res.data.data);
 				setConnectionError(false);
 				console.log(res.data.data);
+				setIsLoading(false);
 			})
 			.catch((err) => {
 				setConnectionError(true);
+				setIsLoading(false);
 			});
 	}, []);
 
@@ -57,8 +69,11 @@ const Messages = ({ session }) => {
 					<h1 className="font-bold text-[32px] mb-4">
 						Boîte de réception{" "}
 					</h1>
-
-					{messages && messages.length > 0 ? (
+					{isLoading ? (
+						[...Array(6)].map((e, index) => (
+							<SkeltonMessage key={index} />
+						))
+					) : messages && messages.length > 0 ? (
 						messages.map((message) => (
 							<Message
 								infos={message}

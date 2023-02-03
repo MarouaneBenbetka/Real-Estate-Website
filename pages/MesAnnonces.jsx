@@ -13,8 +13,10 @@ import ConnectionError from "../components/errors/ConnectionError";
 const MesAnnonces = ({ session }) => {
 	const [mesannonces, setMesAnnonces] = useState(null);
 	const [connectionError, setConnectionError] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
+		setIsLoading(true);
 		const fetchData = async () => {
 			try {
 				const result = await mesannoncesCrud.getAll({
@@ -23,8 +25,10 @@ const MesAnnonces = ({ session }) => {
 
 				setMesAnnonces(result.data.data);
 				setConnectionError(false);
+				setIsLoading(false);
 			} catch {
 				setConnectionError(true);
+				setIsLoading(false);
 			}
 		};
 
@@ -78,8 +82,13 @@ const MesAnnonces = ({ session }) => {
 								/>
 							</div>
 						</div>
-						{mesannonces && mesannonces.length > 0 ? (
-							<MesAnnoncesList mesannonces={mesannonces} />
+
+						{(mesannonces && mesannonces.length > 0) ||
+						isLoading ? (
+							<MesAnnoncesList
+								mesannonces={mesannonces}
+								isLoading={isLoading}
+							/>
 						) : (
 							<EmptyAnnounces />
 						)}
@@ -93,18 +102,22 @@ const MesAnnonces = ({ session }) => {
 export default MesAnnonces;
 
 export async function getServerSideProps({ req }) {
-	const session = await getSession({ req });
+	try {
+		const session = await getSession({ req });
 
-	if (!session) {
+		if (!session) {
+			return {
+				redirect: {
+					destination: "/?login=true",
+					permanent: false,
+				},
+			};
+		}
+
 		return {
-			redirect: {
-				destination: "/?login=true",
-				permanent: false,
-			},
+			props: { session },
 		};
+	} catch {
+		console.log("error");
 	}
-
-	return {
-		props: { session },
-	};
 }

@@ -41,11 +41,9 @@ export default function Explore({ toasting }) {
 			});
 	}, [pageCount]);
 
-	useEffect(() => {
-		if (toasting === "true") {
-			toast.error("vous devez entre authentifiee");
-		}
-	}, []);
+	if (toasting === "true") {
+		toast.error("vous devez entre authentifiee");
+	}
 
 	// const [ann, SetAnn] = useState([]);
 	// useEffect(async () => {
@@ -176,9 +174,13 @@ export default function Explore({ toasting }) {
 
 export async function getServerSideProps(ctx) {
 	// const toasting = req.headers['toasting'] || false
-	const toasting = ctx.query.login || false;
+	try {
+		const toasting = ctx.query.login || false;
 
-	return {
-		props: { toasting },
-	};
+		return {
+			props: { toasting },
+		};
+	} catch {
+		console.log("error");
+	}
 }

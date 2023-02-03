@@ -34,6 +34,7 @@
 		"react-dropdown": "^1.11.0",
 		"react-icons": "^4.7.1",
 		"react-leaflet": "^4.2.0",
+		"react-loader-spinner": "^5.3.4",
 		"react-paginate": "^8.1.4",
 		"react-spring": "^9.6.1",
 		"react-toastify": "^9.1.1",

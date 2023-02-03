@@ -6,8 +6,9 @@ import { annouces } from "../../data/data";
 import TableRow from "./TableRow";
 import Link from "next/link";
 import annonceCrud from "../../utils/services/annonce";
+import SkeltonTableRow from "./SkeltonTableRow";
 
-const MesAnnoncesList = ({ mesannonces }) => {
+const MesAnnoncesList = ({ mesannonces, isLoading }) => {
 	const annonces = mesannonces;
 
 	return (
@@ -30,24 +31,32 @@ const MesAnnoncesList = ({ mesannonces }) => {
 							<th className="text-[18px]">Payment</th>
 						</tr>
 					</thead>
-					<tbody className="bg-white">
-						{annonces?.map((annonce) => (
-							<TableRow
-								key={annonce.id}
-								description={annonce.description}
-								typeAnnonce={annonce.typeAnnonce}
-								typeImmoblier={annonce.typeImmoblier}
-								typePayment={annonce.typePayment}
-								prix={annonce.prix}
-								wilaya={annonce.wilaya}
-								commune={annonce.commune}
-								datePublication={annonce.datePublication}
-								image={annonce.images[0]}
-								id={annonce.id}
-								data={annonce.id}
-							/>
-						))}
-					</tbody>
+					{isLoading ? (
+						<tbody>
+							{[...Array(6)].map((e, index) => (
+								<SkeltonTableRow />
+							))}
+						</tbody>
+					) : (
+						<tbody className="bg-white">
+							{annonces?.map((annonce) => (
+								<TableRow
+									key={annonce.id}
+									description={annonce.description}
+									typeAnnonce={annonce.typeAnnonce}
+									typeImmoblier={annonce.typeImmoblier}
+									typePayment={annonce.typePayment}
+									prix={annonce.prix}
+									wilaya={annonce.wilaya}
+									commune={annonce.commune}
+									datePublication={annonce.datePublication}
+									image={annonce.images[0]}
+									id={annonce.id}
+									data={annonce.id}
+								/>
+							))}
+						</tbody>
+					)}
 				</table>
 			</div>
 		</div>

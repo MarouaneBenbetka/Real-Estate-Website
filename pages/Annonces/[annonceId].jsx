@@ -15,6 +15,8 @@ import {
 import { getSession } from "next-auth/react";
 import { toast } from "react-toastify";
 import Image from "next/image";
+import LoadingSpinner from "../../components/CardDetails/LoadingSpinner";
+import ConnectionError from "../../components/errors/ConnectionError";
 
 const MapWrapper2 = dynamic(
 	() => import("../../components/CardDetails/MapWrapper"),
@@ -57,6 +59,8 @@ export default function CardDeatails({ session }) {
 
 	const [message, setMessage] = useState("");
 	const [announceInfo, setAnnounceInfo] = useState(null);
+	const [isLoading, setIsLoading] = useState(true);
+	const [connectionError, setConnectionError] = useState(false);
 
 	// useEffect(() => {
 	// 	if (announceInfo) {
@@ -66,6 +70,7 @@ export default function CardDeatails({ session }) {
 	// }, [announceInfo]);
 
 	useEffect(() => {
+		setIsLoading(true);
 		const annonceId = window.location.href.split("/").pop();
 		axios
 			.get(`http://127.0.0.1:5000/annonces/${annonceId}`)
@@ -84,9 +89,13 @@ export default function CardDeatails({ session }) {
 				}
 				setAnnounceInfo(data);
 				console.log(data);
+				setIsLoading(false);
+				setConnectionError(false);
 			})
 			.catch((err) => {
 				console.log(err);
+				setConnectionError(true);
+				setIsLoading(false);
 			});
 	}, []);
 
@@ -128,7 +137,7 @@ export default function CardDeatails({ session }) {
 			});
 	};
 
-	return announceInfo ? (
+	return (
 		<div className="mx-8 sm:mx-10 md:mx-[7vw] lg:mx-[8vw]  mt-3">
 			{/* return to explore page */}
 			<div onClick={() => router.back()} className="cursor-pointer">
@@ -140,168 +149,192 @@ export default function CardDeatails({ session }) {
 				</div>
 			</div>
 			{/* title of the annouce */}
-			<h1 className="text-dark-blue font-bold text-[36px] mt-4">
-				{announceInfo.typeAnnonce}
-			</h1>
-			<h2 className="text-gray-600 text-[18px]">{announceInfo.adress}</h2>
-
-			{/*Grid 2x2  [images-infos][description - message]  */}
-			<div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
-				{/* images galery */}
-				<ImagesGalery
-					images={
-						announceInfo.images && announceInfo.images.length > 0
-							? announceInfo.images
-							: ["/house-placeholder.png"]
-					}
-				/>
-				{/* Details de l'annonce */}
-				<div className=" md:ml-20 flex flex-col justify-center  max-w-[400px] mb-4 sm:mb-0">
-					<h1 className="text-purple font-bold text-[28px] mb-4">
-						Détails de l'annonce :
+			{isLoading ? (
+				<LoadingSpinner />
+			) : connectionError ? (
+				<ConnectionError />
+			) : (
+				<>
+					<h1 className="text-dark-blue font-bold text-[36px] mt-4">
+						{announceInfo.typeAnnonce}
 					</h1>
-					<div className=" ml-4 md:ml-12 flex flex-col justify-center gap-3 ">
-						{sideInfo.map((item) => (
-							<h2
-								className="text-gray-700 text-[18px] break-words"
-								key={item.id}
-							>
-								<span className="text-dark-blue font-semibold text-[22px] pr-3">
-									{item.title} :
-								</span>
-								{announceInfo[item.id] +
-									(item.id === "surface" ? "㎡" : "")}
-							</h2>
-						))}
-					</div>
-				</div>
-				{/* Description + contact infos*/}
-				<div>
-					<div>
-						<h1 className="text-dark-blue font-semibold text-[28px] mt-4 mb-2">
-							Description
-						</h1>
-						<p className="text-gray-600	text-[18px] max-w-[650px]">
-							{announceInfo.description}
-						</p>
-						<div></div>
-						<h2 className="mt-6 text-[18px] text-gray-500 mb-1">
-							Propriétaire de l'annonce{" "}
-						</h2>
-						<div className="flex items-center gap-4">
-							<Image
-								width={72}
-								height={72}
-								className="w-[72px] h-[72px] rounded-full  border-purple object-cover object-center"
-								src={
-									announceInfo.ownerImage &&
-									announceInfo.ownerImage.length > 0
-										? announceInfo.ownerImage
-										: "/profile-picture-placehoder.png"
-								}
-							/>
-							<div>
-								<h2 className="text-[20px] font-semibold leading-3 pb-1 mt-3 ">
-									{announceInfo.contactInfo &&
-									announceInfo.contactInfo.name
-										? announceInfo.contactInfo.name
-										: "admin"}
-								</h2>
-								<a
-									href={
-										"mailto:" +
-										(announceInfo.contactInfo &&
-										announceInfo.contactInfo.email
-											? announceInfo.contactInfo.email
-											: "")
-									}
-									target="_blank"
-									rel="noreferrer"
-								>
-									<h3 className="text-gray-600 ">
-										{announceInfo.contactInfo &&
-										announceInfo.contactInfo.email
-											? announceInfo.contactInfo.email
-											: "/"}
-									</h3>
-								</a>
+					<h2 className="text-gray-600 text-[18px]">
+						{announceInfo.adress}
+					</h2>
 
-								<h3 className="text-gray-600 text-[14px] leading-3 pt-1">
-									{announceInfo.contactInfo &&
-									announceInfo.contactInfo.phoneNumber
-										? announceInfo.contactInfo.phoneNumber
-										: "00 00 00 00 00"}
-								</h3>
+					{/*Grid 2x2  [images-infos][description - message]  */}
+					<div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
+						{/* images galery */}
+						<ImagesGalery
+							images={
+								announceInfo.images &&
+								announceInfo.images.length > 0
+									? announceInfo.images
+									: ["/house-placeholder.png"]
+							}
+						/>
+						{/* Details de l'annonce */}
+						<div className=" md:ml-20 flex flex-col justify-center  max-w-[400px] mb-4 sm:mb-0">
+							<h1 className="text-purple font-bold text-[28px] mb-4">
+								Détails de l'annonce :
+							</h1>
+							<div className=" ml-4 md:ml-12 flex flex-col justify-center gap-3 ">
+								{sideInfo.map((item) => (
+									<h2
+										className="text-gray-700 text-[18px] break-words"
+										key={item.id}
+									>
+										<span className="text-dark-blue font-semibold text-[22px] pr-3">
+											{item.title} :
+										</span>
+										{item.id === "date"
+											? new Date(announceInfo[item.id])
+													.toISOString()
+													.substring(0, 10)
+											: announceInfo[item.id] +
+											  (item.id === "surface"
+													? "㎡"
+													: "")}
+									</h2>
+								))}
+							</div>
+						</div>
+						{/* Description + contact infos*/}
+						<div>
+							<div>
+								<h1 className="text-dark-blue font-semibold text-[28px] mt-4 mb-2">
+									Description
+								</h1>
+								<p className="text-gray-600	text-[18px] max-w-[650px]">
+									{announceInfo.description}
+								</p>
+								<div></div>
+								<h2 className="mt-6 text-[18px] text-gray-500 mb-1">
+									Propriétaire de l'annonce{" "}
+								</h2>
+								<div className="flex items-center gap-4">
+									<Image
+										width={72}
+										height={72}
+										className="w-[72px] h-[72px] rounded-full  border-purple object-cover object-center"
+										src={
+											announceInfo.ownerImage &&
+											announceInfo.ownerImage.length > 0
+												? announceInfo.ownerImage
+												: "/profile-picture-placehoder.png"
+										}
+									/>
+									<div>
+										<h2 className="text-[20px] font-semibold leading-3 pb-1 mt-3 ">
+											{announceInfo.contactInfo &&
+											announceInfo.contactInfo.name
+												? announceInfo.contactInfo.name
+												: "admin"}
+										</h2>
+										<a
+											href={
+												"mailto:" +
+												(announceInfo.contactInfo &&
+												announceInfo.contactInfo.email
+													? announceInfo.contactInfo
+															.email
+													: "")
+											}
+											target="_blank"
+											rel="noreferrer"
+										>
+											<h3 className="text-gray-600 ">
+												{announceInfo.contactInfo &&
+												announceInfo.contactInfo.email
+													? announceInfo.contactInfo
+															.email
+													: "/"}
+											</h3>
+										</a>
+
+										<h3 className="text-gray-600 text-[14px] leading-3 pt-1">
+											{announceInfo.contactInfo &&
+											announceInfo.contactInfo.phoneNumber
+												? announceInfo.contactInfo
+														.phoneNumber
+												: "00 00 00 00 00"}
+										</h3>
+									</div>
+								</div>
+							</div>
+						</div>
+						{/* Prix et message */}
+						<div className="w-full mt-10 mb-auto">
+							<div className="flex  flex-col justify-center items-center ">
+								<div className="  mt-4 ">
+									<span className="text-gray-500 font-semibold text-[18px]  leading-[8px] pr-4">
+										Prix
+									</span>
+									<span className=" text-purple font-bold text-[32px]">
+										{announceInfo.prix.toLocaleString(
+											"en-US"
+										)}
+									</span>
+									<span className="text-purple text-[18px] font-normal pr-1 pl-2">
+										DA
+									</span>
+
+									{typeImmobilierTOtypeAnnonce[
+										announcesRenameType[
+											announceInfo.typeAnnonce.toLowerCase()
+										]
+									] && (
+										<span className="text-gray-500 text-[20px]">
+											{" "}
+											/{" "}
+											{
+												typeImmobilierTOtypeAnnonce[
+													announcesRenameType[
+														announceInfo.typeAnnonce.toLowerCase()
+													]
+												]
+											}
+										</span>
+									)}
+								</div>
+								<textarea
+									placeholder="Envoyer un message vers l'annonceur"
+									className="h-[100px] bg-gray-100 p-2  w-[76vw] md:w-2/3  border  rounded border-purple text-dark-blue focus:border-2 placeholder-gray-500"
+									onChange={(e) => setMessage(e.target.value)}
+								></textarea>
+								<button
+									ref={buttonRef}
+									className=" px-4 py-2 mt-2	w-[76vw] md:w-2/3 text-white2 bg-purple rounded-[4px] font-semibold border-2 border-purple hover:bg-white hover:text-purple transition"
+									onClick={sendMessageHandler}
+								>
+									Envoyer Message
+								</button>
 							</div>
 						</div>
 					</div>
-				</div>
-				{/* Prix et message */}
-				<div className="w-full mt-10 mb-auto">
-					<div className="flex  flex-col justify-center items-center ">
-						<div className="  mt-4 ">
-							<span className="text-gray-500 font-semibold text-[18px]  leading-[8px] pr-4">
-								Prix
-							</span>
-							<span className=" text-purple font-bold text-[32px]">
-								{announceInfo.prix.toLocaleString("en-US")}
-							</span>
-							<span className="text-purple text-[18px] font-normal pr-1 pl-2">
-								DA
-							</span>
+					{/* map location */}
+					<h1 className="text-dark-blue font-semibold text-[28px] mt-10 mb-2">
+						Position sur la carte
+					</h1>
 
-							{typeImmobilierTOtypeAnnonce[
-								announcesRenameType[
-									announceInfo.typeAnnonce.toLowerCase()
-								]
-							] && (
-								<span className="text-gray-500 text-[20px]">
-									{" "}
-									/{" "}
-									{
-										typeImmobilierTOtypeAnnonce[
-											announcesRenameType[
-												announceInfo.typeAnnonce.toLowerCase()
-											]
-										]
-									}
-								</span>
-							)}
-						</div>
-						<textarea
-							placeholder="Envoyer un message vers l'annonceur"
-							className="h-[100px] bg-gray-100 p-2  w-[76vw] md:w-2/3  border  rounded border-purple text-dark-blue focus:border-2 placeholder-gray-500"
-							onChange={(e) => setMessage(e.target.value)}
-						></textarea>
-						<button
-							ref={buttonRef}
-							className=" px-4 py-2 mt-2	w-[76vw] md:w-2/3 text-white2 bg-purple rounded-[4px] font-semibold border-2 border-purple hover:bg-white hover:text-purple transition"
-							onClick={sendMessageHandler}
-						>
-							Envoyer Message
-						</button>
-					</div>
-				</div>
-			</div>
-			{/* map location */}
-			<h1 className="text-dark-blue font-semibold text-[28px] mt-10 mb-2">
-				Position sur la carte
-			</h1>
-
-			<MapWrapper2
-				lat={announceInfo.coordinates.latitude}
-				lng={announceInfo.coordinates.longitude}
-			/>
+					<MapWrapper2
+						lat={announceInfo.coordinates.latitude}
+						lng={announceInfo.coordinates.longitude}
+					/>
+				</>
+			)}
 		</div>
-	) : (
-		<div>not loaded</div>
 	);
 }
 
 export async function getServerSideProps({ req }) {
-	const session = await getSession({ req });
+	try {
+		const session = await getSession({ req });
 
-	return {
-		props: { session },
-	};
+		return {
+			props: { session },
+		};
+	} catch {
+		console.log("error");
+	}
 }
