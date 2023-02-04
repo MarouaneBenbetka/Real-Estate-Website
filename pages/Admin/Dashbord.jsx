@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { AiOutlineHome } from "react-icons/ai";
 import { MdOutlineVisibility, MdOutlineSell } from "react-icons/md";
 import { FiUsers } from "react-icons/fi";
@@ -56,7 +57,7 @@ export default function Dashbord({ session }) {
 
 	useEffect(() => {
 		axios
-			.get(`http://127.0.0.1:5000/admin/stats`, {
+			.get(`${process.env.NODE_ENV === "development" ? "http://127.0.0.1:5000" : "https://tpigl.onrender.com"}/admin/stats`, {
 				headers: {
 					Authorization: `Bearer ${session.user.jwt}`,
 				},
@@ -76,7 +77,7 @@ export default function Dashbord({ session }) {
 				setIsLoading(false);
 			});
 		axios
-			.get("http://127.0.0.1:5000/users/")
+			.get(`${process.env.NODE_ENV === "development" ? "http://127.0.0.1:5000" : "https://tpigl.onrender.com"}/annonces/${annonceId}/users/`)
 			.then((res) => {
 				setUsers(res.data.data);
 				setStats((prev) => ({ ...prev, users: res.data.data.length }));

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import styles from "../../styles/NavBar.module.css";
 import { FaBars, FaTimes } from "react-icons/fa";
@@ -55,36 +56,21 @@ export default function Navbar() {
 	useEffect(() => {
 		if (session) {
 			axios
-				.get(`http://127.0.0.1:5000/users/${session.user.id}`, {
-					headers: {
-						Authorization: `Bearer ${session.user.jwt}`,
-					},
-				})
+				.get(
+					`${
+						process.env.NODE_ENV === "development"
+							? "http://127.0.0.1:5000"
+							: "https://tpigl.onrender.com"
+					}/messages/unseen`,
+					{
+						headers: {
+							Authorization: `Bearer ${session.user.jwt}`,
+						},
+					}
+				)
 				.then((res) => {
 					console.log(res);
-					console.log(res.data.data.isAdmin);
-					setIsAdmin(res.data.data.isAdmin);
-					if (!res.data.data.isAdmin) {
-						axios
-							.get(`http://127.0.0.1:5000/messages/unseen`, {
-								headers: {
-									Authorization: `Bearer ${session.user.jwt}`,
-								},
-							})
-							.then((res) => {
-								console.log(res);
-								setNbNotifications(res.data.data);
-							})
-							.catch((err) => {
-								console.log(err);
-								setNbNotifications(0);
-							});
-					} else {
-						Router.push("/Admin/Dashbord");
-					}
-				})
-				.catch((err) => {
-					setIsAdmin(false);
+					setNbNotifications(res.data.data);
 				});
 		} else {
 			setNbNotifications(0);
@@ -109,7 +95,7 @@ export default function Navbar() {
 			callbackUrl:
 				env === "development"
 					? "http://localhost:3000"
-					: "https://glassdon.vercel.app",
+					: "https://tp-igl-equipe1.vercel.app",
 		});
 	};
 
@@ -163,7 +149,7 @@ export default function Navbar() {
 							callbackUrl:
 								env === "development"
 									? "http://localhost:3000"
-									: "https://glassdon.vercel.app",
+									: "https://tp-igl-equipe1.vercel.app",
 						});
 					}}
 					className="hidden md:block px-4 py-2 text-white2 bg-purple rounded-[10px] font-semibold border-2 border-purple hover:bg-white hover:text-purple transition "
@@ -259,7 +245,7 @@ export default function Navbar() {
 												callbackUrl:
 													env === "development"
 														? "http://localhost:3000"
-														: "https://glassdon.vercel.app",
+														: "https://tp-igl-equipe1.vercel.app",
 											});
 										}}
 									>

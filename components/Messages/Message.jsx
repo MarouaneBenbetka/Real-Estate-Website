@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { info } from "autoprefixer";
 import axios from "axios";
 import Image from "next/image";
@@ -59,7 +60,7 @@ export default function Message({ userJwt, infos }) {
 			setSeen(true);
 			axios
 				.put(
-					"http://127.0.0.1:5000/messages/view",
+					`${process.env.NODE_ENV === "development" ? "http://127.0.0.1:5000" : "https://tpigl.onrender.com"}/messages/view`,
 					{ messageId: infos.id },
 					{
 						headers: {

@@ -2,7 +2,7 @@ import axios from "axios";
 
 const env = process.env.NODE_ENV;
 export const URL =
-	env === "development" ? "http://127.0.0.1:5000" : "https://immo..render";
+	env === "development" ? "http://127.0.0.1:5000" : "https://tpigl.onrender.com";
 
 export const ANNONCE = "annonces";
 export const USER = "users";

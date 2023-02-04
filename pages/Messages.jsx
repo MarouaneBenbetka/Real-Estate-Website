@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import PagesPagination from "../components/Home/PagesPagination";
 import Message from "../components/Messages/Message";
@@ -27,7 +28,7 @@ const Messages = ({ session }) => {
 		setIsLoading(true);
 
 		axios
-			.get(`http://127.0.0.1:5000/messages/messages`, {
+			.get(`${process.env.NODE_ENV === "development" ? "http://127.0.0.1:5000" : "https://tpigl.onrender.com"}/messages/messages`, {
 				headers: {
 					Authorization: `Bearer ${session.user.jwt}`,
 				},

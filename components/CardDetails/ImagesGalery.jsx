@@ -1,7 +1,6 @@
 import { Carousel } from "@mantine/carousel";
 import Image from "next/image";
 import { MdOutlineNavigateNext, MdOutlineNavigateBefore } from "react-icons/md";
-import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
 export default function ImagesGalery({ images }) {
 	return (
@@ -44,18 +43,14 @@ export default function ImagesGalery({ images }) {
 			>
 				{images.map((img) => (
 					<Carousel.Slide key={img}>
-						<TransformWrapper>
-							<TransformComponent>
-								<div className="w-[86vw] md:w-[50vw] h-[380px] ">
-									<Image
-										src={img}
-										alt="img"
-										fill
-										className="object-cover object-center rounded-[4px]"
-									/>
-								</div>
-							</TransformComponent>
-						</TransformWrapper>
+						<div className="w-[86vw] md:w-[50vw] h-[380px] ">
+							<Image
+								src={img}
+								alt="img"
+								fill
+								className="object-cover object-center rounded-[4px]"
+							/>
+						</div>
 					</Carousel.Slide>
 				))}
 			</Carousel>
