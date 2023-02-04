@@ -40,9 +40,11 @@ export default function Explore({ toasting }) {
 			});
 	}, [pageCount]);
 
-	if (toasting === "true") {
-		toast.error("vous devez entre authentifiee");
-	}
+	useEffect(() => {
+		if (toasting === "true") {
+			toast.error("vous devez entre authentifiee");
+		}
+	}, [toasting]);
 
 	// const [ann, SetAnn] = useState([]);
 	// useEffect(async () => {

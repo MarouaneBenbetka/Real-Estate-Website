@@ -8,7 +8,7 @@ import Link from "next/link";
 import annonceCrud from "../../utils/services/annonce";
 import SkeltonTableRow from "./SkeltonTableRow";
 
-const MesAnnoncesList = ({ mesannonces, isLoading }) => {
+const MesAnnoncesList = ({ mesannonces, isLoading, canDelete }) => {
 	const annonces = mesannonces;
 
 	return (
@@ -53,7 +53,7 @@ const MesAnnoncesList = ({ mesannonces, isLoading }) => {
 									image={annonce.images[0]}
 									id={annonce.id}
 									data={annonce.id}
-									onFinishDelete={onFinishDelete}
+									canDelete={canDelete}
 								/>
 							))}
 						</tbody>

@@ -66,7 +66,7 @@ export default function Dashbord({ session }) {
 				setStats({
 					messages: res.data.data.messages_count,
 					announces: res.data.data.annonces_count,
-					users: 0,
+					users: res.data.data.users_count,
 					visitors: 0,
 				});
 			})

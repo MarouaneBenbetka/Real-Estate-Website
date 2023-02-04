@@ -92,9 +92,7 @@ const MesAnnonces = ({ session }) => {
 							<MesAnnoncesList
 								mesannonces={mesannonces}
 								isLoading={isLoading}
-								onFinishDelete={() => {
-									resetData();
-								}}
+								canDelete={true}
 							/>
 						) : (
 							<EmptyAnnounces />

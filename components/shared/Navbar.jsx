@@ -45,7 +45,7 @@ export default function Navbar() {
 	const [active, setActive] = useState(0);
 	const [navMobile, setNavMobile] = useState(false);
 	const [nbNotifications, setNbNotifications] = useState(0);
-	const [isAdmin, setIsAdmin] = useState(false);
+	const [isAdmin, setIsAdmin] = useState(true);
 	const router = useRouter();
 	const currentRoute = router.pathname;
 
