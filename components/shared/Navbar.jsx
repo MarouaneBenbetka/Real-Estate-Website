@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import styles from "../../styles/NavBar.module.css";
 import { FaBars, FaTimes } from "react-icons/fa";

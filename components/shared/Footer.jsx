@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { footerLinks, socialMedia } from "../../data/data";
 
 const Footer = () => {
