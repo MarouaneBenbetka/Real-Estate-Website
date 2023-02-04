@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BiTrash } from "react-icons/bi";
 import { FiExternalLink } from "react-icons/fi";
 import { useSession } from "next-auth/react";
@@ -21,11 +21,12 @@ export default function TableRow({
 	id,
 }) {
 	const { status, data: session } = useSession();
+	const [isDeleted, setIsDeleted] = useState(false);
 	// console.log(session);
 
 	return (
 		<>
-			<tr className="bg-white ">
+			<tr className={"bg-white " + (isDeleted ? "hidden" : "")}>
 				<td className="bg-white ">
 					<div className="flex items-center space-x-3 w-fit	">
 						<div className="avatar">
@@ -92,11 +93,14 @@ export default function TableRow({
 					</Link>
 					<input
 						type="checkbox"
-						id="my-modal2"
+						id={`my-modal${id}`}
 						defaultChecked={false}
 						className="modal-toggle"
 					/>
-					<div className="modal hero lg:min-w-xl" id="my-modal-2">
+					<div
+						className="modal hero lg:min-w-xl"
+						id={`my-modal-${id}`}
+					>
 						<div className="modal-box">
 							<h3 className="font-bold text-lg">
 								Voulez vous supprimer cette annonce !
@@ -112,21 +116,32 @@ export default function TableRow({
 									replace={false}
 									className="btn bg-purple border-purple confirm"
 									onClick={(e) => {
+										console.log(id, prix);
+										console.log("------");
+										try {
+											const result = annonceCrud.remove(
+												id,
+												{
+													headers: {
+														Authorization: `Bearer ${session.user.jwt}`,
+													},
+												}
+											);
+											toast.success(
+												"Annonce supprimee avec succès"
+											);
+											setIsDeleted(true);
+										} catch {
+											toast.error(
+												"Erreur lors du supression"
+											);
+										}
+
 										document
-											.querySelector('[id="my-modal2"]')
+											.querySelector(
+												`[id="my-modal${id}"]`
+											)
 											.click();
-										// dispatch(deleteDonation(e.target.getAttribute("data")));
-										// console.log("this is the id",e.target.getAttribute("data"));
-										console.log(id);
-										const result = annonceCrud.remove(id, {
-											headers: {
-												Authorization: `Bearer ${session.user.jwt}`,
-											},
-										});
-										console.log(result.data);
-										toast.success(
-											"Annonce supprimee avec usc"
-										);
 									}}
 								>
 									Confirmer
@@ -138,7 +153,9 @@ export default function TableRow({
 									className="btn bg-[#d92525] border-[#d92525]"
 									onClick={(e) => {
 										document
-											.querySelector('[id="my-modal2"]')
+											.querySelector(
+												`[id="my-modal${id}"]`
+											)
 											.click();
 									}}
 								>
@@ -149,7 +166,9 @@ export default function TableRow({
 					</div>
 					<button
 						onClick={(e) => {
-							document.querySelector('[id="my-modal2"]').click();
+							document
+								.querySelector(`[id="my-modal${id}"]`)
+								.click();
 							// console.log(props.data);
 							// document
 							//   .querySelector(".confirm")

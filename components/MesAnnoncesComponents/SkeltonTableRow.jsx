@@ -5,7 +5,6 @@ const y_offset = 6;
 export default function SkeltonTableRow() {
 	return (
 		<tr className="w-[1200px]  shadow-md  rounded-md overflow-hidden">
-			{" "}
 			<td colSpan={6}>
 				<ContentLoader
 					speed={2}

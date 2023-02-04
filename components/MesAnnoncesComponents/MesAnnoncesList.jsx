@@ -8,7 +8,7 @@ import Link from "next/link";
 import annonceCrud from "../../utils/services/annonce";
 import SkeltonTableRow from "./SkeltonTableRow";
 
-const MesAnnoncesList = ({ mesannonces, isLoading }) => {
+const MesAnnoncesList = ({ mesannonces, isLoading, onFinishDelete }) => {
 	const annonces = mesannonces;
 
 	return (
@@ -34,7 +34,7 @@ const MesAnnoncesList = ({ mesannonces, isLoading }) => {
 					{isLoading ? (
 						<tbody>
 							{[...Array(6)].map((e, index) => (
-								<SkeltonTableRow />
+								<SkeltonTableRow key={index} />
 							))}
 						</tbody>
 					) : (
@@ -53,6 +53,7 @@ const MesAnnoncesList = ({ mesannonces, isLoading }) => {
 									image={annonce.images[0]}
 									id={annonce.id}
 									data={annonce.id}
+									onFinishDelete={onFinishDelete}
 								/>
 							))}
 						</tbody>

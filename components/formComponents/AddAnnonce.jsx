@@ -20,7 +20,7 @@ const LocationPicker2 = dynamic(
 	}
 );
 
-const AddAnnonce = () => {
+const AddAnnonce = ({ onFinishSubmit }) => {
 	const status = "loading";
 	const { data: session } = useSession();
 
@@ -65,7 +65,7 @@ const AddAnnonce = () => {
 		//   ),
 	});
 
-	const onSubmit = async (values, onSubmitProps) => {
+	const onSubmit = (values, onSubmitProps) => {
 		console.log("onSubmit", values);
 		const links = [];
 		const button = document.querySelector("[type=submit]");
@@ -86,26 +86,30 @@ const AddAnnonce = () => {
 		if (commune == "") commune = communes[wilaya][0].value;
 		if (typeAnnonce == "") typeAnnonce = "Vente";
 
-		try {
-			for (let i = 0; i < values.images.length; i++) {
-				let formdata = new FormData();
-				// const file = values.image[i];
-				// console.log(values.images[i]);
-				formdata.append("file", values.images[i]);
+		for (let i = 0; i < values.images.length; i++) {
+			let formdata = new FormData();
+			// const file = values.image[i];
+			// console.log(values.images[i]);
+			formdata.append("file", values.images[i]);
 
-				formdata.append("upload_preset", "myUploads");
-				// console.log(formdata);
+			formdata.append("upload_preset", "myUploads");
+			// console.log(formdata);
 
-				let result = await axios.post(
+			axios
+				.post(
 					"https://api.cloudinary.com/v1_1/dsliesrpf/image/upload",
 					formdata
-				);
-				// console.log(result.data.secure_url);
-
-				links.push(result.data.secure_url);
-			}
-			console.log(session);
-			const response = await axios.post(
+				)
+				.then((res) => {
+					links.push(res.data.secure_url);
+				})
+				.catch((err) => {
+					toast.error(err.name);
+				});
+			// console.log(result.data.secure_url);
+		}
+		axios
+			.post(
 				`http://127.0.0.1:5000/annonces/`,
 				{
 					wilaya,
@@ -125,20 +129,24 @@ const AddAnnonce = () => {
 						Authorization: `Bearer ${session.user.jwt}`,
 					},
 				}
-			);
-
-			console.log(response.data);
-
-			onSubmitProps.setSubmitting(false);
-			button.classList.remove("loading");
-			button.innerText = "Submit";
-			onSubmitProps.resetForm();
-		} catch {
-			(error) => {
-				toast.error(error.name);
-				console.log(error);
-			};
-		}
+			)
+			.then((res) => {
+				console.log(res);
+				onSubmitProps.setSubmitting(false);
+				button.classList.remove("loading");
+				button.innerText = "Submit";
+				onSubmitProps.resetForm();
+				document.getElementById("my-modal1").click();
+				console.log(onFinishSubmit);
+				onFinishSubmit();
+			})
+			.catch((err) => {
+				console.log(err);
+				toast.error(err.name);
+				onSubmitProps.setSubmitting(false);
+				button.classList.remove("loading");
+				button.innerText = "Submit";
+			});
 	};
 
 	return (

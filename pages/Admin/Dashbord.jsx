@@ -6,6 +6,7 @@ import StatsCard from "../../components/Admin/dashbord/StatsCard";
 import UsersTable from "../../components/Admin/dashbord/UsersTable";
 import { DUMMY_USERS } from "../../data/data";
 import PagesPagination from "../../components/Home/PagesPagination";
+import { useEffect } from "react";
 const cards = [
 	{
 		id: "users",

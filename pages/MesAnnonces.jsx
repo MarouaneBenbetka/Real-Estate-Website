@@ -15,25 +15,29 @@ const MesAnnonces = ({ session }) => {
 	const [connectionError, setConnectionError] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 
+	const fetchData = async () => {
+		try {
+			const result = await mesannoncesCrud.getAll({
+				headers: { Authorization: `Bearer ${session.user.jwt}` },
+			});
+
+			setMesAnnonces(result.data.data);
+			setConnectionError(false);
+			setIsLoading(false);
+		} catch {
+			setConnectionError(true);
+			setIsLoading(false);
+		}
+	};
 	useEffect(() => {
 		setIsLoading(true);
-		const fetchData = async () => {
-			try {
-				const result = await mesannoncesCrud.getAll({
-					headers: { Authorization: `Bearer ${session.user.jwt}` },
-				});
-
-				setMesAnnonces(result.data.data);
-				setConnectionError(false);
-				setIsLoading(false);
-			} catch {
-				setConnectionError(true);
-				setIsLoading(false);
-			}
-		};
 
 		fetchData();
 	}, []);
+
+	const resetData = () => {
+		fetchData();
+	};
 
 	return (
 		<div className="flex flex-col justify-center mx-2 sm:mx-8 md:mx-[6vw] lg:mx-[8vw]">
@@ -59,7 +63,7 @@ const MesAnnonces = ({ session }) => {
 					/>
 					<div className="modal hero lg:min-w-xl">
 						<div className="hero-content md:w-5/6 relative">
-							<AddAnnonce />
+							<AddAnnonce onFinishSubmit={resetData} />
 						</div>
 					</div>
 					<div className="overflow-x-auto w-full px-4 py-6 min-h-[400px]">
@@ -88,6 +92,9 @@ const MesAnnonces = ({ session }) => {
 							<MesAnnoncesList
 								mesannonces={mesannonces}
 								isLoading={isLoading}
+								onFinishDelete={() => {
+									resetData();
+								}}
 							/>
 						) : (
 							<EmptyAnnounces />

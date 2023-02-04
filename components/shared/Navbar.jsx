@@ -84,7 +84,7 @@ export default function Navbar() {
 		<div className="flex justify-between items-center    py-4 md:px-6 lg:px-8 border-b">
 			<div className="w-[140px] h-[40px] ml-4 font-bold text-[24px] relative">
 				<Image
-					src="/logo_immo.png"
+					src="/logo_immo2.png"
 					alt="IMMO_LOGO"
 					fill
 					style={{ objectFit: "contain" }}
@@ -107,10 +107,7 @@ export default function Navbar() {
 							href={navLink.link}
 							className={
 								"md:px-3 lg:px-5 w-full  z-10" +
-								(currentRoute === navLink.link ||
-								(currentRoute === "/Annonces/[annonceId]" &&
-									(navLink.link === "/Admin/Annonces" ||
-										navLink.link === "/MesAnnonces"))
+								(currentRoute === navLink.link
 									? "text-[18px] text-purple font-semibold"
 									: "text-[18px]")
 							}
@@ -199,14 +196,7 @@ export default function Navbar() {
 											href={navLink.link}
 											className={
 												"block p-4 w-full h-full  " +
-												(currentRoute ===
-													navLink.link ||
-												(currentRoute ===
-													"/Annonces/[annonceId]" &&
-													(navLink.link ===
-														"/Admin/Annonces" ||
-														navLink.link ===
-															"/MesAnnonces"))
+												(currentRoute === navLink.link
 													? "text-[18px] text-purple font-semibold"
 													: "text-[18px]")
 											}
