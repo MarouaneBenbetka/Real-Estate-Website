@@ -32,7 +32,7 @@ export default NextAuth({
 				console.log(data);
 
 				const result = await axios.post(
-					`${URL}/users/`,
+					`${URL}/users`,
 					data,
 					{
 						headers: {
