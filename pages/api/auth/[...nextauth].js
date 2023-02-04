@@ -3,6 +3,7 @@ import GoogleProvider from "next-auth/providers/google";
 import Error from "next/error";
 import jsonwebtoken from "jsonwebtoken";
 import axios from "axios";
+import { URL } from "../../../utils/services/crud";
 
 export default NextAuth({
 	secret: process.env.JWT_SECRET,
@@ -31,7 +32,7 @@ export default NextAuth({
 				console.log(data);
 
 				const result = await axios.post(
-					env === "development" ? "http://127.0.0.1:5000/users" : "https://tpigl.onrender.com/users",
+					`${URL}/users`,
 					data,
 					{
 						headers: {

@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import axios from "axios";
+import { URL } from "../../utils/services/crud";
 
 const navlinks = [
 	{
@@ -55,7 +56,7 @@ export default function Navbar() {
 	useEffect(() => {
 		if (session) {
 			axios
-				.get(`${process.env.NODE_ENV === "development" ? "http://127.0.0.1:5000" : "https://tpigl.onrender.com"}/messages/unseen`, {
+				.get(`${URL}/messages/unseen`, {
 					headers: {
 						Authorization: `Bearer ${session.user.jwt}`,
 					},
@@ -84,9 +85,7 @@ export default function Navbar() {
 		e.preventDefault();
 		signIn("google", {
 			callbackUrl:
-				env === "development"
-					? "http://localhost:3000"
-					: "https://tp-igl-equipe1.vercel.app",
+				URL,
 		});
 	};
 
@@ -138,9 +137,7 @@ export default function Navbar() {
 					onClick={() => {
 						signOut({
 							callbackUrl:
-								env === "development"
-									? "http://localhost:3000"
-									: "https://tp-igl-equipe1.vercel.app",
+								URL,
 						});
 					}}
 					className="hidden md:block px-4 py-2 text-white2 bg-purple rounded-[10px] font-semibold border-2 border-purple hover:bg-white hover:text-purple transition "
@@ -234,9 +231,7 @@ export default function Navbar() {
 										onClick={() => {
 											signOut({
 												callbackUrl:
-													env === "development"
-														? "http://localhost:3000"
-														: "https://tp-igl-equipe1.vercel.app",
+													URL,
 											});
 										}}
 									>

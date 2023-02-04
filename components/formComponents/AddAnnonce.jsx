@@ -21,6 +21,7 @@ const LocationPicker2 = dynamic(
 );
 
 const AddAnnonce = ({ onFinishSubmit }) => {
+	const env = process.env.NODE_ENV
 	const status = "loading";
 	const { data: session } = useSession();
 
@@ -105,7 +106,7 @@ const AddAnnonce = ({ onFinishSubmit }) => {
 
 					axios
 						.post(
-							`${process.env.NODE_ENV === "development" ? "http://127.0.0.1:5000" : "https://tpigl.onrender.com"}/annonces/`,
+							`${env === "development" ? "http://127.0.0.1:5000" : "https://tpigl.onrender.com"}/annonces/`,
 							{
 								wilaya,
 								commune,
