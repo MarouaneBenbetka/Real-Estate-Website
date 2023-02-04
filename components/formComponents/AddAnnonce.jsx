@@ -65,7 +65,7 @@ const AddAnnonce = ({ onFinishSubmit }) => {
 		//   ),
 	});
 
-	const onSubmit = (values, onSubmitProps) => {
+	const onSubmit = async (values, onSubmitProps) => {
 		console.log("onSubmit", values);
 		let links = [];
 		const button = document.querySelector("[type=submit]");
@@ -95,56 +95,58 @@ const AddAnnonce = ({ onFinishSubmit }) => {
 			formdata.append("upload_preset", "myUploads");
 			// console.log(formdata);
 
-			axios
-				.post(
+			for (let i = 0; i < values.images.length; i++) {
+				let formdata = new FormData();
+				// const file = values.image[i];
+				// console.log(values.images[i]);
+				formdata.append("file", values.images[i]);
+				formdata.append("upload_preset", "myUploads");
+				// console.log(formdata);
+				let result = await axios.post(
 					"https://api.cloudinary.com/v1_1/dsliesrpf/image/upload",
 					formdata
+				);
+				// console.log(result.data.secure_url);
+				links.push(result.data.secure_url);
+			}
+
+			axios
+				.post(
+					`http://127.0.0.1:5000/annonces/`,
+					{
+						wilaya,
+						commune,
+						description,
+						typeId: 1,
+						category: typeAnnonce,
+						images: links,
+						coordinates: position,
+						address,
+						price: prix,
+						surface,
+					},
+					{
+						headers: {
+							"Content-Type": "application/json",
+							Authorization: `Bearer ${session.user.jwt}`,
+						},
+					}
 				)
 				.then((res) => {
-					links.push(res.data.secure_url);
-
-					axios
-						.post(
-							`http://127.0.0.1:5000/annonces/`,
-							{
-								wilaya,
-								commune,
-								description,
-								typeId: 1,
-								category: typeAnnonce,
-								images: links,
-								coordinates: position,
-								address,
-								price: prix,
-								surface,
-							},
-							{
-								headers: {
-									"Content-Type": "application/json",
-									Authorization: `Bearer ${session.user.jwt}`,
-								},
-							}
-						)
-						.then((res) => {
-							onSubmitProps.setSubmitting(false);
-							button.classList.remove("loading");
-							button.innerText = "Submit";
-							onSubmitProps.resetForm();
-							document.getElementById("my-modal1").click();
-							onFinishSubmit();
-						})
-						.catch((err) => {
-							console.log(err);
-							toast.error(err.name);
-							onSubmitProps.setSubmitting(false);
-							button.classList.remove("loading");
-							button.innerText = "Submit";
-						});
+					onSubmitProps.setSubmitting(false);
+					button.classList.remove("loading");
+					button.innerText = "Submit";
+					onSubmitProps.resetForm();
+					document.getElementById("my-modal1").click();
+					onFinishSubmit();
 				})
 				.catch((err) => {
+					console.log(err);
 					toast.error(err.name);
+					onSubmitProps.setSubmitting(false);
+					button.classList.remove("loading");
+					button.innerText = "Submit";
 				});
-			console.log(links);
 		}
 	};
 

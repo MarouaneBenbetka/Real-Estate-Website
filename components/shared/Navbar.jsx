@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import axios from "axios";
+import Router from "next/router";
 
 const navlinks = [
 	{
@@ -45,7 +46,7 @@ export default function Navbar() {
 	const [active, setActive] = useState(0);
 	const [navMobile, setNavMobile] = useState(false);
 	const [nbNotifications, setNbNotifications] = useState(0);
-	const [isAdmin, setIsAdmin] = useState(true);
+	const [isAdmin, setIsAdmin] = useState(false);
 	const router = useRouter();
 	const currentRoute = router.pathname;
 
@@ -54,19 +55,42 @@ export default function Navbar() {
 	useEffect(() => {
 		if (session) {
 			axios
-				.get(`http://127.0.0.1:5000/messages/unseen`, {
+				.get(`http://127.0.0.1:5000/users/${session.user.id}`, {
 					headers: {
 						Authorization: `Bearer ${session.user.jwt}`,
 					},
 				})
 				.then((res) => {
 					console.log(res);
-					setNbNotifications(res.data.data);
+					console.log(res.data.data.isAdmin);
+					setIsAdmin(res.data.data.isAdmin);
+					if (!res.data.data.isAdmin) {
+						axios
+							.get(`http://127.0.0.1:5000/messages/unseen`, {
+								headers: {
+									Authorization: `Bearer ${session.user.jwt}`,
+								},
+							})
+							.then((res) => {
+								console.log(res);
+								setNbNotifications(res.data.data);
+							})
+							.catch((err) => {
+								console.log(err);
+								setNbNotifications(0);
+							});
+					} else {
+						Router.push("/Admin/Dashbord");
+					}
+				})
+				.catch((err) => {
+					setIsAdmin(false);
 				});
 		} else {
 			setNbNotifications(0);
+			setIsAdmin(false);
 		}
-	}, []);
+	}, [session]);
 
 	const openAnimation = useSpring({
 		from: { maxHeight: "0px" },
