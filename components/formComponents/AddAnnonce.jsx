@@ -50,7 +50,7 @@ const AddAnnonce = ({ onFinishSubmit }) => {
 		// typeImmobilier: Yup.string().required("Required"),
 		// typeAnnonce: Yup.string().required("Required"),
 		prix: Yup.number().required("Required"),
-		address: Yup.string().required("Required"),
+		// address: Yup.string().required("Required"),
 		// images: Yup.mixed()
 		//   .required("Required")
 		//   .test(
