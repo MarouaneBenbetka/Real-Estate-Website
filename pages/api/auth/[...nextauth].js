@@ -29,6 +29,7 @@ export default NextAuth({
 
 				const result = await axios.post(`${URL}/users/`, data, {
 					headers: {
+						"Accept-Encoding": "gzip,deflate,compress",
 						"Content-Type": "application/json",
 					},
 				});
@@ -73,7 +74,7 @@ export default NextAuth({
 			},
 		}),
 	],
-	// pages: {
-	// 	signIn: "/auth/signIn",
-	// },
+	pages: {
+		signIn: "/auth/signIn",
+	},
 });
