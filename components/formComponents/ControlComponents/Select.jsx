@@ -8,7 +8,6 @@ function Select(props) {
 	useEffect(() => {
 		if (label === "Commune") {
 			onFirstRender(options[0].key);
-			console.log("yo");
 		}
 	}, [options]);
 	return (

@@ -41,7 +41,7 @@ export default function LocationPicker({ position, onChangedPosition }) {
 				center={position}
 				zoom={15}
 				scrollWheelZoom={true}
-				className="h-[200px] w-full focus:outline-none "
+				className="h-[230px] w-full focus:outline-none "
 			>
 				<TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 

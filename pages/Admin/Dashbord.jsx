@@ -6,6 +6,9 @@ import StatsCard from "../../components/Admin/dashbord/StatsCard";
 import UsersTable from "../../components/Admin/dashbord/UsersTable";
 import { DUMMY_USERS } from "../../data/data";
 import PagesPagination from "../../components/Home/PagesPagination";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { getSession } from "next-auth/react";
 const cards = [
 	{
 		id: "users",
@@ -38,7 +41,53 @@ const cards = [
 	},
 ];
 
-export default function Dashbord() {
+export default function Dashbord({ session }) {
+	const [connectionError, setConnectionError] = useState(false);
+	const [isLoading, setIsLoading] = useState(true);
+
+	const [stats, setStats] = useState({
+		users: 0,
+		messages: 0,
+		announces: 0,
+		visitors: 0,
+	});
+	const [users, setUsers] = useState([]);
+
+	useEffect(() => {
+		axios
+			.get(`http://127.0.0.1:5000/admin/stats`, {
+				headers: {
+					Authorization: `Bearer ${session.user.jwt}`,
+				},
+			})
+			.then((res) => {
+				setConnectionError(false);
+				setIsLoading(false);
+				setStats({
+					messages: res.data.data.messages_count,
+					announces: res.data.data.annonces_count,
+					users: 0,
+					visitors: 0,
+				});
+			})
+			.catch((err) => {
+				setConnectionError(true);
+				setIsLoading(false);
+			});
+		axios
+			.get("http://127.0.0.1:5000/users/")
+			.then((res) => {
+				setUsers(res.data.data);
+				setStats((prev) => ({ ...prev, users: res.data.data.length }));
+				setConnectionError(false);
+				setIsLoading(false);
+			})
+			.catch((err) => {
+				setConnectionError(false);
+				setIsLoading(false);
+			});
+	}, []);
+
 	const nextPageHandler = (e) => {
 		e.preventDefault();
 		// if (pageCount < maxPages) {
@@ -79,7 +128,7 @@ export default function Dashbord() {
 							key={card.id}
 							name={card.name}
 							icon={card.icon}
-							value={card.value}
+							value={stats[card.id]}
 							hexColor={card.hex}
 						/>
 					);
@@ -90,14 +139,36 @@ export default function Dashbord() {
 			<h1 className="font-bold text-[32px] mt-8 mb-4">
 				Table des utilisateurs
 			</h1>
-			<UsersTable users={DUMMY_USERS} />
-			<PagesPagination
+			{isLoading ? <p>loading</p> : users && <UsersTable users={users} />}
+
+			{/* <PagesPagination
 				maxPages={4}
 				currentPage={1}
 				onNextPageClick={nextPageHandler}
 				onPreviousPageClick={previousPageHandler}
 				onSelectionPageClick={selectPageHandler}
-			/>
+			/> */}
 		</div>
 	);
+}
+
+export async function getServerSideProps({ req }) {
+	try {
+		const session = await getSession({ req });
+
+		if (!session) {
+			return {
+				redirect: {
+					destination: "/?login=true",
+					permanent: false,
+				},
+			};
+		}
+
+		return {
+			props: { session },
+		};
+	} catch {
+		console.log("error");
+	}
 }

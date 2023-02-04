@@ -1,14 +1,49 @@
 import { info } from "autoprefixer";
+import axios from "axios";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MdExpandMore } from "react-icons/md";
 import { useSpring, animated } from "react-spring";
 
-export default function Message({ infos }) {
+export default function Message({ userJwt, infos }) {
 	const [expand, setExpand] = useState(false);
 	const [showExanpd, setShowExpand] = useState(false);
 	const [seen, setSeen] = useState(infos.vue);
+	const [formatedDate, setFormatedDate] = useState("");
+	const [fullDate, setFullDate] = useState("");
 
+	useEffect(() => {
+		console.log(infos);
+		const date = new Date(infos.date);
+
+		const year = date.getFullYear();
+		let month = date.getMonth() + 1;
+		let dt = date.getDate();
+		let hours = date.getHours();
+		let minutes = date.getMinutes();
+
+		const currentDate = new Date();
+		if (
+			currentDate.getFullYear() === year &&
+			currentDate.getMonth() + 1 === month &&
+			currentDate.getDate() === dt
+		) {
+			if (dt < 10) dt = "0" + dt;
+			if (month < 10) month = "0" + month;
+			if (hours < 10) hours = "0" + hours;
+			if (minutes < 10) minutes = "0" + minutes;
+
+			setFormatedDate(`${hours}:${minutes}`);
+		} else {
+			if (dt < 10) dt = "0" + dt;
+			if (month < 10) month = "0" + month;
+			if (hours < 10) hours = "0" + hours;
+			if (minutes < 10) minutes = "0" + minutes;
+
+			setFormatedDate(`${year}-${month}-${dt}`);
+		}
+		setFullDate(`${year}-${month}-${dt} ${hours}:${minutes}`);
+	}, []);
 	const iconAnimation = useSpring({
 		from: {
 			transform: "rotate(0deg)",
@@ -18,6 +53,28 @@ export default function Message({ infos }) {
 		},
 		config: { duration: "100" },
 	});
+
+	const onExpandMessage = () => {
+		if (!seen) {
+			setSeen(true);
+			axios
+				.put(
+					"http://127.0.0.1:5000/messages/view",
+					{ messageId: infos.id },
+					{
+						headers: {
+							"Content-Type": "application/json",
+							Authorization: `Bearer ${userJwt}`,
+						},
+					}
+				)
+				.catch((err) => {
+					console.log(err);
+				});
+		}
+
+		setExpand((prev) => !prev);
+	};
 
 	return (
 		<div
@@ -29,17 +86,18 @@ export default function Message({ infos }) {
 			}
 			onMouseEnter={() => setShowExpand(true)}
 			onMouseLeave={() => setShowExpand(false)}
-			onClick={() => {
-				setExpand((prev) => !prev);
-				setSeen(true);
-			}}
+			onClick={onExpandMessage}
 		>
 			<div className="flex justify-start items-start">
 				<div className="flex items-center mr-2">
 					<div className="   flex items-center justify-center mr-2">
 						<Image
 							className="w-[48px] h-[48px] rounded-full  border-purple object-cover object-center"
-							src={"/house-placeholder.png"}
+							src={
+								infos.photo
+									? infos.photo
+									: "profile-picture-placehoder.png"
+							}
 							alt="hi"
 							width={48}
 							height={48}
@@ -64,8 +122,13 @@ export default function Message({ infos }) {
 				>
 					{infos.message}
 				</p>
-				<p className="ml-auto w-[94px] mt-[14px] mr-2 font-bold text-purple ">
-					{infos.date}
+				<p
+					className={
+						"ml-auto w-[94px] mt-[14px] mr-2 font-bold text-purple " +
+						(expand ? "text-center" : "text-right")
+					}
+				>
+					{expand ? fullDate : formatedDate}
 				</p>
 				{showExanpd && (
 					<animated.div

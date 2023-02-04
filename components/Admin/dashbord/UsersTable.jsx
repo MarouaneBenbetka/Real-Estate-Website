@@ -21,7 +21,7 @@ export default function UsersTable({ users }) {
 							<td>
 								<div className="w-[50px] h-[50px] relative rounded-full overflow-hidden">
 									<Image
-										src={user.photo}
+										src={user.picture_link}
 										alt="user"
 										fill
 										style={{
@@ -31,16 +31,18 @@ export default function UsersTable({ users }) {
 									/>
 								</div>
 							</td>
-							<td>{user.name}</td>
-							<td>{user.mail}</td>
-							<td>{user.phone}</td>
+							<td>{user.full_name}</td>
+							<td>{user.email}</td>
+							<td>{user.phone_number}</td>
 							<td>
 								<p className="max-w-[350px] whitespace-nowrap overflow-hidden text-ellipsis">
-									{user.adress}
+									{user.address}
 								</p>
 							</td>
 							<td width={30}>
-								<p className="text-center">{user.nbAnnonces}</p>
+								<p className="text-center">
+									{user.annonces.length}
+								</p>
 							</td>
 						</tr>
 					))}

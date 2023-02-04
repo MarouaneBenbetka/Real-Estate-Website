@@ -20,7 +20,7 @@ const LocationPicker2 = dynamic(
 	}
 );
 
-const AddAnnonce = () => {
+const AddAnnonce = ({ onFinishSubmit }) => {
 	const status = "loading";
 	const { data: session } = useSession();
 
@@ -30,6 +30,7 @@ const AddAnnonce = () => {
 		typeImmobilier: "",
 		typeAnnonce: "",
 		prix: "",
+		surface: "",
 		wilaya: "Alger",
 		address: "",
 		images: "",
@@ -43,11 +44,11 @@ const AddAnnonce = () => {
 	const [commune, setCommune] = useState("Alger");
 
 	const validationSchema = Yup.object({
-		wilaya: Yup.string().required("Required"),
-		commune: Yup.string().required("Required"),
+		// wilaya: Yup.string().required("Required"),
+		// commune: Yup.string().required("Required"),
 		description: Yup.string().required("Required"),
-		typeImmobilier: Yup.string().required("Required"),
-		typeAnnonce: Yup.string().required("Required"),
+		// typeImmobilier: Yup.string().required("Required"),
+		// typeAnnonce: Yup.string().required("Required"),
 		prix: Yup.number().required("Required"),
 		address: Yup.string().required("Required"),
 		// images: Yup.mixed()
@@ -64,106 +65,87 @@ const AddAnnonce = () => {
 		//   ),
 	});
 
-	const onSubmit = async (values, onSubmitProps) => {
-		const links = [];
+	const onSubmit = (values, onSubmitProps) => {
+		console.log("onSubmit", values);
+		let links = [];
 		const button = document.querySelector("[type=submit]");
 		button.innerText = "";
 		button.classList.add("loading");
 
-		const {
+		let {
 			wilaya,
 			commune,
 			description,
 			typeImmobilier,
-			tyoeAnnonce,
+			typeAnnonce,
 			address,
+			prix,
+			surface,
 		} = values;
-		//   console.log("Form data", { donator: user_id, ...values });
-		try {
-			for (let i = 0; i < values.images.length; i++) {
-				let formdata = new FormData();
-				// const file = values.image[i];
-				// console.log(values.images[i]);
-				formdata.append("file", values.images[i]);
 
-				formdata.append("upload_preset", "myUploads");
-				// console.log(formdata);
+		if (commune == "") commune = communes[wilaya][0].value;
+		if (typeAnnonce == "") typeAnnonce = "Vente";
 
-				let result = await axios.post(
+		for (let i = 0; i < values.images.length; i++) {
+			let formdata = new FormData();
+			// const file = values.image[i];
+			// console.log(values.images[i]);
+			formdata.append("file", values.images[i]);
+
+			formdata.append("upload_preset", "myUploads");
+			// console.log(formdata);
+
+			axios
+				.post(
 					"https://api.cloudinary.com/v1_1/dsliesrpf/image/upload",
 					formdata
-				);
-				// console.log(result.data.secure_url);
+				)
+				.then((res) => {
+					links.push(res.data.secure_url);
 
-				links.push(result.data.secure_url);
-			}
-			console.log(session);
-			const response = await axios.post(
-				`http://127.0.0.1:5000/annonces`,
-				{
-					wilaya,
-					commune,
-					description,
-					typeId: 1,
-					category: tyoeAnnonce,
-					images: links,
-					coordinates: position,
-					price: 234231,
-				},
-				{
-					headers: {
-						"Content-Type": "application/json",
-						Authorization: `Bearer ${session.user.jwt}`,
-					},
-				}
-			);
-
-			//   const response = await annonceCrud.post(
-			//     {
-			//       wilaya,
-			//       commune,
-			//       description,
-			//       typeId: 1,
-			//       category: tyoeAnnonce,
-			//       images: links,
-			//       coordinates: position,
-			//       price: 234231,
-			//     },
-			//     {
-			//       headers: {
-			//         "Content-Type": "application/json",
-			//         Authorization: `Bearer ${session.user.jwt}`,
-			//       },
-			//     }
-			//   );
-
-			console.log(response.data);
-
-			onSubmitProps.setSubmitting(false);
-			button.classList.remove("loading");
-			button.innerText = "Submit";
-			onSubmitProps.resetForm();
-		} catch {
-			(error) => {
-				toast.error(error.name);
-				console.log(error);
-			};
+					axios
+						.post(
+							`http://127.0.0.1:5000/annonces/`,
+							{
+								wilaya,
+								commune,
+								description,
+								typeId: 1,
+								category: typeAnnonce,
+								images: links,
+								coordinates: position,
+								address,
+								price: prix,
+								surface,
+							},
+							{
+								headers: {
+									"Content-Type": "application/json",
+									Authorization: `Bearer ${session.user.jwt}`,
+								},
+							}
+						)
+						.then((res) => {
+							onSubmitProps.setSubmitting(false);
+							button.classList.remove("loading");
+							button.innerText = "Submit";
+							onSubmitProps.resetForm();
+							document.getElementById("my-modal1").click();
+							onFinishSubmit();
+						})
+						.catch((err) => {
+							console.log(err);
+							toast.error(err.name);
+							onSubmitProps.setSubmitting(false);
+							button.classList.remove("loading");
+							button.innerText = "Submit";
+						});
+				})
+				.catch((err) => {
+					toast.error(err.name);
+				});
+			console.log(links);
 		}
-
-		//second
-
-		//   document.querySelector("#my-modal").click();
-		//   const config = {
-		//     headers: {
-		//       "Content-Type": "application/json",
-		//     },
-		//   };
-		//   const { data } = await axios.post(
-		//     "/api/auth/register",
-		//     {},
-		//     config
-		//   );
-		//   console.log(data);
 	};
 
 	return (
@@ -174,7 +156,7 @@ const AddAnnonce = () => {
 			>
 				✕
 			</label>
-			<div className="card-body ">
+			<div className="card-body p-4	px-8">
 				<Formik
 					initialValues={initialValues}
 					validationSchema={validationSchema}
@@ -251,6 +233,14 @@ const AddAnnonce = () => {
 											formik={formik}
 											placeholder="50000 da"
 										/>
+										<FormikControl
+											control="input"
+											type="number"
+											label="Surface"
+											name="surface"
+											formik={formik}
+											placeholder="200㎡"
+										/>
 										<div className="form-control">
 											<label
 												className="label"
@@ -313,7 +303,6 @@ const AddAnnonce = () => {
 									>
 										Submit
 									</button>
-									{console.log(formik)}
 								</div>
 							</Form>
 						);

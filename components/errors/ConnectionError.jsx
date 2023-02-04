@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function ConnectionError() {
 	return (
-		<div className="flex flex-col items-center py-24 sm:py-32 h-[calc(100vh-80px)]">
+		<div className="flex flex-col items-center justify-center pb-10 min-h-[calc(100vh-80px)]">
 			<Image
 				src={"/connection_lost.png"}
 				alt=""
