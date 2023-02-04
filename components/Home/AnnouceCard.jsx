@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { createStyles, Image, Card, Text, Group, Button } from "@mantine/core";
 import { Carousel } from "@mantine/carousel";
