@@ -7,6 +7,7 @@ import PagesPagination from "../components/Home/PagesPagination";
 import axios from "axios";
 import NothingFound from "../components/errors/NothingFound";
 import ConnectionError from "../components/errors/ConnectionError";
+import { getSession } from "next-auth/react";
 import { URL } from "../utils/services/crud";
 
 const wait_function_test = async function test() {
@@ -41,9 +42,11 @@ export default function Explore({ toasting }) {
 			});
 	}, [pageCount]);
 
-	if (toasting === "true") {
-		toast.error("vous devez entre authentifiee");
-	}
+	useEffect(() => {
+		if (toasting === "true") {
+			toast.error("vous devez entre authentifiee");
+		}
+	}, [toasting]);
 
 	// const [ann, SetAnn] = useState([]);
 	// useEffect(async () => {
@@ -56,9 +59,7 @@ export default function Explore({ toasting }) {
 	const searchHandler = (e, searchText) => {
 		e.preventDefault();
 		axios
-			.get(
-				`${URL}/annonces/search?q=${searchText}&page=${pageCount}`
-			)
+			.get(`${URL}/annonces/search?q=${searchText}&page=${pageCount}`)
 			.then((res) => {
 				setConnectionError(false);
 				if (res.data.data) {
@@ -174,6 +175,7 @@ export default function Explore({ toasting }) {
 
 export async function getServerSideProps(ctx) {
 	// const toasting = req.headers['toasting'] || false
+
 	try {
 		const toasting = ctx.query.login || false;
 

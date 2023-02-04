@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import axios from "axios";
+import Router from "next/router";
 import { URL } from "../../utils/services/crud";
 
 const navlinks = [
@@ -67,8 +68,9 @@ export default function Navbar() {
 				});
 		} else {
 			setNbNotifications(0);
+			setIsAdmin(false);
 		}
-	}, []);
+	}, [session]);
 
 	const openAnimation = useSpring({
 		from: { maxHeight: "0px" },
@@ -84,8 +86,7 @@ export default function Navbar() {
 	const googleSSO = (e) => {
 		e.preventDefault();
 		signIn("google", {
-			callbackUrl:
-				URL,
+			callbackUrl: URL,
 		});
 	};
 
@@ -136,8 +137,7 @@ export default function Navbar() {
 				<button
 					onClick={() => {
 						signOut({
-							callbackUrl:
-								URL,
+							callbackUrl: URL,
 						});
 					}}
 					className="hidden md:block px-4 py-2 text-white2 bg-purple rounded-[10px] font-semibold border-2 border-purple hover:bg-white hover:text-purple transition "
@@ -230,8 +230,7 @@ export default function Navbar() {
 										className="px-4 py-2 text-white2 bg-purple rounded-[10px] font-semibold border-2 border-purple hover:bg-white hover:text-purple transition"
 										onClick={() => {
 											signOut({
-												callbackUrl:
-													URL,
+												callbackUrl: URL,
 											});
 										}}
 									>

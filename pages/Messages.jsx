@@ -42,6 +42,7 @@ const Messages = ({ session }) => {
 			.catch((err) => {
 				setConnectionError(true);
 				setIsLoading(false);
+				console.log(err);
 			});
 	}, []);
 

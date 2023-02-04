@@ -10,7 +10,7 @@ function MyApp({ session, Component, pageProps }) {
 	return (
 		<SessionProvider session={session}>
 			<Head>
-				<link rel="icon" type="image/svg+xml" href="/logo_immo2.png" />
+				<link rel="icon" type="image/svg+xml" href="/immo_logo.ico" />
 				<title>IMMO Website</title>
 			</Head>
 			<MantineProvider

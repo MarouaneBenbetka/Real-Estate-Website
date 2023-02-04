@@ -19,6 +19,7 @@ export default function TableRow({
 	datePublication,
 	image,
 	id,
+	canDelete,
 }) {
 	const { status, data: session } = useSession();
 	const [isDeleted, setIsDeleted] = useState(false);
@@ -80,10 +81,15 @@ export default function TableRow({
 					<span className="text-[16px] font-normal pr-1 pl-1">
 						DA
 					</span>
-					{typeImmobilierTOtypeAnnonce[typeImmoblier] && (
+					{typeImmobilierTOtypeAnnonce[typeAnnonce.toLowerCase()] && (
 						<span className="text-gray-500 text-[20px]">
 							{" "}
-							/ {typeImmobilierTOtypeAnnonce[typeImmoblier]}
+							/{" "}
+							{
+								typeImmobilierTOtypeAnnonce[
+									typeAnnonce.toLowerCase()
+								]
+							}
 						</span>
 					)}
 				</td>
@@ -164,25 +170,27 @@ export default function TableRow({
 							</div>
 						</div>
 					</div>
-					<button
-						onClick={(e) => {
-							document
-								.querySelector(`[id="my-modal${id}"]`)
-								.click();
-							// console.log(props.data);
-							// document
-							//   .querySelector(".confirm")
-							//   .setAttribute("data", props.data);
-							//add the modal of suppression to confirm eiher I will supress or not and fix the toast
-							// add in igl the content of the about us page
-						}}
-					>
-						<BiTrash
-							size={26}
-							color="#d92525"
-							className="bg-white"
-						></BiTrash>
-					</button>
+					{canDelete && (
+						<button
+							onClick={(e) => {
+								document
+									.querySelector(`[id="my-modal${id}"]`)
+									.click();
+								// console.log(props.data);
+								// document
+								//   .querySelector(".confirm")
+								//   .setAttribute("data", props.data);
+								//add the modal of suppression to confirm eiher I will supress or not and fix the toast
+								// add in igl the content of the about us page
+							}}
+						>
+							<BiTrash
+								size={26}
+								color="#d92525"
+								className="bg-white"
+							></BiTrash>
+						</button>
+					)}
 				</td>
 			</tr>
 		</>

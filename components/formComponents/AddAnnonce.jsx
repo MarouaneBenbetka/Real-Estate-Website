@@ -21,7 +21,7 @@ const LocationPicker2 = dynamic(
 );
 
 const AddAnnonce = ({ onFinishSubmit }) => {
-	const env = process.env.NODE_ENV
+	const env = process.env.NODE_ENV;
 	const status = "loading";
 	const { data: session } = useSession();
 
@@ -51,7 +51,7 @@ const AddAnnonce = ({ onFinishSubmit }) => {
 		// typeImmobilier: Yup.string().required("Required"),
 		// typeAnnonce: Yup.string().required("Required"),
 		prix: Yup.number().required("Required"),
-		address: Yup.string().required("Required"),
+		// address: Yup.string().required("Required"),
 		// images: Yup.mixed()
 		//   .required("Required")
 		//   .test(
@@ -66,7 +66,7 @@ const AddAnnonce = ({ onFinishSubmit }) => {
 		//   ),
 	});
 
-	const onSubmit = (values, onSubmitProps) => {
+	const onSubmit = async (values, onSubmitProps) => {
 		console.log("onSubmit", values);
 		let links = [];
 		const button = document.querySelector("[type=submit]");
@@ -96,56 +96,58 @@ const AddAnnonce = ({ onFinishSubmit }) => {
 			formdata.append("upload_preset", "myUploads");
 			// console.log(formdata);
 
-			axios
-				.post(
+			for (let i = 0; i < values.images.length; i++) {
+				let formdata = new FormData();
+				// const file = values.image[i];
+				// console.log(values.images[i]);
+				formdata.append("file", values.images[i]);
+				formdata.append("upload_preset", "myUploads");
+				// console.log(formdata);
+				let result = await axios.post(
 					"https://api.cloudinary.com/v1_1/dsliesrpf/image/upload",
 					formdata
+				);
+				// console.log(result.data.secure_url);
+				links.push(result.data.secure_url);
+			}
+
+			axios
+				.post(
+					`${URL}/annonces/`,
+					{
+						wilaya,
+						commune,
+						description,
+						typeId: 1,
+						category: typeAnnonce,
+						images: links,
+						coordinates: position,
+						address,
+						price: prix,
+						surface,
+					},
+					{
+						headers: {
+							"Content-Type": "application/json",
+							Authorization: `Bearer ${session.user.jwt}`,
+						},
+					}
 				)
 				.then((res) => {
-					links.push(res.data.secure_url);
-
-					axios
-						.post(
-							`${env === "development" ? "http://127.0.0.1:5000" : "https://tpigl.onrender.com"}/annonces/`,
-							{
-								wilaya,
-								commune,
-								description,
-								typeId: 1,
-								category: typeAnnonce,
-								images: links,
-								coordinates: position,
-								address,
-								price: prix,
-								surface,
-							},
-							{
-								headers: {
-									"Content-Type": "application/json",
-									Authorization: `Bearer ${session.user.jwt}`,
-								},
-							}
-						)
-						.then((res) => {
-							onSubmitProps.setSubmitting(false);
-							button.classList.remove("loading");
-							button.innerText = "Submit";
-							onSubmitProps.resetForm();
-							document.getElementById("my-modal1").click();
-							onFinishSubmit();
-						})
-						.catch((err) => {
-							console.log(err);
-							toast.error(err.name);
-							onSubmitProps.setSubmitting(false);
-							button.classList.remove("loading");
-							button.innerText = "Submit";
-						});
+					onSubmitProps.setSubmitting(false);
+					button.classList.remove("loading");
+					button.innerText = "Submit";
+					onSubmitProps.resetForm();
+					document.getElementById("my-modal1").click();
+					onFinishSubmit();
 				})
 				.catch((err) => {
+					console.log(err);
 					toast.error(err.name);
+					onSubmitProps.setSubmitting(false);
+					button.classList.remove("loading");
+					button.innerText = "Submit";
 				});
-			console.log(links);
 		}
 	};
 

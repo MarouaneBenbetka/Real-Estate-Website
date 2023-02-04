@@ -35,11 +35,7 @@ function GoggleRegisterForm() {
 			},
 		};
 		try {
-			const result = await axios.put(
-				`${URL}/users/user`,
-				values,
-				config
-			);
+			const result = await axios.put(`${URL}/users/user`, values, config);
 
 			console.log(result);
 			setStatus("pending");

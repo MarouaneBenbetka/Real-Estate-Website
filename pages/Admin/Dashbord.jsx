@@ -10,6 +10,7 @@ import PagesPagination from "../../components/Home/PagesPagination";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { getSession } from "next-auth/react";
+import userCrud from "../../utils/services/user";
 import { URL } from "../../utils/services/crud";
 const cards = [
 	{
@@ -68,7 +69,7 @@ export default function Dashbord({ session }) {
 				setStats({
 					messages: res.data.data.messages_count,
 					announces: res.data.data.annonces_count,
-					users: 0,
+					users: res.data.data.users_count,
 					visitors: 0,
 				});
 			})
@@ -167,10 +168,28 @@ export async function getServerSideProps({ req }) {
 			};
 		}
 
+		// const response = await userCrud.get(session.user.id, {
+		// 	headers: { Authorization: `Bearer ${session.user.jwt}` },
+		// });
+
+		// if (!response.data.isAdmin) {
+		// 	return {
+		// 		redirect: {
+		// 			destination: "/?login=true",
+		// 			permanent: false,
+		// 		},
+		// 	};
+		// }
+
 		return {
 			props: { session },
 		};
 	} catch {
-		console.log("error");
+		return {
+			redirect: {
+				destination: "/",
+				permanent: false,
+			},
+		};
 	}
 }
