@@ -4,7 +4,6 @@ import Error from "next/error";
 import jsonwebtoken from "jsonwebtoken";
 import axios from "axios";
 import { URL } from "../../../utils/services/crud";
-import { URL } from "../../../utils/services/crud";
 
 export default NextAuth({
 	secret: process.env.JWT_SECRET,

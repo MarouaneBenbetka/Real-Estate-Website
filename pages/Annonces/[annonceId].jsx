@@ -20,7 +20,6 @@ import Image from "next/image";
 import LoadingSpinner from "../../components/CardDetails/LoadingSpinner";
 import ConnectionError from "../../components/errors/ConnectionError";
 import { URL } from "../../utils/services/crud";
-import { URL } from "../../utils/services/crud";
 
 const MapWrapper2 = dynamic(
 	() => import("../../components/CardDetails/MapWrapper"),
