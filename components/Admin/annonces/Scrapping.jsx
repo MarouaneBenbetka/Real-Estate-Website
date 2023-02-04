@@ -2,13 +2,14 @@ import axios from "axios";
 import Image from "next/image";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { URL } from "../../../utils/services/crud";
 
 export default function Scrapping({ onCloseModal, onScrappingStateChanged }) {
 	const handleScrapping = () => {
 		onCloseModal();
 		onScrappingStateChanged(true);
 		axios
-			.get("http://127.0.0.1:5000/admin")
+			.get(`${URL}/admin`)
 			.then((res) => {
 				onScrappingStateChanged(false);
 				console.log(res);
@@ -43,7 +44,8 @@ export default function Scrapping({ onCloseModal, onScrappingStateChanged }) {
 					<a
 						className="w-[200px] h-[90px] p-2  border-2 border-purple rounded-md flex justify-center items-center transition-all duration-100 ease-in-out hover:scale-[1.06] cursor-pointer"
 						href="https://www.beytic.com/annonces-immobilieres/?_page=1"
-						target="_blank" rel="noreferrer"
+						target="_blank"
+						rel="noreferrer"
 					>
 						<Image
 							src="/beytic.png"
@@ -55,7 +57,8 @@ export default function Scrapping({ onCloseModal, onScrappingStateChanged }) {
 					<a
 						className=" w-[200px] h-[90px]  p-2  border-2 border-purple rounded-md flex justify-center items-center transition-all duration-100 ease-in-out hover:scale-[1.06] cursor-pointer"
 						href="http://www.annonce-algerie.com/AnnoncesImmobilier.asp"
-						target="_blank" rel="noreferrer"
+						target="_blank"
+						rel="noreferrer"
 					>
 						<Image
 							src="/annonce_algerie.png"

@@ -112,7 +112,7 @@ const AddAnnonce = ({ onFinishSubmit }) => {
 
 			axios
 				.post(
-					`http://127.0.0.1:5000/annonces/`,
+					`${URL}/annonces/`,
 					{
 						wilaya,
 						commune,

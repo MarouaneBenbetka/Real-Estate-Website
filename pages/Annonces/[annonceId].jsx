@@ -19,6 +19,7 @@ import { toast } from "react-toastify";
 import Image from "next/image";
 import LoadingSpinner from "../../components/CardDetails/LoadingSpinner";
 import ConnectionError from "../../components/errors/ConnectionError";
+import { URL } from "../../utils/services/crud";
 
 const MapWrapper2 = dynamic(
 	() => import("../../components/CardDetails/MapWrapper"),
@@ -75,13 +76,7 @@ export default function CardDeatails({ session }) {
 		setIsLoading(true);
 		const annonceId = window.location.href.split("/").pop();
 		axios
-			.get(
-				`${
-					process.env.NODE_ENV === "development"
-						? "http://127.0.0.1:5000"
-						: "https://tpigl.onrender.com"
-				}/annonces/${annonceId}`
-			)
+			.get(`${URL}/annonces/${annonceId}`)
 			.then((res) => {
 				const data = res.data.data;
 				if (!data.coordinates.latitude) {
@@ -122,11 +117,7 @@ export default function CardDeatails({ session }) {
 
 		axios
 			.post(
-				`${
-					process.env.NODE_ENV === "development"
-						? "http://127.0.0.1:5000"
-						: "https://tpigl.onrender.com"
-				}/messages/ok`,
+				`${URL}/messages/ok`,
 				{ annonceId: announceInfo.id, content: message },
 				{
 					headers: {

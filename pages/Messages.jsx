@@ -10,6 +10,7 @@ import axios from "axios";
 import EmptyMessages from "../components/errors/EmptyMessages";
 import ConnectionError from "../components/errors/ConnectionError";
 import SkeltonMessage from "../components/Messages/SkeltonMessage";
+import { URL } from "../utils/services/crud";
 
 const Messages = ({ session }) => {
 	const [pageCount, setPageCount] = useState(1);
@@ -28,7 +29,7 @@ const Messages = ({ session }) => {
 		setIsLoading(true);
 
 		axios
-			.get(`${process.env.NODE_ENV === "development" ? "http://127.0.0.1:5000" : "https://tpigl.onrender.com"}/messages/messages`, {
+			.get(`${URL}/messages/messages`, {
 				headers: {
 					Authorization: `Bearer ${session.user.jwt}`,
 				},
@@ -41,6 +42,7 @@ const Messages = ({ session }) => {
 			.catch((err) => {
 				setConnectionError(true);
 				setIsLoading(false);
+				console.log(err);
 			});
 	}, []);
 

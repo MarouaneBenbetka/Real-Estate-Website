@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { getSession } from "next-auth/react";
 import userCrud from "../../utils/services/user";
+import { URL } from "../../utils/services/crud";
 const cards = [
 	{
 		id: "users",
@@ -57,7 +58,7 @@ export default function Dashbord({ session }) {
 
 	useEffect(() => {
 		axios
-			.get(`${process.env.NODE_ENV === "development" ? "http://127.0.0.1:5000" : "https://tpigl.onrender.com"}/admin/stats`, {
+			.get(`${URL}/admin/stats`, {
 				headers: {
 					Authorization: `Bearer ${session.user.jwt}`,
 				},
@@ -77,7 +78,7 @@ export default function Dashbord({ session }) {
 				setIsLoading(false);
 			});
 		axios
-			.get(`${process.env.NODE_ENV === "development" ? "http://127.0.0.1:5000" : "https://tpigl.onrender.com"}/annonces/${annonceId}/users/`)
+			.get(`${URL}/annonces/${annonceId}/users/`)
 			.then((res) => {
 				setUsers(res.data.data);
 				setStats((prev) => ({ ...prev, users: res.data.data.length }));

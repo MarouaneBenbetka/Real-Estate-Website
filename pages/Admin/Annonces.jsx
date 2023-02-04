@@ -7,6 +7,7 @@ import { getSession } from "next-auth/react";
 import axios from "axios";
 import PagesPagination from "../../components/Home/PagesPagination";
 import { Oval } from "react-loader-spinner";
+import { URL } from "../../utils/services/crud";
 
 export default function Annonces({ session }) {
 	const [modalOpened, setModalOpened] = useState(false);
@@ -19,7 +20,7 @@ export default function Annonces({ session }) {
 
 	useEffect(() => {
 		axios
-			.get(`http://127.0.0.1:5000/admin/annonces?page=${pageCount}`, {
+			.get(`${URL}/admin/annonces?page=${pageCount}`, {
 				headers: {
 					Authorization: `Bearer ${session.user.jwt}`,
 				},

@@ -10,6 +10,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import axios from "axios";
 import Router from "next/router";
+import { URL } from "../../utils/services/crud";
 
 const navlinks = [
 	{
@@ -56,18 +57,11 @@ export default function Navbar() {
 	useEffect(() => {
 		if (session) {
 			axios
-				.get(
-					`${
-						process.env.NODE_ENV === "development"
-							? "http://127.0.0.1:5000"
-							: "https://tpigl.onrender.com"
-					}/messages/unseen`,
-					{
-						headers: {
-							Authorization: `Bearer ${session.user.jwt}`,
-						},
-					}
-				)
+				.get(`${URL}/messages/unseen`, {
+					headers: {
+						Authorization: `Bearer ${session.user.jwt}`,
+					},
+				})
 				.then((res) => {
 					console.log(res);
 					setNbNotifications(res.data.data);
@@ -92,10 +86,7 @@ export default function Navbar() {
 	const googleSSO = (e) => {
 		e.preventDefault();
 		signIn("google", {
-			callbackUrl:
-				env === "development"
-					? "http://localhost:3000"
-					: "https://tp-igl-equipe1.vercel.app",
+			callbackUrl: URL,
 		});
 	};
 
@@ -146,10 +137,7 @@ export default function Navbar() {
 				<button
 					onClick={() => {
 						signOut({
-							callbackUrl:
-								env === "development"
-									? "http://localhost:3000"
-									: "https://tp-igl-equipe1.vercel.app",
+							callbackUrl: URL,
 						});
 					}}
 					className="hidden md:block px-4 py-2 text-white2 bg-purple rounded-[10px] font-semibold border-2 border-purple hover:bg-white hover:text-purple transition "
@@ -242,10 +230,7 @@ export default function Navbar() {
 										className="px-4 py-2 text-white2 bg-purple rounded-[10px] font-semibold border-2 border-purple hover:bg-white hover:text-purple transition"
 										onClick={() => {
 											signOut({
-												callbackUrl:
-													env === "development"
-														? "http://localhost:3000"
-														: "https://tp-igl-equipe1.vercel.app",
+												callbackUrl: URL,
 											});
 										}}
 									>

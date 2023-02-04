@@ -8,6 +8,7 @@ import axios from "axios";
 import NothingFound from "../components/errors/NothingFound";
 import ConnectionError from "../components/errors/ConnectionError";
 import { getSession } from "next-auth/react";
+import { URL } from "../utils/services/crud";
 
 const wait_function_test = async function test() {
 	console.log("start timer");
@@ -26,7 +27,7 @@ export default function Explore({ toasting }) {
 
 	useEffect(() => {
 		axios
-			.get(`${process.env.NODE_ENV === "development" ? "http://127.0.0.1:5000" : "https://tpigl.onrender.com"}/annonces?page=${pageCount}`)
+			.get(`${URL}/annonces?page=${pageCount}`)
 			.then((res) => {
 				setConnectionError(false);
 				setAnnounces(res.data.data);
@@ -58,9 +59,7 @@ export default function Explore({ toasting }) {
 	const searchHandler = (e, searchText) => {
 		e.preventDefault();
 		axios
-			.get(
-				`${process.env.NODE_ENV === "development" ? "http://127.0.0.1:5000" : "https://tpigl.onrender.com"}/annonces/search?q=${searchText}&page=${pageCount}`
-			)
+			.get(`${URL}/annonces/search?q=${searchText}&page=${pageCount}`)
 			.then((res) => {
 				setConnectionError(false);
 				if (res.data.data) {
@@ -84,7 +83,7 @@ export default function Explore({ toasting }) {
 		e.preventDefault();
 		axios
 			.get(
-				`${process.env.NODE_ENV === "development" ? "http://127.0.0.1:5000" : "https://tpigl.onrender.com"}/annonces/search?q=${lastSearch}&min_date=${filterData.dateDebut}&max_date=${filterData.dateFin}&wilaya=${filterData.wilaya}&commune=${filterData.commune}&type=${filterData.typeAnnonce}&page=${pageCount}`
+				`${URL}/annonces/search?q=${lastSearch}&min_date=${filterData.dateDebut}&max_date=${filterData.dateFin}&wilaya=${filterData.wilaya}&commune=${filterData.commune}&type=${filterData.typeAnnonce}&page=${pageCount}`
 			)
 			.then((res) => {
 				setConnectionError(false);
