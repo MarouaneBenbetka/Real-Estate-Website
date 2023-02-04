@@ -9,6 +9,7 @@ import { useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import { findLocation } from "./ControlComponents/commune_lag_lng";
 import annonceCrud from "../../utils/services/annonce";
+import { URL } from "../../utils/services/crud";
 
 const LocationPicker2 = dynamic(
 	() =>
@@ -92,63 +93,53 @@ const AddAnnonce = ({ onFinishSubmit }) => {
 			// const file = values.image[i];
 			// console.log(values.images[i]);
 			formdata.append("file", values.images[i]);
-
 			formdata.append("upload_preset", "myUploads");
 			// console.log(formdata);
-
-			for (let i = 0; i < values.images.length; i++) {
-				let formdata = new FormData();
-				// const file = values.image[i];
-				// console.log(values.images[i]);
-				formdata.append("file", values.images[i]);
-				formdata.append("upload_preset", "myUploads");
-				// console.log(formdata);
-				let result = await axios.post(
-					"https://api.cloudinary.com/v1_1/dsliesrpf/image/upload",
-					formdata
-				);
-				// console.log(result.data.secure_url);
-				links.push(result.data.secure_url);
-			}
-
-			axios
-				.post(
-					`${URL}/annonces/`,
-					{
-						wilaya,
-						commune,
-						description,
-						typeId: 1,
-						category: typeAnnonce,
-						images: links,
-						coordinates: position,
-						address,
-						price: prix,
-						surface,
-					},
-					{
-						headers: {
-							"Content-Type": "application/json",
-							Authorization: `Bearer ${session.user.jwt}`,
-						},
-					}
-				)
-				.then((res) => {
-					onSubmitProps.setSubmitting(false);
-					button.classList.remove("loading");
-					button.innerText = "Submit";
-					onSubmitProps.resetForm();
-					document.getElementById("my-modal1").click();
-					onFinishSubmit();
-				})
-				.catch((err) => {
-					console.log(err);
-					toast.error(err.name);
-					onSubmitProps.setSubmitting(false);
-					button.classList.remove("loading");
-					button.innerText = "Submit";
-				});
+			let result = await axios.post(
+				"https://api.cloudinary.com/v1_1/dsliesrpf/image/upload",
+				formdata
+			);
+			// console.log(result.data.secure_url);
+			links.push(result.data.secure_url);
 		}
+
+		axios
+			.post(
+				`${URL}/annonces/`,
+				{
+					wilaya,
+					commune,
+					description,
+					typeId: 1,
+					category: typeAnnonce,
+					images: links,
+					coordinates: position,
+					address,
+					price: prix,
+					surface,
+				},
+				{
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${session.user.jwt}`,
+					},
+				}
+			)
+			.then((res) => {
+				onSubmitProps.setSubmitting(false);
+				button.classList.remove("loading");
+				button.innerText = "Submit";
+				onSubmitProps.resetForm();
+				document.getElementById("my-modal1").click();
+				onFinishSubmit();
+			})
+			.catch((err) => {
+				console.log(err);
+				toast.error(err.name);
+				onSubmitProps.setSubmitting(false);
+				button.classList.remove("loading");
+				button.innerText = "Submit";
+			});
 	};
 
 	return (

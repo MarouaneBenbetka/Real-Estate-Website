@@ -29,6 +29,7 @@ export default NextAuth({
 
 				const result = await axios.post(`${URL}/users/`, data, {
 					headers: {
+						"Accept-Encoding": "gzip,deflate,compress",
 						"Content-Type": "application/json",
 						"Accept-Encoding":"gzip,deflate,compress"
 					},
