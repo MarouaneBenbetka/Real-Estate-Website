@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import PagesPagination from "../components/Home/PagesPagination";
 import Message from "../components/Messages/Message";

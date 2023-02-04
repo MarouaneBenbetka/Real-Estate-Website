@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { AiOutlineHome } from "react-icons/ai";
 import { MdOutlineVisibility, MdOutlineSell } from "react-icons/md";
 import { FiUsers } from "react-icons/fi";

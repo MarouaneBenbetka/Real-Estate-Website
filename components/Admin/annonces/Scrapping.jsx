@@ -17,7 +17,7 @@ export default function Scrapping({ onCloseModal }) {
 					<a
 						className="w-[200px] h-[90px] p-2  border-2 border-purple rounded-md flex justify-center items-center transition-all duration-100 ease-in-out hover:scale-[1.06] cursor-pointer"
 						href="https://www.beytic.com/annonces-immobilieres/?_page=1"
-						target="_blank"
+						target="_blank" rel="noreferrer"
 					>
 						<Image
 							src="/beytic.png"
@@ -29,7 +29,7 @@ export default function Scrapping({ onCloseModal }) {
 					<a
 						className=" w-[200px] h-[90px]  p-2  border-2 border-purple rounded-md flex justify-center items-center transition-all duration-100 ease-in-out hover:scale-[1.06] cursor-pointer"
 						href="http://www.annonce-algerie.com/AnnoncesImmobilier.asp"
-						target="_blank"
+						target="_blank" rel="noreferrer"
 					>
 						<Image
 							src="/annonce_algerie.png"

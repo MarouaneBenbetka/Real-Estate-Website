@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { info } from "autoprefixer";
 import axios from "axios";
 import Image from "next/image";
