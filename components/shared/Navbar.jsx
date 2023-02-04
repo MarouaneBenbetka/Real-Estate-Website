@@ -7,6 +7,7 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import { toast } from "react-toastify";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import axios from "axios";
 
 const navlinks = [
 	{
@@ -47,13 +48,21 @@ export default function Navbar() {
 	const [isAdmin, setIsAdmin] = useState(false);
 	const router = useRouter();
 	const currentRoute = router.pathname;
-	console.log(currentRoute);
 
 	const env = process.env.NODE_ENV;
 
 	useEffect(() => {
 		if (session) {
-			console.log("implement notifications");
+			axios
+				.get(`http://127.0.0.1:5000/messages/unseen`, {
+					headers: {
+						Authorization: `Bearer ${session.user.jwt}`,
+					},
+				})
+				.then((res) => {
+					console.log(res);
+					setNbNotifications(res.data.data);
+				});
 		} else {
 			setNbNotifications(0);
 		}
@@ -122,7 +131,6 @@ export default function Navbar() {
 					</li>
 				))}
 			</ul>
-			{console.log("session", status)}
 
 			{status !== "unauthenticated" && status !== "loading" ? (
 				<button

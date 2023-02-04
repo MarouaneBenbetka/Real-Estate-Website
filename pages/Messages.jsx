@@ -35,7 +35,6 @@ const Messages = ({ session }) => {
 			.then((res) => {
 				setMessages(res.data.data);
 				setConnectionError(false);
-				console.log(res.data.data);
 				setIsLoading(false);
 			})
 			.catch((err) => {

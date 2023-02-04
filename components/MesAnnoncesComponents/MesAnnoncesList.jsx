@@ -8,7 +8,7 @@ import Link from "next/link";
 import annonceCrud from "../../utils/services/annonce";
 import SkeltonTableRow from "./SkeltonTableRow";
 
-const MesAnnoncesList = ({ mesannonces, isLoading, onFinishDelete }) => {
+const MesAnnoncesList = ({ mesannonces, isLoading }) => {
 	const annonces = mesannonces;
 
 	return (

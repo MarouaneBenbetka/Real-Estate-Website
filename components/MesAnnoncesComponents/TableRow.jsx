@@ -31,7 +31,7 @@ export default function TableRow({
 					<div className="flex items-center space-x-3 w-fit	">
 						<div className="avatar">
 							<div className="mask mask-squircle w-12 h-12">
-								{false ? (
+								{image && image.length > 0 ? (
 									<Image
 										src={image}
 										width={40}

@@ -67,7 +67,7 @@ const AddAnnonce = ({ onFinishSubmit }) => {
 
 	const onSubmit = (values, onSubmitProps) => {
 		console.log("onSubmit", values);
-		const links = [];
+		let links = [];
 		const button = document.querySelector("[type=submit]");
 		button.innerText = "";
 		button.classList.add("loading");
@@ -102,51 +102,50 @@ const AddAnnonce = ({ onFinishSubmit }) => {
 				)
 				.then((res) => {
 					links.push(res.data.secure_url);
+
+					axios
+						.post(
+							`http://127.0.0.1:5000/annonces/`,
+							{
+								wilaya,
+								commune,
+								description,
+								typeId: 1,
+								category: typeAnnonce,
+								images: links,
+								coordinates: position,
+								address,
+								price: prix,
+								surface,
+							},
+							{
+								headers: {
+									"Content-Type": "application/json",
+									Authorization: `Bearer ${session.user.jwt}`,
+								},
+							}
+						)
+						.then((res) => {
+							onSubmitProps.setSubmitting(false);
+							button.classList.remove("loading");
+							button.innerText = "Submit";
+							onSubmitProps.resetForm();
+							document.getElementById("my-modal1").click();
+							onFinishSubmit();
+						})
+						.catch((err) => {
+							console.log(err);
+							toast.error(err.name);
+							onSubmitProps.setSubmitting(false);
+							button.classList.remove("loading");
+							button.innerText = "Submit";
+						});
 				})
 				.catch((err) => {
 					toast.error(err.name);
 				});
-			// console.log(result.data.secure_url);
+			console.log(links);
 		}
-		axios
-			.post(
-				`http://127.0.0.1:5000/annonces/`,
-				{
-					wilaya,
-					commune,
-					description,
-					typeId: 1,
-					category: typeAnnonce,
-					images: links,
-					coordinates: position,
-					address,
-					price: prix,
-					surface,
-				},
-				{
-					headers: {
-						"Content-Type": "application/json",
-						Authorization: `Bearer ${session.user.jwt}`,
-					},
-				}
-			)
-			.then((res) => {
-				console.log(res);
-				onSubmitProps.setSubmitting(false);
-				button.classList.remove("loading");
-				button.innerText = "Submit";
-				onSubmitProps.resetForm();
-				document.getElementById("my-modal1").click();
-				console.log(onFinishSubmit);
-				onFinishSubmit();
-			})
-			.catch((err) => {
-				console.log(err);
-				toast.error(err.name);
-				onSubmitProps.setSubmitting(false);
-				button.classList.remove("loading");
-				button.innerText = "Submit";
-			});
 	};
 
 	return (

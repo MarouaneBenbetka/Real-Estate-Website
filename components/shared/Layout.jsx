@@ -14,7 +14,6 @@ function Layout({ children }) {
 		const response = await userCrud.get(id, {
 			headers: { Authorization: `Bearer ${session.user.jwt}` },
 		});
-		console.log(response);
 		const isNewUser = response.data.data.isValid;
 		return isNewUser;
 	};
@@ -23,7 +22,6 @@ function Layout({ children }) {
 		const fetchData = async () => {
 			const result = await checkIfNewUser(session?.user.id);
 			setIsNewUser(result);
-			console.log("is new user", isNewUser);
 		};
 		if (session) {
 			fetchData();

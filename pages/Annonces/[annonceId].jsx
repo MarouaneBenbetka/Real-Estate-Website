@@ -130,6 +130,7 @@ export default function CardDeatails({ session }) {
 					);
 				} else {
 					toast.success("Evoie du message avec succes");
+					setMessage("");
 				}
 			})
 			.catch((err) => {
@@ -301,6 +302,7 @@ export default function CardDeatails({ session }) {
 									placeholder="Envoyer un message vers l'annonceur"
 									className="h-[100px] bg-gray-100 p-2  w-[76vw] md:w-2/3  border  rounded border-purple text-dark-blue focus:border-2 placeholder-gray-500"
 									onChange={(e) => setMessage(e.target.value)}
+									value={message}
 								></textarea>
 								<button
 									ref={buttonRef}

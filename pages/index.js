@@ -32,7 +32,6 @@ export default function Explore({ toasting }) {
 				setMaxPages(res.data.max_pages);
 				if (res.data.data.length == 0) setNoResultFound(true);
 				else setNoResultFound(false);
-				console.log(res.data);
 				setIsLoading(false);
 			})
 			.catch((err) => {
