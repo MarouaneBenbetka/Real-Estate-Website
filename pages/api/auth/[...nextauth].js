@@ -30,6 +30,7 @@ export default NextAuth({
 				const result = await axios.post(`${URL}/users/`, data, {
 					headers: {
 						"Content-Type": "application/json",
+						"Accept-Encoding":"gzip,deflate,compress"
 					},
 				});
 
@@ -71,9 +72,32 @@ export default NextAuth({
 			httpOptions: {
 				timeout: 40000,
 			},
-		}),
+			// async profile (profile, tokens) {
+		
+			// 	  const NewUser = await User.create({
+			// 		email: profile.email,
+			// 		adress: ' ',
+			// 		isDonator: false,
+			// 		phoneNum: 11111111,
+			// 		fullname: profile.name,
+			// 		password: hashSync(profile.sub),
+			// 		image: profile.picture,
+			// 		isValid:false
+			// 	  })
+			// 	  return {
+			// 		email: NewUser.email,
+			// 		isDonator: NewUser.isDonator,
+			// 		id: NewUser.id,
+			// 		fullname: NewUser.fullname,
+			// 		image: NewUser.image,
+			// 		phoneNum: NewUser.phone,
+			// 		isValid : false,
+			// 	  }
+			// 	}
+			  }
+		),
 	],
-	// pages: {
-	// 	signIn: "/auth/signIn",
-	// },
+	pages: {
+		signIn: "/auth/signIn",
+	},
 });
