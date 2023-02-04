@@ -78,7 +78,7 @@ export default function Dashbord({ session }) {
 				setIsLoading(false);
 			});
 		axios
-			.get(`${URL}/annonces/${annonceId}/users/`)
+			.get(`${URL}/users/`)
 			.then((res) => {
 				setUsers(res.data.data);
 				setStats((prev) => ({ ...prev, users: res.data.data.length }));
