@@ -55,16 +55,54 @@ export default function Navbar() {
 	const env = process.env.NODE_ENV;
 
 	useEffect(() => {
+		// if (session) {
+		// 	axios
+		// 		.get(`${URL}/messages/unseen`, {
+		// 			headers: {
+		// 				Authorization: `Bearer ${session.user.jwt}`,
+		// 			},
+		// 		})
+		// 		.then((res) => {
+		// 			console.log(res);
+		// 			setNbNotifications(res.data.data);
+		// 		});
+		// } else {
+		// 	setNbNotifications(0);
+		// 	setIsAdmin(false);
+		// }
+
 		if (session) {
 			axios
-				.get(`${URL}/messages/unseen`, {
+				.get(`${URL}/users/${session.user.id}`, {
 					headers: {
 						Authorization: `Bearer ${session.user.jwt}`,
 					},
 				})
 				.then((res) => {
 					console.log(res);
-					setNbNotifications(res.data.data);
+					console.log(res.data.data.isAdmin);
+					setIsAdmin(res.data.data.isAdmin);
+					if (!res.data.data.isAdmin) {
+						axios
+							.get(`${URL}/messages/unseen`, {
+								headers: {
+									Authorization: `Bearer ${session.user.jwt}`,
+								},
+							})
+							.then((res) => {
+								console.log(res);
+								setNbNotifications(res.data.data);
+							})
+							.catch((err) => {
+								console.log(err);
+								setNbNotifications(0);
+							});
+					} else {
+						Router.push("/Admin/Dashbord");
+					}
+				})
+				.catch((err) => {
+					setIsAdmin(false);
 				});
 		} else {
 			setNbNotifications(0);

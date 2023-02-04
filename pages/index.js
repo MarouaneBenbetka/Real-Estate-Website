@@ -70,7 +70,7 @@ export default function Explore({ toasting }) {
 				if (res.data.data.length == 0) setNoResultFound(true);
 				else setNoResultFound(false);
 				setMaxPages(res.data.max_pages);
-
+				setPageCount(1);
 				console.log(res.data);
 			})
 			.catch((err) => {
@@ -91,6 +91,7 @@ export default function Explore({ toasting }) {
 				if (res.data.data.length == 0) setNoResultFound(true);
 				else setNoResultFound(false);
 				setMaxPages(res.data.max_pages);
+				setPageCount(1);
 				console.log(res.data);
 			})
 			.catch((err) => {
