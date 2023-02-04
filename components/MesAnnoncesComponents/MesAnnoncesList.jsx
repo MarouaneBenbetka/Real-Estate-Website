@@ -53,7 +53,7 @@ const MesAnnoncesList = ({ mesannonces, isLoading }) => {
 									image={annonce.images[0]}
 									id={annonce.id}
 									data={annonce.id}
-									onFinishDelete={onFinishDelete}
+									// onFinishDelete={onFinishDelete}
 								/>
 							))}
 						</tbody>
