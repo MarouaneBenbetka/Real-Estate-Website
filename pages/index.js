@@ -25,7 +25,7 @@ export default function Explore({ toasting }) {
 
 	useEffect(() => {
 		axios
-			.get(`http://127.0.0.1:5000/annonces?page=${pageCount}`)
+			.get(`${process.env.NODE_ENV === "development" ? "http://127.0.0.1:5000" : "https://tpigl.onrender.com"}/annonces?page=${pageCount}`)
 			.then((res) => {
 				setConnectionError(false);
 				setAnnounces(res.data.data);
@@ -56,7 +56,7 @@ export default function Explore({ toasting }) {
 		e.preventDefault();
 		axios
 			.get(
-				`http://127.0.0.1:5000/annonces/search?q=${searchText}&page=${pageCount}`
+				`${process.env.NODE_ENV === "development" ? "http://127.0.0.1:5000" : "https://tpigl.onrender.com"}/annonces/search?q=${searchText}&page=${pageCount}`
 			)
 			.then((res) => {
 				setConnectionError(false);
@@ -81,7 +81,7 @@ export default function Explore({ toasting }) {
 		e.preventDefault();
 		axios
 			.get(
-				`http://127.0.0.1:5000/annonces/search?q=${lastSearch}&min_date=${filterData.dateDebut}&max_date=${filterData.dateFin}&wilaya=${filterData.wilaya}&commune=${filterData.commune}&type=${filterData.typeAnnonce}&page=${pageCount}`
+				`${process.env.NODE_ENV === "development" ? "http://127.0.0.1:5000" : "https://tpigl.onrender.com"}/annonces/search?q=${lastSearch}&min_date=${filterData.dateDebut}&max_date=${filterData.dateFin}&wilaya=${filterData.wilaya}&commune=${filterData.commune}&type=${filterData.typeAnnonce}&page=${pageCount}`
 			)
 			.then((res) => {
 				setConnectionError(false);

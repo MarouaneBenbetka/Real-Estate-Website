@@ -55,7 +55,7 @@ export default function Navbar() {
 	useEffect(() => {
 		if (session) {
 			axios
-				.get(`http://127.0.0.1:5000/messages/unseen`, {
+				.get(`${process.env.NODE_ENV === "development" ? "http://127.0.0.1:5000" : "https://tpigl.onrender.com"}/messages/unseen`, {
 					headers: {
 						Authorization: `Bearer ${session.user.jwt}`,
 					},

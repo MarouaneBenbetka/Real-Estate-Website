@@ -105,7 +105,7 @@ const AddAnnonce = ({ onFinishSubmit }) => {
 
 					axios
 						.post(
-							`http://127.0.0.1:5000/annonces/`,
+							`${process.env.NODE_ENV === "development" ? "http://127.0.0.1:5000" : "https://tpigl.onrender.com"}/annonces/`,
 							{
 								wilaya,
 								commune,

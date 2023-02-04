@@ -31,7 +31,7 @@ export default NextAuth({
 				console.log(data);
 
 				const result = await axios.post(
-					"http://127.0.0.1:5000/users",
+					process.env.NODE_ENV === "development" ? "http://127.0.0.1:5000" : "https://tpigl.onrender.com",
 					data,
 					{
 						headers: {

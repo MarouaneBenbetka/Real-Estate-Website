@@ -75,7 +75,7 @@ export default function CardDeatails({ session }) {
 		setIsLoading(true);
 		const annonceId = window.location.href.split("/").pop();
 		axios
-			.get(`http://127.0.0.1:5000/annonces/${annonceId}`)
+			.get(`${process.env.NODE_ENV === "development" ? "http://127.0.0.1:5000" : "https://tpigl.onrender.com"}/annonces/${annonceId}`)
 			.then((res) => {
 				const data = res.data.data;
 				if (!data.coordinates.latitude) {
@@ -116,7 +116,7 @@ export default function CardDeatails({ session }) {
 
 		axios
 			.post(
-				`http://127.0.0.1:5000/messages/ok`,
+				`${process.env.NODE_ENV === "development" ? "http://127.0.0.1:5000" : "https://tpigl.onrender.com"}/annonces/${annonceId}/messages/ok`,
 				{ annonceId: announceInfo.id, content: message },
 				{
 					headers: {
