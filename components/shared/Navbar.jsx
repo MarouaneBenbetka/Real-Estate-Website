@@ -86,7 +86,7 @@ export default function Navbar() {
 			callbackUrl:
 				env === "development"
 					? "http://localhost:3000"
-					: "https://glassdon.vercel.app",
+					: "https://tp-igl-equipe1.vercel.app",
 		});
 	};
 
@@ -140,7 +140,7 @@ export default function Navbar() {
 							callbackUrl:
 								env === "development"
 									? "http://localhost:3000"
-									: "https://glassdon.vercel.app",
+									: "https://tp-igl-equipe1.vercel.app",
 						});
 					}}
 					className="hidden md:block px-4 py-2 text-white2 bg-purple rounded-[10px] font-semibold border-2 border-purple hover:bg-white hover:text-purple transition "
@@ -236,7 +236,7 @@ export default function Navbar() {
 												callbackUrl:
 													env === "development"
 														? "http://localhost:3000"
-														: "https://glassdon.vercel.app",
+														: "https://tp-igl-equipe1.vercel.app",
 											});
 										}}
 									>
