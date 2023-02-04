@@ -21,6 +21,7 @@ const LocationPicker2 = dynamic(
 );
 
 const AddAnnonce = ({ onFinishSubmit }) => {
+	const env = process.env.NODE_ENV;
 	const status = "loading";
 	const { data: session } = useSession();
 

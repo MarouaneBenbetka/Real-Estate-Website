@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { MdExpandMore } from "react-icons/md";
 import { useSpring, animated } from "react-spring";
+import { URL } from "../../utils/services/crud";
 
 export default function Message({ userJwt, infos }) {
 	const [expand, setExpand] = useState(false);
