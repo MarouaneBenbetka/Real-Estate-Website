@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { getSession } from "next-auth/react";
 import axios from "axios";
 import PagesPagination from "../../components/Home/PagesPagination";
+import { Oval } from "react-loader-spinner";
 
 export default function Annonces({ session }) {
 	const [modalOpened, setModalOpened] = useState(false);
@@ -14,6 +15,7 @@ export default function Annonces({ session }) {
 	const [maxPages, setMaxPages] = useState(1);
 	const [isLoading, setIsLoading] = useState(true);
 	const [connectionError, setConnectionError] = useState(false);
+	const [scrappingEncours, setScrappingEncours] = useState(false);
 
 	useEffect(() => {
 		axios
@@ -45,10 +47,7 @@ export default function Annonces({ session }) {
 		if (pageCount < maxPages) {
 			setPageCount((prevPageCount) => prevPageCount + 1);
 			setIsLoading(true);
-			window.scrollTo({
-				top: 0,
-				behavior: "smooth",
-			});
+			document.body.scrollTop = document.documentElement.scrollTop = 0;
 		}
 	};
 	const previousPageHandler = (e) => {
@@ -56,10 +55,7 @@ export default function Annonces({ session }) {
 		if (pageCount > 1) {
 			setPageCount((prevPageCount) => prevPageCount - 1);
 			setIsLoading(true);
-			window.scrollTo({
-				top: 0,
-				behavior: "smooth",
-			});
+			document.body.scrollTop = document.documentElement.scrollTop = 0;
 		}
 	};
 	const selectPageHandler = (e, num) => {
@@ -67,10 +63,7 @@ export default function Annonces({ session }) {
 		if (num != pageCount) {
 			setPageCount(num);
 			setIsLoading(true);
-			window.scrollTo({
-				top: 0,
-				behavior: "smooth",
-			});
+			document.body.scrollTop = document.documentElement.scrollTop = 0;
 		}
 	};
 	return (
@@ -87,15 +80,54 @@ export default function Annonces({ session }) {
 				centered
 			>
 				{/* Modal content */}
-				<Scrapping onCloseModal={() => setModalOpened(false)} />
+				<Scrapping
+					onCloseModal={() => {
+						setModalOpened(false);
+					}}
+					onScrappingStateChanged={(value) =>
+						setScrappingEncours(value)
+					}
+				/>
 			</Modal>
 
 			<button
-				className={`btn bg-purple border-purple border-2 text-white hover:bg-white2 hover:text-purple hover:border-purple`}
-				onClick={() => setModalOpened(true)}
+				className={
+					`btn bg-purple border-purple border-2 text-white` +
+					(scrappingEncours
+						? "bg bg-gray-700 border-gray-700 cursor-wait"
+						: ` hover:bg-white2 hover:text-purple hover:border-purple`)
+				}
+				onClick={() => {
+					scrappingEncours
+						? console.log("scrapping en cours")
+						: setModalOpened(true);
+				}}
 			>
-				Mise a jour annonces
+				{scrappingEncours ? (
+					<div className="flex gap-4 items-center justify-center">
+						<p>Scrapping en cours</p>
+						<Oval
+							height={24}
+							width={24}
+							color="#8065F0"
+							wrapperStyle={{}}
+							wrapperClass=""
+							visible={true}
+							ariaLabel="oval-loading"
+							secondaryColor="#a9a4df"
+							strokeWidth={4}
+							strokeWidthSecondary={4}
+						/>
+					</div>
+				) : (
+					"Mise a jour des annonces"
+				)}
 			</button>
+			{scrappingEncours && (
+				<p className="text-[14px] mt-1 text-gray-500">
+					Cela peut prendre quelques minutes .
+				</p>
+			)}
 			<div className="max-w-[100vw] overflow-x-auto">
 				<MesAnnoncesList
 					mesannonces={announces}

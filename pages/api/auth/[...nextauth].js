@@ -16,10 +16,6 @@ export default NextAuth({
 			//I must send here the token type and the id_token to the backend
 
 			if (account) {
-				console.log(account);
-				console.log(account.id_token, account.token_type);
-				console.log("token ~~~~~~~~~~~~~~~~~~~~~", token);
-
 				// const jwt = jsonwebtoken.sign(token, process.env.JWT_SECRET)
 				// console.log('jwttttttttttttttttt', jwt)
 				const data = {
@@ -78,47 +74,6 @@ export default NextAuth({
 			httpOptions: {
 				timeout: 40000,
 			},
-			// async profile (profile, tokens) {
-			//   await dbConnect()
-			//   console.log(tokens)
-			//   const user = await User.findOne({
-			//     email: profile.email
-			//   })
-
-			//   if (user) {
-			//     return {
-			//       email: user.email,
-			//       isDonator: user.isDonator,
-			//       id: user.id,
-			//       fullname: user.fullname,
-			//       image: user.image,
-			//       phoneNum: user.phoneNum,
-			//       isValid: user.isValid
-			//     }
-			//   } else {
-			//     console.log(profile)
-
-			//     const NewUser = await User.create({
-			//       email: profile.email,
-			//       adress: ' ',
-			//       isDonator: false,
-			//       phoneNum: 11111111,
-			//       fullname: profile.name,
-			//       password: hashSync(profile.sub),
-			//       image: profile.picture,
-			//       isValid:false
-			//     })
-			//     return {
-			//       email: NewUser.email,
-			//       isDonator: NewUser.isDonator,
-			//       id: NewUser.id,
-			//       fullname: NewUser.fullname,
-			//       image: NewUser.image,
-			//       phoneNum: NewUser.phone,
-			//       isValid : false,
-			//     }
-			//   }
-			// }
 		}),
 	],
 	pages: {

@@ -7,6 +7,7 @@ import PagesPagination from "../components/Home/PagesPagination";
 import axios from "axios";
 import NothingFound from "../components/errors/NothingFound";
 import ConnectionError from "../components/errors/ConnectionError";
+import { getSession } from "next-auth/react";
 
 const wait_function_test = async function test() {
 	console.log("start timer");
@@ -175,6 +176,7 @@ export default function Explore({ toasting }) {
 
 export async function getServerSideProps(ctx) {
 	// const toasting = req.headers['toasting'] || false
+
 	try {
 		const toasting = ctx.query.login || false;
 

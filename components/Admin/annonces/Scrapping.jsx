@@ -1,10 +1,36 @@
+import axios from "axios";
 import Image from "next/image";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
-export default function Scrapping({ onCloseModal }) {
+export default function Scrapping({ onCloseModal, onScrappingStateChanged }) {
+	const handleScrapping = () => {
+		onCloseModal();
+		onScrappingStateChanged(true);
+		axios
+			.get("http://127.0.0.1:5000/admin")
+			.then((res) => {
+				onScrappingStateChanged(false);
+				console.log(res);
+				if (res.data.status === "success") {
+					toast.success("Scrapping avec succes");
+				} else {
+					toast.error("Erreur lors du scrapping");
+				}
+			})
+			.catch((err) => {
+				onScrappingStateChanged(false);
+				console.log(err);
+				toast.error("Erreur lors du scrapping");
+			});
+	};
+
 	return (
 		<div className=" p-5  max-h-[95vh]">
 			<div
-				className="w-[28px] h-[28px] rounded-full flex justify-center items-center absolute right-3 top-3 bg-[#d92525] border-[#d92525] hover:bg-[#d92525] hover:border-[#d92525] text-white cursor-pointer"
+				className={
+					"w-[28px] h-[28px] rounded-full flex justify-center items-center absolute right-3 top-3 text-white cursor-pointer border-2 bg-[#d92525] border-[#d92525] hover:bg-white hover:text-[#d92525] hover:border-[#d92525] "
+				}
 				onClick={onCloseModal}
 			>
 				<p>✕</p>
@@ -41,11 +67,11 @@ export default function Scrapping({ onCloseModal }) {
 				</div>
 
 				<button
-					className=" mt-10  px-6 py-2 text-white2 text-[18px] bg-purple
-					rounded-[8px] font-semibold border-2 border-purple
-					hover:bg-white hover:text-purple transition "
+					className={
+						" mt-10  px-6 py-2 text-white2 text-[18px] bg-purple rounded-[8px] font-semibold border-2 border-purple transition hover:bg-white hover:text-purple  cursor-pointer"
+					}
+					onClick={handleScrapping}
 				>
-					{" "}
 					Demarrer le scrapping
 				</button>
 				<p className="text-[14px] mt-1 text-gray-500">

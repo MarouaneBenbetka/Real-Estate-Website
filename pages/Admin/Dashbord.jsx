@@ -9,6 +9,7 @@ import PagesPagination from "../../components/Home/PagesPagination";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { getSession } from "next-auth/react";
+import userCrud from "../../utils/services/user";
 const cards = [
 	{
 		id: "users",
@@ -165,10 +166,28 @@ export async function getServerSideProps({ req }) {
 			};
 		}
 
+		// const response = await userCrud.get(session.user.id, {
+		// 	headers: { Authorization: `Bearer ${session.user.jwt}` },
+		// });
+
+		// if (!response.data.isAdmin) {
+		// 	return {
+		// 		redirect: {
+		// 			destination: "/?login=true",
+		// 			permanent: false,
+		// 		},
+		// 	};
+		// }
+
 		return {
 			props: { session },
 		};
 	} catch {
-		console.log("error");
+		return {
+			redirect: {
+				destination: "/",
+				permanent: false,
+			},
+		};
 	}
 }
