@@ -70,7 +70,7 @@ export default function Dashbord({ session }) {
 					messages: res.data.data.messages_count,
 					announces: res.data.data.annonces_count,
 					users: res.data.data.users_count,
-					visitors: 0,
+					visitors: 3,
 				});
 			})
 			.catch((err) => {

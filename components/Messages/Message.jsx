@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import { MdExpandMore } from "react-icons/md";
 import { useSpring, animated } from "react-spring";
 import { URL } from "../../utils/services/crud";
+import { FiExternalLink } from "react-icons/fi";
+import Link from "next/link";
 
 export default function Message({ userJwt, infos }) {
 	const [expand, setExpand] = useState(false);
@@ -57,6 +59,7 @@ export default function Message({ userJwt, infos }) {
 	});
 
 	const onExpandMessage = () => {
+		console.log(seen);
 		if (!seen) {
 			setSeen(true);
 			axios
@@ -114,16 +117,30 @@ export default function Message({ userJwt, infos }) {
 						{infos.name}
 					</h2>
 				</div>
-
-				<p
-					className={
-						"hidden md:block text-[16px] text-gray-700 mt-[14px] flex-1 mr-8  overflow-hidden text-ellipsis" +
-						(expand ? " mb-3" : " whitespace-nowrap") +
-						(seen ? "" : " font-bold ")
-					}
-				>
-					{infos.message}
-				</p>
+				<div className="hidden md:flex flex-1 mr-8 w-full overflow-hidden  flex-col">
+					<p
+						className={
+							" text-[16px] text-gray-700 mt-[14px]   overflow-hidden text-ellipsis" +
+							(expand ? " mb-3" : " whitespace-nowrap") +
+							(seen ? "" : " font-bold ")
+						}
+					>
+						{infos.message}
+					</p>
+					{expand && (
+						<Link
+							href={`/Annonces/${infos.annonceId}`}
+							className="cursor-pointer mx-auto hover:underline hover:bg-slate-300 px-2 rounded-md"
+						>
+							<div className="mx-auto flex gap-2">
+								<p className="text-dark-blue">
+									Annonce associés
+								</p>
+								<FiExternalLink size={24} color="#000929" />
+							</div>
+						</Link>
+					)}
+				</div>
 				<p
 					className={
 						"ml-auto w-[94px] mt-[14px] mr-2 font-bold text-purple " +
@@ -151,6 +168,25 @@ export default function Message({ userJwt, infos }) {
 			>
 				{infos.message}
 			</p>
+			{expand && (
+				<div className="flex md:hidden">
+					<Link
+						href={`/Annonces/${infos.annonceId}}`}
+						className=" block md:hidden cursor-pointer mx-auto hover:underline hover:bg-slate-300 px-2 rounded-md"
+					>
+						<div className="mx-auto flex gap-2">
+							<p className="text-dark-blue">Annonce associés</p>
+							<FiExternalLink size={24} color="#000929" />
+						</div>
+					</Link>
+				</div>
+			)}
+
+			{/* <div className="mx-auto">
+				<Link href={"/Annonces/"} className="cursor-pointer mx-auto">
+					<FiExternalLink size={24} color="#000929" />
+				</Link>
+			</div> */}
 		</div>
 	);
 }

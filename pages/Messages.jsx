@@ -17,7 +17,7 @@ const Messages = ({ session }) => {
 	const [connectionError, setConnectionError] = useState(false);
 	const [messages, setMessages] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
-	const maxPages = 1;
+	const [maxPages, setMaxPages] = useState(1);
 
 	const wait_function_test = async function test() {
 		console.log("start timer");
@@ -29,13 +29,14 @@ const Messages = ({ session }) => {
 		setIsLoading(true);
 
 		axios
-			.get(`${URL}/messages/messages`, {
+			.get(`${URL}/messages/messages?page=${pageCount}`, {
 				headers: {
 					Authorization: `Bearer ${session.user.jwt}`,
 				},
 			})
 			.then((res) => {
-				setMessages(res.data.data);
+				setMessages(res.data.data.reverse());
+				setMaxPages(res.data.maxPages);
 				setConnectionError(false);
 				setIsLoading(false);
 			})
@@ -44,22 +45,43 @@ const Messages = ({ session }) => {
 				setIsLoading(false);
 				console.log(err);
 			});
-	}, []);
+	}, [pageCount]);
 
 	// pages navigation handlers :
 
 	const nextPageHandler = (e) => {
 		e.preventDefault();
-		if (pageCount < maxPages)
+		if (pageCount < maxPages) {
 			setPageCount((prevPageCount) => prevPageCount + 1);
+			setIsLoading(true);
+
+			window.scrollTo({
+				top: 0,
+				behavior: "smooth",
+			});
+		}
 	};
 	const previousPageHandler = (e) => {
 		e.preventDefault();
-		if (pageCount > 1) setPageCount((prevPageCount) => prevPageCount - 1);
+		if (pageCount > 1) {
+			setPageCount((prevPageCount) => prevPageCount - 1);
+			setIsLoading(true);
+			window.scrollTo({
+				top: 0,
+				behavior: "smooth",
+			});
+		}
 	};
 	const selectPageHandler = (e, num) => {
 		e.preventDefault();
-		setPageCount(num);
+		if (num != pageCount) {
+			setPageCount(num);
+			setIsLoading(true);
+			window.scrollTo({
+				top: 0,
+				behavior: "smooth",
+			});
+		}
 	};
 
 	return (

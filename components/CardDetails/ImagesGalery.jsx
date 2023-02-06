@@ -4,7 +4,7 @@ import { MdOutlineNavigateNext, MdOutlineNavigateBefore } from "react-icons/md";
 
 export default function ImagesGalery({ images }) {
 	return (
-		<div className="border-2 border-purple w-fit h-fit rounded-[6px] mt-2 mx-auto md:mx-0">
+		<div className="border-2 border-purple max-w-[90vw]  h-fit rounded-[6px] mt-2 mx-auto md:mx-0">
 			<Carousel
 				sx={{ maxWidth: 650 }}
 				mx="auto"

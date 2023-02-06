@@ -4,7 +4,11 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { URL } from "../../../utils/services/crud";
 
-export default function Scrapping({ onCloseModal, onScrappingStateChanged }) {
+export default function Scrapping({
+	onCloseModal,
+	onScrappingStateChanged,
+	userJwt,
+}) {
 	const handleScrapping = () => {
 		onCloseModal();
 		onScrappingStateChanged(true);

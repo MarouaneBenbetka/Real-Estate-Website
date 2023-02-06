@@ -125,24 +125,32 @@ export default function AnnouceCard({
 							span
 							className="text-purple font-bold text-[22px]"
 						>
-							{prix.toLocaleString("en-US")}
-							<span className="text-[16px] font-normal"> DA</span>
+							{prix == "0"
+								? "Prix sur demande"
+								: prix.toLocaleString("en-US")}
+							{prix != "0" && (
+								<span className="text-[16px] font-normal">
+									{" "}
+									DA
+								</span>
+							)}
 						</Text>
-						{typeImmobilierTOtypeAnnonce[
-							announcesRenameType[typeAnnoce.toLowerCase()]
-						] && (
-							<Text span size="sm" color="dimmed">
-								{" "}
-								/{" "}
-								{
-									typeImmobilierTOtypeAnnonce[
-										announcesRenameType[
-											typeAnnoce.toLowerCase()
+						{prix != "0" &&
+							typeImmobilierTOtypeAnnonce[
+								announcesRenameType[typeAnnoce.toLowerCase()]
+							] && (
+								<Text span size="sm" color="dimmed">
+									{" "}
+									/{" "}
+									{
+										typeImmobilierTOtypeAnnonce[
+											announcesRenameType[
+												typeAnnoce.toLowerCase()
+											]
 										]
-									]
-								}
-							</Text>
-						)}
+									}
+								</Text>
+							)}
 					</div>
 				</Group>
 			</Link>

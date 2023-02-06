@@ -91,6 +91,7 @@ export default function SearchBar({ onSearch, onFilter }) {
 						className="absolute right-3"
 						onClick={(e) => {
 							onSearch(e, searchedText);
+							setShowFilters(false);
 						}}
 					>
 						<FiSearch size="30px" color="#7065F0" />
@@ -105,6 +106,7 @@ export default function SearchBar({ onSearch, onFilter }) {
 							onKeyDown={(e) => {
 								if (e.key === "Enter") {
 									onSearch(e, searchedText);
+									setShowFilters(false);
 								}
 							}}
 						/>

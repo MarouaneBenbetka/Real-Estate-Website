@@ -20,31 +20,53 @@ export default function Explore({ toasting }) {
 	const [pageCount, setPageCount] = useState(1);
 	const [announces, setAnnounces] = useState(null);
 	const [maxPages, setMaxPages] = useState(1);
+
 	const [lastSearch, setLastSearch] = useState("");
 	const [isLoading, setIsLoading] = useState(true);
 	const [noResultFound, setNoResultFound] = useState(false);
 	const [connectionError, setConnectionError] = useState(false);
+	const [lastFilter, setLastFilter] = useState(null);
 
 	useEffect(() => {
-		axios
-			.get(`${URL}/annonces?page=${pageCount}`)
-			.then((res) => {
-				setConnectionError(false);
-				setAnnounces(res.data.data);
-				setMaxPages(res.data.max_pages);
-				if (res.data.data.length == 0) setNoResultFound(true);
-				else setNoResultFound(false);
-				setIsLoading(false);
-			})
-			.catch((err) => {
-				setConnectionError(true);
-				setIsLoading(false);
-			});
+		if (lastFilter || lastSearch) {
+			const url = lastFilter
+				? `${URL}/annonces/search?q=${lastSearch}&min_date=${lastFilter.minDate}&max_date=${lastFilter.maxDate}&wilaya=${lastFilter.wilaya}&commune=${lastFilter.commune}&type=${lastFilter.type}&page=${pageCount}`
+				: `${URL}/annonces/search?q=${lastSearch}&page=${pageCount}`;
+			axios
+				.get(`${url}`)
+				.then((res) => {
+					setConnectionError(false);
+					setAnnounces(res.data.data);
+					if (res.data.data.length == 0) setNoResultFound(true);
+					else setNoResultFound(false);
+					setMaxPages(res.data.max_pages);
+					setIsLoading(false);
+				})
+				.catch((err) => {
+					setConnectionError(true);
+					setIsLoading(false);
+				});
+		} else {
+			axios
+				.get(`${URL}/annonces?page=${pageCount}`)
+				.then((res) => {
+					setConnectionError(false);
+					setAnnounces(res.data.data);
+					setMaxPages(res.data.max_pages);
+					if (res.data.data.length == 0) setNoResultFound(true);
+					else setNoResultFound(false);
+					setIsLoading(false);
+				})
+				.catch((err) => {
+					setConnectionError(true);
+					setIsLoading(false);
+				});
+		}
 	}, [pageCount]);
 
 	useEffect(() => {
 		if (toasting === "true") {
-			toast.error("vous devez entre authentifiee");
+			toast.error("Vous devez etre authentifié");
 		}
 	}, [toasting]);
 
@@ -57,9 +79,10 @@ export default function Explore({ toasting }) {
 	//search bar handler :
 
 	const searchHandler = (e, searchText) => {
+		setIsLoading(true);
 		e.preventDefault();
 		axios
-			.get(`${URL}/annonces/search?q=${searchText}&page=${pageCount}`)
+			.get(`${URL}/annonces/search?q=${searchText}&page=${1}`)
 			.then((res) => {
 				setConnectionError(false);
 				if (res.data.data) {
@@ -72,9 +95,12 @@ export default function Explore({ toasting }) {
 				setMaxPages(res.data.max_pages);
 				setPageCount(1);
 				console.log(res.data);
+				setIsLoading(false);
+				setLastFilter(null);
 			})
 			.catch((err) => {
 				setConnectionError(true);
+				setIsLoading(false);
 			});
 	};
 
@@ -83,7 +109,13 @@ export default function Explore({ toasting }) {
 		e.preventDefault();
 		axios
 			.get(
-				`${URL}/annonces/search?q=${lastSearch}&min_date=${filterData.dateDebut}&max_date=${filterData.dateFin}&wilaya=${filterData.wilaya}&commune=${filterData.commune}&type=${filterData.typeAnnonce}&page=${pageCount}`
+				`${URL}/annonces/search?q=${lastSearch}&min_date=${
+					filterData.dateDebut
+				}&max_date=${filterData.dateFin}&wilaya=${
+					filterData.wilaya
+				}&commune=${filterData.commune}&type=${
+					filterData.typeAnnonce
+				}&page=${1}`
 			)
 			.then((res) => {
 				setConnectionError(false);
@@ -93,6 +125,13 @@ export default function Explore({ toasting }) {
 				setMaxPages(res.data.max_pages);
 				setPageCount(1);
 				console.log(res.data);
+				setLastFilter({
+					minDate: filterData.dateDebut,
+					maxDate: filterData.dateFin,
+					type: filterData.typeAnnonce,
+					wilaya: filterData.wilaya,
+					commune: filterData.commune,
+				});
 			})
 			.catch((err) => {
 				setConnectionError(true);
@@ -106,6 +145,7 @@ export default function Explore({ toasting }) {
 		if (pageCount < maxPages) {
 			setPageCount((prevPageCount) => prevPageCount + 1);
 			setIsLoading(true);
+
 			window.scrollTo({
 				top: 0,
 				behavior: "smooth",

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import FormikControl from "./ControlComponents/FormikControl";
@@ -37,6 +37,17 @@ const AddAnnonce = ({ onFinishSubmit }) => {
 		address: "",
 		images: "",
 	};
+
+	useEffect(() => {
+		axios
+			.get(`${URL}/annonces/types`)
+			.then((res) => {
+				console.log(res.data.data);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	}, []);
 
 	// postion for the map location
 	const [position, setPosition] = useState({
@@ -88,58 +99,62 @@ const AddAnnonce = ({ onFinishSubmit }) => {
 		if (commune == "") commune = communes[wilaya][0].value;
 		if (typeAnnonce == "") typeAnnonce = "Vente";
 
-		for (let i = 0; i < values.images.length; i++) {
-			let formdata = new FormData();
-			// const file = values.image[i];
-			// console.log(values.images[i]);
-			formdata.append("file", values.images[i]);
-			formdata.append("upload_preset", "myUploads");
-			// console.log(formdata);
-			let result = await axios.post(
-				"https://api.cloudinary.com/v1_1/dsliesrpf/image/upload",
-				formdata
-			);
-			// console.log(result.data.secure_url);
-			links.push(result.data.secure_url);
-		}
+		try {
+			for (let i = 0; i < values.images.length; i++) {
+				let formdata = new FormData();
+				// const file = values.image[i];
+				// console.log(values.images[i]);
+				formdata.append("file", values.images[i]);
+				formdata.append("upload_preset", "myUploads");
+				// console.log(formdata);
+				let result = await axios.post(
+					"https://api.cloudinary.com/v1_1/dsliesrpf/image/upload",
+					formdata
+				);
+				// console.log(result.data.secure_url);
+				links.push(result.data.secure_url);
+			}
 
-		axios
-			.post(
-				`${URL}/annonces/`,
-				{
-					wilaya,
-					commune,
-					description,
-					typeId: 1,
-					category: typeAnnonce,
-					images: links,
-					coordinates: position,
-					address,
-					price: prix,
-					surface,
-				},
-				{
-					headers: {
-						"Content-Type": "application/json",
-						Authorization: `Bearer ${session.user.jwt}`,
+			axios
+				.post(
+					`${URL}/annonces/`,
+					{
+						wilaya,
+						commune,
+						description,
+						typeId: 1,
+						category: typeAnnonce,
+						images: links,
+						coordinates: position,
+						address,
+						price: prix,
+						surface,
 					},
-				}
-			)
-			.then((res) => {
-				onSubmitProps.setSubmitting(false);
-				button.classList.remove("loading");
-				button.innerText = "Submit";
-				onSubmitProps.resetForm();
-				document.getElementById("my-modal1").click();
-				onFinishSubmit();
-			})
-			.catch((err) => {
-				console.log(err);
-				toast.error(err.name);
-				onSubmitProps.setSubmitting(false);
-				button.classList.remove("loading");
-				button.innerText = "Submit";
-			});
+					{
+						headers: {
+							"Content-Type": "application/json",
+							Authorization: `Bearer ${session.user.jwt}`,
+						},
+					}
+				)
+				.then((res) => {
+					onSubmitProps.setSubmitting(false);
+					button.classList.remove("loading");
+					button.innerText = "Submit";
+					onSubmitProps.resetForm();
+					document.getElementById("my-modal1").click();
+					onFinishSubmit();
+				})
+				.catch((err) => {
+					console.log(err);
+					toast.error(err.name);
+					onSubmitProps.setSubmitting(false);
+					button.classList.remove("loading");
+					button.innerText = "Submit";
+				});
+		} catch {
+			toast.error("Connexion echoue");
+		}
 	};
 
 	return (
@@ -211,7 +226,7 @@ const AddAnnonce = ({ onFinishSubmit }) => {
 									/>
 
 									<FormikControl
-										control="input"
+										control="textarea"
 										type="text"
 										label="Address"
 										name="address"

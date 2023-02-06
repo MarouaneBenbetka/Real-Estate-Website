@@ -115,9 +115,14 @@ export default function CardDeatails({ session }) {
 			return;
 		}
 
+		if (message === "") {
+			toast.error("Vous ne pouvez pas envyer un message vide");
+			return;
+		}
+
 		axios
 			.post(
-				`${URL}/messages/ok`,
+				`${URL}/messages/`,
 				{ annonceId: announceInfo.id, content: message },
 				{
 					headers: {
@@ -275,31 +280,37 @@ export default function CardDeatails({ session }) {
 										Prix
 									</span>
 									<span className=" text-purple font-bold text-[32px]">
-										{announceInfo.prix.toLocaleString(
-											"en-US"
+										{announceInfo.prix == "0"
+											? "Prix sur demande"
+											: announceInfo.prix.toLocaleString(
+													"en-US"
+											  )}
+										{announceInfo.prix != "0" && (
+											<span className="text-purple text-[18px] font-normal pr-1 pl-2">
+												{" "}
+												DA
+											</span>
 										)}
 									</span>
-									<span className="text-purple text-[18px] font-normal pr-1 pl-2">
-										DA
-									</span>
 
-									{typeImmobilierTOtypeAnnonce[
-										announcesRenameType[
-											announceInfo.typeAnnonce.toLowerCase()
-										]
-									] && (
-										<span className="text-gray-500 text-[20px]">
-											{" "}
-											/{" "}
-											{
-												typeImmobilierTOtypeAnnonce[
-													announcesRenameType[
-														announceInfo.typeAnnonce.toLowerCase()
+									{announceInfo.prix != 0 &&
+										typeImmobilierTOtypeAnnonce[
+											announcesRenameType[
+												announceInfo.typeAnnonce.toLowerCase()
+											]
+										] && (
+											<span className="text-gray-500 text-[20px]">
+												{" "}
+												/{" "}
+												{
+													typeImmobilierTOtypeAnnonce[
+														announcesRenameType[
+															announceInfo.typeAnnonce.toLowerCase()
+														]
 													]
-												]
-											}
-										</span>
-									)}
+												}
+											</span>
+										)}
 								</div>
 								<textarea
 									placeholder="Envoyer un message vers l'annonceur"
