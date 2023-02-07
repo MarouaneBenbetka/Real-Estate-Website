@@ -122,7 +122,7 @@ export default function CardDeatails({ session }) {
 
 		axios
 			.post(
-				`${URL}/messages/`,
+				`${URL}/messages/ok`,
 				{ annonceId: announceInfo.id, content: message },
 				{
 					headers: {
