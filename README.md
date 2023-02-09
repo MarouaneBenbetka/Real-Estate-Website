@@ -27,6 +27,12 @@ This project is a web application allowing the user to publish and consult the r
 ## Scrapping for admin
 ![alt text](https://github.com/MarouaneBenbetka/real_estate_website/blob/main/screenshots/scrap.png)
 
+## This project was made by
+
+* [BENBETKA Marouane](https://github.com/MarouaneBenbetka)
+* [KEBIR Ahmed Rayane](https://github.com/RayaneA7)
+* [SAFSAF Bilel](https://github.com/bilelsef7)
+* [ANANE AYOUB](https://github.com/Ayoub-Anane)
 
 
 ## Getting Started
