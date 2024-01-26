@@ -105,7 +105,7 @@ const AddAnnonce = ({ onFinishSubmit }) => {
 				// const file = values.image[i];
 				// console.log(values.images[i]);
 				formdata.append("file", values.images[i]);
-				formdata.append("upload_preset", "myUploads");
+				formdata.append("upload_preset", "ucljorkr");
 				// console.log(formdata);
 				let result = await axios.post(
 					"https://api.cloudinary.com/v1_1/dsliesrpf/image/upload",
@@ -267,12 +267,6 @@ const AddAnnonce = ({ onFinishSubmit }) => {
 												accept="image/*"
 												name="image"
 												className="file-input file-input-bordered w-full file-input-md file-input-accent file-selector-button:bg-primary bg-white"
-												onChange={(e) => {
-													formik.setFieldValue(
-														"images",
-														e.target.files
-													);
-												}}
 												multiple={true}
 											/>
 										</div>

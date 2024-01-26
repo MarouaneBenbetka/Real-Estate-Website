@@ -2,7 +2,7 @@ import "../styles/globals.css";
 import Layout from "../components/shared/Layout.jsx";
 import { SessionProvider } from "next-auth/react";
 import { MantineProvider } from "@mantine/core";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Head from "next/head";
 

@@ -150,7 +150,7 @@ export default function CardDeatails({ session }) {
 		<div className="mx-8 sm:mx-10 md:mx-[7vw] lg:mx-[8vw]  mt-3">
 			{/* return to explore page */}
 			<div onClick={() => router.back()} className="cursor-pointer">
-				<div className="flex items-center gap-1 text-purple font-bold text-[22px] w-fit relative underlineAnimation ">
+				<div className="flex items-center gap-1 text-purple font-bold text-[22px] w-fit relative ">
 					<MdOutlineNavigateBefore color="#7065F0" size={30} />
 					<div className="relative">
 						<p>Retour</p>
